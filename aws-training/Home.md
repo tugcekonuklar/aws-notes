@@ -124,7 +124,28 @@
       perform only those tasks
     * A **role** has policies granting access to specific services and operations.
 
-## Commands CLI
+# Developer Tools
+
+* **AWS Cloud9 :** Creates a Development environment
+    * Has all apps you can download
+
+* **AWS SDK**
+    * helps to build infra with code
+
+* **AWS CLI:**
+* Aws command, followed by the three parts:
+    * Command – The top-level service that you are calling (for example, Amazon EC2, Amazon CloudWatch). For a list of
+      currently supported services, see [Cli Doc](http://docs.aws.amazon.com/cli/latest/reference/). Using the example
+      script, Amazon EC2 is being called.
+    * Subcommand – The operation to perform on that service (for example, run-instances, put-metric-data). In this
+      Amazon EC2 example, the run-instances subcommand requests the creation of a new Amazon EC2 instance.
+    * Parameters – Any arguments required to perform the operation. Argument names are preceded by two dashes (--). For
+      example, to run the Amazon EC2 run instances operation, pass in a number of parameters, such as the AMI ID, to
+      create the instance.
+    * Options – The AWS CLI also provides choices that you can specify when executing operation. For example, you can
+      use the --query option to limit the response text so that it returns only the instance ID of your new instan
+
+<img src="./img/8.png" alt="alt text" width="500" height="300">
 
 * to list EC2 instances
 
@@ -144,24 +165,52 @@ aws ec2 run-instances --image-id ami-0164f9b296f8e78cc --instance-type t4g.micro
 aws ec2 stop-instances --instance-id i-123456
 ```
 
-Tools:
+* Configure the aws region info
 
-* AWS Cloud9 : Creates a Development environment
-    * Has all apps you can download
+```shell
+aws configure
+```
 
-* AWS X-Ray : helps to track all actions.
+* **AWS X-Ray :**
+    * helps to track all actions.
+    * helps developers analyze and debug production or distributed applications
+    * X-Ray provides a complete view of requests as they travel through your application, and shows a map of your
+      application’s underlying components.
+    * Creates service map
+        * This provides you with a view of connections among services in your application. The service map enables you
+          to do the following:
+            * Create a dependency tree
+            * Detect latency or errors when working across AWS Availability Zones or AWS Regions
+            * Identify services not operating as expecte
     * Will show you how long the process takes time
-    * Shows errors etc
+    * identify errors and bugs
+        * X-Ray can automatically highlight bugs or errors in your application code by analyzing the response code for
+          each request made to your application.
+    * identify performance bottlenecks
+        * With service maps, you can view relationships between services and resources in your application in real time.
+          You can easily detect where high latencies are occurring and visualize node and edge latency distribution for
+          services.
+    * Build our own analysis and visualization app
+        * X-Ray provides a set of query APIs you can use to build your own analysis and visualizations applications that
+          use the data that X-Ray records
     * X-Ray Commands: https://docs.aws.amazon.com/xray/latest/api/API_Operations.html
-    * instromentantion for code
+    * Instromentantion for code
+    * [Integration with other services](https://github.com/aws?q=xray-sdk.)
 
-* AWS CloudWatch: Monitor performance metrics/ analytic
+<img src="./img/9.png" alt="alt text" width="500" height="300">
+
+# Management Tools:
+
+* **AWS CloudWatch**:
+    * Monitor performance metrics/ analytic
     * Collects ant tracks metrics
     * Setup alarms
     * Create dashboards
     * Does not tall you one of instances sotting down
 
-* AWS CloudTrail: tells you who, what and why?
+* AWS CloudTrail:
+    * tells you who, what and why?
+
 
 * AWS Lambda :
     * AWS Lambda can automatically run code in response to multiple events, such as:
