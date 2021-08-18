@@ -23,16 +23,18 @@
 ## AWS Foundation Services
 
 <img src="./img/2.png" alt="alt text" width="500" height="300">
+
 * AWS provides several foundation services
-  * Compute:
-    * Amazon Elastic Compute Cloud (EC2) id AWS compute services
-    * Easy to boot new server 
-    * You can combine EC2 with Elastic Load Balancing and Auto Scaling services to develop a high availability and high-performance infra for your apps.
-  * Networking:
-    * Networking group provides a DNS 
-        * DNS can give direct control over your AWS and interaction with EC2 instances over your network.
-  * Storage:
-    * Provides several type of storage options 
+    * Compute:
+        * Amazon Elastic Compute Cloud (EC2) id AWS compute services
+        * Easy to boot new server
+        * You can combine EC2 with Elastic Load Balancing and Auto Scaling services to develop a high availability and
+          high-performance infra for your apps.
+    * Networking:
+        * Networking group provides a DNS
+            * DNS can give direct control over your AWS and interaction with EC2 instances over your network.
+    * Storage:
+        * Provides several type of storage options
 
 ### Compute
 
@@ -125,6 +127,7 @@
 ## Commands CLI
 
 * to list EC2 instances
+
 ```shell
 aws ec2 describe-instances
 ```
