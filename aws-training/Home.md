@@ -84,28 +84,29 @@
 
 ## AWS Platform Services
 
-<img src="./img/3.png" alt="alt text" width="500" height="300">
-* Platform services devided 4 categories 
-* Database: several options to store data based on the type  
-  * SQL: Amazon Relational Database (Amazon RDS)
-  * NoSQL : 
-    * AWS DynamoDb is a great key value database
-    * AWS Document DB : Document DB 
-    * AWS ElasticCache, for Redis or MemCache 
-    * Amazon Redshift for data warehouse 
+* Platform services devided 4 categories
+* Database: several options to store data based on the type
+    * SQL: Amazon Relational Database (Amazon RDS)
+    * NoSQL :
+        * AWS DynamoDb is a great key value database
+        * AWS Document DB : Document DB
+        * AWS ElasticCache, for Redis or MemCache
+        * Amazon Redshift for data warehouse
 * Analytics: provides services to analyse big data
     * Amazon Kinesis
-    * Amazon EMR 
+    * Amazon EMR
 * Development Tools:
-    * AWS CodeCommit is a source control service is combined with development services such as 
+    * AWS CodeCommit is a source control service is combined with development services such as
         * AWS CodeDeploy
         * AWS Elastic Beanstalk
         * AWS Cloud Formation
     * Helps to create robust DevOps model.
 * Mobile:
-  * AWS Simple Notification Service SNS for notification.
-  * Amazon Cognito for authentication and saving mobile user data
-  * Amazon Pinpoint to measure and analyse mobile application usage
+    * AWS Simple Notification Service SNS for notification.
+    * Amazon Cognito for authentication and saving mobile user data
+    * Amazon Pinpoint to measure and analyse mobile application usage
+
+<img src="./img/3.png" alt="alt text" width="500" height="300">
 
 ## Architecture Evaluation
 
