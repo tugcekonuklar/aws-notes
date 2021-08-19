@@ -16,6 +16,11 @@
   for example hardware and operation system)
 * **Software as a service (SaaS):** Provides you with a completed product that the service provider runs and manages
 
+### Amazon Resource Name (ARN)
+
+* You can use Amazon Resource Names (ARNs) to uniquely identify AWS resources or groups of resources.
+  <img src="./img/17.png" alt="alt text" width="500" height="300">
+
 ## AWS service Stack
 
 <img src="./img/1.png" alt="alt text" width="500" height="300">
@@ -82,6 +87,13 @@
 <img src="./img/6.png" alt="alt text" width="500" height="300"></br>
 <img src="./img/7.png" alt="alt text" width="500" height="300">
 
+* **AWS Lambda** :
+    * AWS Lambda can automatically run code in response to multiple events, such as:
+        * HTTP requests through Amazon API Gateway
+        * Modifications to objects in Amazon S3 buckets
+        * Table updates in Amazon DynamoDB
+        * State transitions in AWS Step Functions
+
 ## AWS Platform Services
 
 * Platform services devided 4 categories
@@ -124,6 +136,79 @@
       required to perform a task. Determine what users need to do and then craft policies that allow the users to
       perform only those tasks
     * A **role** has policies granting access to specific services and operations.
+
+<img src="./img/13.png" alt="alt text" width="500" height="300"></br>
+<img src="./img/14.png" alt="alt text" width="500" height="300"></br>
+<img src="./img/15.png" alt="alt text" width="500" height="300"></br>
+
+* Example of IAM Policy
+  <img src="./img/16.png" alt="alt text" width="500" height="300"></br>
+
+* IAM Permission Type
+    * Identity-based permissions are attached to the IAM user and indicate what the user is permitted to do.
+    * Resource-based permissions are attached to a resource and indicate what a specified user (or group of users) is
+      permitted to do with it. Amazon S3, Amazon Simple Queue Service (Amazon SQS), Amazon Simple Notification Service (
+      Amazon SNS), and AWS OpsWorks are the only services that support resource-based permissions.
+
+<img src="./img/18.png" alt="alt text" width="500" height="300"></br>
+<img src="./img/19.png" alt="alt text" width="500" height="300"></br>
+
+* IAM Policy Types
+  <img src="./img/20.png" alt="alt text" width="500" height="300"></br>
+
+* IAM Policies Evaluation Logic
+    * Use policies to fine-tune permissions granted to IAM users, groups, and roles.
+    * Policies can be in a variety of formats. Because policies are in JSON format, you can use them with a
+      version-control system.
+    * It’s good practice to define least privilege access to each user, group, or role. Then you can customize access to
+      specific resources by using an authorization policy.
+    * To determine whether the request should be allowed or denied, these rules are followed:
+        * By default, all requests are denied. (In general, requests made by using the account/root credentials for
+          resources in the account are always allowed.)
+        * An explicit allow overrides this default.
+        * An explicit deny overrides any allows.
+    * All policies that have been applied to the IAM entity are evaluated. If there is a conflict, the most restrictive
+      policy is applied. For example, when one policy allows an acMon and another policy denies an acMon, the policy
+      that denies the acMon is applied
+
+  <img src="./img/21.png" alt="alt text" width="500" height="300"></br>
+
+* The example policy gives users access to only the following:
+    * The DynamoDB table whose name is represented by table-name.
+    * The AWS account's corporate Amazon S3 bucket whose name is represented by bucket-name and all the objects it
+      contains.
+    * The policy includes an explicit deny ("Effect":"Deny" element). Used with the NotResource element, this helps to
+      ensure that the users cannot use any AWS actions or resources. The exception is those specified in the policy,
+      even if permissions have been granted in another policy. (An explicit deny statement takes precedence over an
+      allow statement.)
+
+* Overview of Authentication
+    * For example, if you are developing a mobile photo app on AWS, you must sign in to AWS using credentials to create
+      the AWS environment for that app. Signing in to AWS here requires that you authenticate with AWS (AWS
+      authentication).
+    * After the environment has been set up, the end user should be able to sign in to their photo application. Signing
+      in to the photo application requires the user to authenticate with their application (
+      application authentication).
+    * If the user takes a picture using their photo app and uploads it to AWS, authentication occurs with AWS (AWS
+      authentication).
+    * Finally, the photos that have been uploaded to the S3 bucket can cause a backend job to update the RDS database
+      with an entry for the uploaded photo. This job requires database authentication
+
+  <img src="./img/22.png" alt="alt text" width="500" height="300"></br>
+
+* Authentication via Deeloper Tools
+
+* IAM Authentiation in CLI and SDK
+  <img src="./img/23.png" alt="alt text" width="500" height="300">
+
+* Best Practices:
+    * not using your AWS account root user credentials. Instead, create separate IAM users with their own access keys
+      for each project, and tailor the permissions of the users specific to those projects.
+    * In general,recommended you use IAM roles when running your application on Amazon EC2 and use credential profiles
+      or environment variables elsewhere.
+
+* Security Credential rules
+  <img src="./img/23.png" alt="alt text" width="500" height="300">
 
 # Developer Tools
 
@@ -207,15 +292,28 @@ aws configure
     * Collects ant tracks metrics
     * Setup alarms
     * Create dashboards
-    * Does not tall you one of instances sotting down
+    * Does not tell you one of instances getting down
 
-* AWS CloudTrail:
-    * tells you who, what and why?
+<img src="./img/10.png" alt="alt text" width="500" height="300"></br>
 
+<img src="./img/11.png" alt="alt text" width="500" height="300">
 
-* AWS Lambda :
-    * AWS Lambda can automatically run code in response to multiple events, such as:
-        * HTTP requests through Amazon API Gateway
-        * Modifications to objects in Amazon S3 buckets
-        * Table updates in Amazon DynamoDB
-        * State transitions in AWS Step Functions
+* Auto Scaling works as a trio of services working together. Elastic Load Balancing and EC2 instances feed metrics to
+  Amazon CloudWatch. Auto Scaling defines a group with launch configurations and Auto Scaling policies. Amazon
+  CloudWatch alarms run Auto Scaling policies to affect the size of your fleet. All of these services work well
+  individually, but together they become more powerful and increase the control and flexibility that you demand
+
+* **AWS CloudTrail:**
+    * tells you who, when, what, which, where?
+    * AWS CloudTrail is an AWS service that generates logs of calls to the AWS API. Because the AWS API underlies both
+      the command line interface (AWS CLI) and the AWS Management Console, AWS CloudTrail can record all activity
+      against the services it monitors
+    * You can use the AWS API call history CloudTrail produces to track changes to AWS resources. These changes include
+      creation, modification, and deletion of AWS resources, such as Amazon EC2 instances, Amazon VPC security groups,
+      and Amazon EBS volumes.
+
+<img src="./img/12.png" alt="alt text" width="500" height="300">
+
+# Storage Services
+
+<img src="./img/24.png" alt="alt text" width="500" height="300"></br>
