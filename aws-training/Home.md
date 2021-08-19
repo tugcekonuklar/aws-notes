@@ -320,4 +320,4 @@ aws configure
 
 # Storage Services
 
-<img src="./img/24.png" alt="alt text" width="500" height="300"></br>
+<img src="./img/25.png" alt="alt text" width="500" height="300"></br>
