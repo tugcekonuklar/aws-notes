@@ -210,9 +210,9 @@
     * In general,recommended you use IAM roles when running your application on Amazon EC2 and use credential profiles
       or environment variables elsewhere.
 
-* Security Credential rules
+* Security Credential Priority Order 
 
-<img src="./img/23.png" alt="alt text" width="500" height="300">
+<img src="./img/24.png" alt="alt text" width="500" height="300">
 
 # Developer Tools
 
