@@ -142,7 +142,8 @@
 <img src="./img/15.png" alt="alt text" width="500" height="300"></br>
 
 * Example of IAM Policy
-  <img src="./img/16.png" alt="alt text" width="500" height="300"></br>
+
+<img src="./img/16.png" alt="alt text" width="500" height="300"></br>
 
 * IAM Permission Type
     * Identity-based permissions are attached to the IAM user and indicate what the user is permitted to do.
@@ -154,7 +155,8 @@
 <img src="./img/19.png" alt="alt text" width="500" height="300"></br>
 
 * IAM Policy Types
-  <img src="./img/20.png" alt="alt text" width="500" height="300"></br>
+
+<img src="./img/20.png" alt="alt text" width="500" height="300"></br>
 
 * IAM Policies Evaluation Logic
     * Use policies to fine-tune permissions granted to IAM users, groups, and roles.
@@ -196,10 +198,11 @@
 
   <img src="./img/22.png" alt="alt text" width="500" height="300"></br>
 
-* Authentication via Deeloper Tools
+* **Authentication via Developer Tools**
 
 * IAM Authentiation in CLI and SDK
-  <img src="./img/23.png" alt="alt text" width="500" height="300">
+
+<img src="./img/23.png" alt="alt text" width="500" height="300">
 
 * Best Practices:
     * not using your AWS account root user credentials. Instead, create separate IAM users with their own access keys
@@ -208,7 +211,8 @@
       or environment variables elsewhere.
 
 * Security Credential rules
-  <img src="./img/23.png" alt="alt text" width="500" height="300">
+
+<img src="./img/23.png" alt="alt text" width="500" height="300">
 
 # Developer Tools
 
