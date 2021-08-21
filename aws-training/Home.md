@@ -210,7 +210,7 @@
     * In general,recommended you use IAM roles when running your application on Amazon EC2 and use credential profiles
       or environment variables elsewhere.
 
-* Security Credential Priority Order 
+* Security Credential Priority Order
 
 <img src="./img/24.png" alt="alt text" width="500" height="300">
 
@@ -321,3 +321,72 @@ aws configure
 # Storage Services
 
 <img src="./img/25.png" alt="alt text" width="500" height="300"></br>
+
+* **Amazon Simple Storage Service Glacier (Amazon S3 Glacier)**
+    * Low-cost storage service that provides highly secure, durable, and flexible storage for data archiving and online
+      backup.
+    * Data storing in Amazon S3 Glacier as archives. An archive can represent a single file, or you can combine several
+      files to be uploaded as a single archive.
+
+* **Amazon Elastic File System (Amazon EFS)**
+    * Amazon EFS delivers a simple, scalable, elastic, highly available, and highly durable network file system as a
+      service to Amazon Elastic Compute Cloud (Amazon EC2) instances.
+    * Amazon EFS supports highly parallelized workloads. It is designed to meet the performance needs of big data and
+      analytics, media processing, content management, web serving, and home directories
+* **AWS Storage Gateway:**
+    * AWS Storage Gateway connects an on-premises software appliance with cloud-based storage.
+    * It provides seamless and secure storage integration between an organization’s on-premises IT environment and the
+      AWS storage infrastructure, such as Amazon S3, Amazon S3 Glacier, and Amazon EBS.
+    * AWS Storage Gateway use cases include the following:
+        * Corporate file sharing
+        * Enabling existing on-premises backup applications to store primary backups on Amazon S3
+        * Disaster recovery
+        * Mirroring data to cloud-based compute resources and then archiving it to Amazon S3 Glacier
+* **Amazon Elastic Block Store (Amazon EBS):**
+    * Amazon EBS volumes provide durable block-level storage for use with EC2 instances. Amazon EBS volumes are
+      network-attached storage that persists independently from the running life of a single EC2 instanc
+
+* Amazon S3 Bucket:
+    * Amazon S3 provides developers and IT teams with highly secure, durable, and scalable object storage. Amazon S3 is
+      easy to use, with a simple web service interface to store and retrieve any amount of data from anywhere on the web
+    * use cases:
+      <img src="./img/26.png" alt="alt text" width="500" height="300"></br>
+
+    * Simple web page :
+      <img src="./img/27.png" alt="alt text" width="500" height="300"></br>
+
+    * Amazon S3 Concept:
+        * Do not use (.) and (_) while giving name
+          <img src="./img/28x.png" alt="alt text" width="500" height="300"></br>
+
+    * Versioning is dissable in default, we should enable.
+    * Predesigned Request: All objects and buckets are private by default.
+        * Presigned URLs are useful if you want your user to be able upload a specific object to your bucket without
+          being required to have AWS security credentials or permissions.
+        * When you create a presigned URL, you must provide the following:
+            * Your security credentials
+            * Bucket name
+            * Object key
+            * HTTP method (PUT for uploading objects, GET for retrieving objects)
+            * Expiration date and time The presigned URLs are valid only for the specified duration. Share the
+              pre-signed URL with users who need to access your S3 bucket to put or retrieve objects
+
+    * **Best Practices:**
+        * Performance
+            * Request
+                * Handle NoSuchBucket Errors instead of checking of existing of fixed buckets.
+                * Set the object metadata before uploading an object
+                * Avoid using copy operation to update meta data
+                * Cache bucket keys names if your app allows it.
+            * Network Latency
+                * Choose the bucket region closest
+                * Compress data stored in Amazon s3
+                * Use a content delivery network CDN, such as Amazon CloudFront to distrubute content with low-latency
+                  and high data-transfer speeds
+        * Data integrity      
+            * Ensure data is not corrupted in transit
+            * Check the MD5 checksum of the object retrieved from the GET and PUT operation.
+
+## Design NoSQL Solution with Amazon DynamoDB
+
+
