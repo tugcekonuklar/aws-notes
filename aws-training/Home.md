@@ -350,14 +350,14 @@ aws configure
     * Amazon S3 provides developers and IT teams with highly secure, durable, and scalable object storage. Amazon S3 is
       easy to use, with a simple web service interface to store and retrieve any amount of data from anywhere on the web
     * use cases:
-<img src="./img/26.png" alt="alt text" width="500" height="300"></br>
+      <img src="./img/26.png" alt="alt text" width="500" height="300"></br>
 
     * Simple web page :
-<img src="./img/27.png" alt="alt text" width="500" height="300"></br>
+      <img src="./img/27.png" alt="alt text" width="500" height="300"></br>
 
     * Amazon S3 Concept:
-        * Do not use (.) and (_) while giving name
-          <img src="./img/28x.png" alt="alt text" width="500" height="300"></br>
+        * Do not use (.) and (_) while giving name     
+          <img src="./img/28.png" alt="alt text" width="500" height="300"></br>
 
     * Versioning is dissable in default, we should enable.
     * Predesigned Request: All objects and buckets are private by default.
