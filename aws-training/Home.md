@@ -1,4 +1,4 @@
-# Introduction to AWS
+# Developing Solution in AWS
 
 # What is Cloud Computing?
 
@@ -350,10 +350,10 @@ aws configure
     * Amazon S3 provides developers and IT teams with highly secure, durable, and scalable object storage. Amazon S3 is
       easy to use, with a simple web service interface to store and retrieve any amount of data from anywhere on the web
     * use cases:
-      <img src="./img/26.png" alt="alt text" width="500" height="300"></br>
+<img src="./img/26.png" alt="alt text" width="500" height="300"></br>
 
     * Simple web page :
-      <img src="./img/27.png" alt="alt text" width="500" height="300"></br>
+<img src="./img/27.png" alt="alt text" width="500" height="300"></br>
 
     * Amazon S3 Concept:
         * Do not use (.) and (_) while giving name
@@ -383,7 +383,7 @@ aws configure
                 * Compress data stored in Amazon s3
                 * Use a content delivery network CDN, such as Amazon CloudFront to distrubute content with low-latency
                   and high data-transfer speeds
-        * Data integrity      
+        * Data integrity
             * Ensure data is not corrupted in transit
             * Check the MD5 checksum of the object retrieved from the GET and PUT operation.
 
