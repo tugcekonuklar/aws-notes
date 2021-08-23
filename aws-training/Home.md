@@ -389,4 +389,44 @@ aws configure
 
 ## Design NoSQL Solution with Amazon DynamoDB
 
+<img src="./img/29.png" alt="alt text" width="500" height="300"></br>
 
+* Comparing relational and noSql Db
+    * Relational databases have the following characteristics:
+        * Data is stored in tables that are related to each other through a primary key–foreign key relationship. The
+          database supports complex queries and joins to retrieve a combination of data from various tables.
+        * The schema of a relational database is defined in the beginning. Changes to the schema usually require a
+          migration of data from the old schema to the new schema.
+        * Data in SQL databases is queried using structured query language (SQL), which can allow for complex queries.
+        * Relational databases support vertical scaling, which means that a single server must be made more powerful.
+        * Relational databases support ACID transactions: atomicity, consistency, isolation, and durability.
+        * Relational databases automatically support strong data consistency due to ACID properties of transactions.
+    * Non-relational database. NoSQL databases have the following characteristics:
+        * NoSQL databases can support wide-column stores, document stores, key-value stores, and graph stores. The type
+          of data stored varies by NoSQL database.
+        * NoSQL databases do not have a fixed schema. Different records can have different attributes.
+        * Data in NoSQL databases is queried by focusing on collections of documents.
+        * NoSQL databases support horizontal scaling. With this approach, you can partition and spread data across
+          multiple cheaper servers instead of purchasing more powerful servers. For example, if a table stores
+          information about 100,000 users, data can be partitioned to store a subset of 10,000 users on each server.
+        * NoSQL databases generally deliver high performance with eventual consistency. Depending on the database, you
+          can set it to strong consistency, if needed, for your usage scenario (
+          example of strong consistency: read immediately after a write returns the latest data). Note: DynamoDB
+          supports ACID via DynamoDB Transactions
+
+<img src="./img/30.png" alt="alt text" width="500" height="300"></br>
+
+* **Amazon Relational Database Service (Amazon RDS):** Provides relational database services in the cloud with support
+  for the following database engines:
+    * Amazon Aurora
+    * PostgreSQL
+    * MySQL
+    * MariaDB
+    * Oracle
+    * Microsoft SQL Server
+
+* **Amazon Redshift:** Fast, fully managed data warehouse
+* **Amazon DynamoDB:** NoSQL database that supports both document and key-value store models
+* **Amazon Neptune:** Fast, reliable, fully managed graph database service that makes it easy to build and run applications
+  that work with highly connected datasets.
+* **Amazon ElastiCache:** In-memory data cache that supports a fully managed Redis or Memcached engine
