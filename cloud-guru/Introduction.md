@@ -144,8 +144,70 @@ level [AWS Introduction](https://learn.acloud.guru/course/intro-to-aws/)
       only them, to access your database. It's an extra layer of security above just the usual username and password
       or firewall that may normally protect your services.
       </br><img src="./img/intro/5.png" alt="alt text" width="500" height="300"></br>
+* Explicit deny: If you set a permission with Effect=Denny this will override all assigned related permissions. In
+  default
+  all permissions are denny we don't need to do anything for them, but if you set explicit deny it will always override
+  granted permissions too. Be
+  careful.
+* Less Privilege: Give minimum permission as much as you can, otherwise will be complex to manage.
+
+## Secret Managers
+
+* When you need to reach 3rd party solutions sometimes you need to store secrets in your code and this os not safe.
+* So this is the issue that AWS Secrets Manager solves.
+* AWS Secrets Manager is a simple service that helps you protect the secrets that are needed to access your
+  applications, services, and resources.
+* The secrets can be passwords, keys, and tokens that you may use to access things like the mentioned database in my
+  story, but AWS secrets manager goes a step further than just password storage.
+* Password can replace with secret management by a request for the application password, in your programming code. No
+  longer to store password in application.
+  </br><img src="./img/intro/6.png" alt="alt text" width="500" height="300"></br>
+* And not only that secret manager can also change your passwords for you at regular intervals. So not only do you not
+  have to keep passwords in your code, which saves you time, the passwords themselves are automatically changed by the
+  service, both where they're stored and on the surface where it's being used.
+* Completely automatically, which improves security.
+
+## Directory Service
+
+* AWS Directory Service can provide a specific managed Microsoft active directory, as well as a simple active directory
+  option for when you don't need all the options that Microsoft active directory provides.
+* And it also has an AD connector, which is used to allow your on-premises users to log into their AWS applications with
+  their active directory credentials.
+* And not only that, usually to ensure your users can always log in, you would normally have to build multiple servers
+  or running a distributed active directory, so it continues to work if one server fails.
+* If anything fails, the service automatically replaces the failed server with a working one.
+* Also, in addition to the benefits of having your active directory hosted for you,
+* AWS managed Microsoft Active Directory is also compatible with other AWS services.
+  </br><img src="./img/intro/7.png" alt="alt text" width="500" height="300"></br>
 
 # Compute
+
+* AWS describe their own compute capability as compute for any workload. Instances, containers, and serverless
+  computing.
+* Instances:
+    * Regarding instances also known as virtual machines
+    * AWS EC2( Amazon Elastic Compute Cloud) : a service that provides secure and resizeable virtual machines in the
+      cloud
+      is known as Amazon Elastic Compute Cloud, also known as EC2.
+    * Amazon EC2 Spot: A service which helps you run fault tolerant workloads for up to 90% of the
+      normal price of EC2
+    * Amazon EC2 Auto Scaling: A service which can automatically add or remove computing capacity to meet your
+      changes in computing demand
+    * Amazon LightSail: a service which provides a really easy to use cloud platform to build an
+      application or website
+* Containers:
+    * Amazon Elastic Container Service (ECS): A service to run secure, reliable, and scalable container
+    * Amazon Elastic Container Registry (ECR): A service to store manage and deploy container images
+    * Amazon Elastic Kubernetes Service (EKS): fully managed Kubernetes service
+* Serverless:
+    * AWS Lambda
+* Edge services:
+    * AWS Outposts: lets you run your AWS services on your own servers, instead of Amazons.
+    * AWS Snow Family: lets you bring a lot of data into AWS
+        * These are devices you can order to put files on them. And then they're shipped back to Amazon and loaded into
+          your AWS account. They have devices from the size of a portable hard disk to a full semi-trailer
+          full of storage disks. The snow family has a solution useful for any business trying to move to the cloud.
+    * 
 
 # Storage
 
