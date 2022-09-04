@@ -1,130 +1,74 @@
-# Quiz IAM:
+# EC2 (Elastic Compute Cloud )
 
-QUESTION 1
-
-In AWS, what is IAM used for?
-
-Choose 3
-
-    * Creating and managing users and groups
-
-    * Assigning permissions to allow and deny access to AWS resources
-
-    * Managing access to AWS services
-
-    Secure VPN access to AWS
-
-Good work!
-
-    Correct. IAM supports multiple methods to create and manage IAM users & IAM groups.
-    
-    Correct. Using policies, you can specify several layers of permission granularity.
-    
-    Correct. You can use AWS IAM to securely control individual and group access to your AWS resources.
-
-QUESTION 2
-
-True or False? AWS recommends that EC2 instances have credentials stored on them so that the instances can access other
-resources (such as S3 buckets).
-
-    True
-
-    * False
-
-Good work!
-
-    AWS recommends IAM roles so that your applications can securely make API requests from your instances, without requiring you to manage the security credentials that the applications use.
-
-QUESTION 3
-
-Which is the best way to enable S3 read-access for an EC2 instance?
-
-    Configure a bucket policy which grants read-access based on the EC2 instance name
-
-    * Create an IAM role with read-access to S3 and assign the role to the EC2 instance
-
-    Create a new IAM group and grant read access to S3. Store the group's credentials locally on the EC2 instance and configure your application to supply the credentials with each API request.
-    
-    Create a new IAM role and grant read-access to S3. Store the role's credentials locally on the EC2 instance and configure your application to supply the credentials with each API request
-
-Good work!
-
-    Correct. IAM roles allow applications to securely make API requests from instances, without requiring you to manage the security credentials that the applications use.
-
-QUESTION 4
-
-Which of the following can you use to test that an IAM policy attached to a user, group or role works as expected?
-
-    IAM Access Analyzer
-
-    Trusted Advisor
-
-    * IAM Policy Simulator
-
-    Lambda
-
-Good work!
-
-    You can use the IAM Policy Simulator test policies that are attached to IAM users, groups, or roles in your AWS account. If more than one policy is attached to the user, group, or role, you can test all the policies, or select individual policies to test. You can test which actions are allowed or denied by the selected policies for specific resources.
-
-QUESTION 5
-
-What is an IAM Policy?
-
-    
-    A file containing a user's private SSH key
-
-    A CSV file which contains a users Access Key and Secret Access Key
-
-    * A JSON document which defines one or more permissions
-    
-    The policy which determines how your AWS bill will be paid
-
-Good work!
-
-    Correct. An IAM policy is an object in AWS that, when associated with an identity or resource, defines their permissions. AWS evaluates these policies when an IAM principal (user or role) makes a request. Permissions in the policies determine whether the request is allowed or denied. Most policies are stored in AWS as JSON documents. AWS supports six types of policies: identity-based policies, resource-based policies, permissions boundaries, Organizations SCPs, ACLs, and session policies.
+* Exam tips - EC2:
+    * EC2 is like a VM hosted in AWS instead of your own Data center
+    * You can select the capacity right now
+    * You can grown and shirnk when ever you need
+    * Pay for what you use.
+    * Infrastructire can setup minutes not months.
 
 
-QUESTION 6
+* Exam Tips - EC2 Pricing:
+    * On Demand:
+        * Default section
+        * allows you to pay by the hour or second depending on the type of instance you run
+        * this is a great option for flexibility
+    * Reserved :
+        * allows you to reserve capacity for one or three years where the discount
+          they claim of up to 72% on the hourly charge
+        * Regional
+        * Has some instance types:
+            * Standard RIs: Up to %72 off on demand
+            * Convertable RIs: When your reservation requirements changed in standatd you can not change thats why we
+              have convertable RIs, comes with %54 demand price
+            * Schedules RIs: these allow you to launch a reserved instance within a time frame that you specify and this
+              allows you to match your capacity reservation to a predictable recurring schedule, which only requires
+              either a fraction of a day, week, or month
+    * Spot:
+        * If you've got known fixed requirements,
+          we then have spot instances,
+          which allows you to purchase unused capacity at a discount of up to 90%
+          prices fluctuate with supply and demand,
+        * you set your maximum that you're willing to pay and if the price goes over
+          the maximum, they're going to either hibernate or terminate your instance,
+          depending on the options that you selected
+        * this is great for applications
+          with flexible start and end times,
+          but it's not so great for applications which need to be up and running all the
+          time
+    * Dedicated:
+        * it's really great if you've got server bound licenses that you want to
+          reuse, or if you have compliance requirements,
+          which are preventing you from using a multi-tendency
+        * The most expensive one.
 
-Which statement best describes IAM?
+* Exam Tips - Instance Types:
+  * Determines the hardware of the host computer
+    * ach instance type offer different compute, memory and storage capabilities.
+    * They are grouped in different instance families like :
+      * General Purpose
+      * Micro instance 
+      * Compute optimised
+      * FPGA instance
+      * GPU instance
+      * Machine learning ASIC instance
+      * Memory Optimised
+      * Storage Optimised
+    * Select an instance types based on requirement of the application. 
 
-
-    IAM allows you to manage permissions for AWS resources only.
-    
-    * IAM allows you to manage users, groups, and roles and their corresponding level of access to the AWS Platform.
-    
-    IAM allows you to manage users' passwords only. AWS staff must create new users for your organization. This is done by raising a ticket.
-    
-    IAM stands for Improvised Application Management, and it allows you to deploy and manage applications in the AWS Cloud.
-
-Good work!
-    
-    Correct. AWS Identity and Access Management (IAM) enables you to manage access to AWS services and resources securely. Using IAM, you can create and manage AWS users, groups, roles, and use permissions to allow and deny their access to AWS resources.
-
-QUESTION 7
-
-Which IAM entity can you use to delegate access to trusted entities such as IAM users, applications, or AWS services such as EC2?
-
-    IAM User
-
-    IAM Group
-    
-    * IAM Role
-
-    IAM Web Identity Federation
-
-Good work!
-
-    You can use IAM roles to delegate access to IAM users managed within your account, to IAM users under a different AWS account, to a web service offered by AWS such as Amazon Elastic Compute Cloud (Amazon EC2), or to an external user authenticated by an external identity provider (IdP) service that is compatible with SAML 2.0 or OpenID Connect, or a custom-built identity broker. IAM Roles.
-
-
-
-
-
-
-
-
-
-
-
+* Simple Web PAge in EC2 instance 
+  * Launch an instance in EC2
+  * Add SSH and HTTP Security Groups roles for port 22 and 80
+  * Store Securuty SSH key pair folder that downloaded to login .pem file
+  * Open terminal 
+  * Set permission to Pem file to execute by using `chmod 400 ec2_ins.pem`
+  * then copy the Public IP of the ec2 instance and type this command to connect the ec2 instance `ssh ec2-user@3.83....5 -i ec2_ins.pem` then say yes
+  * After you login lets get sudo rights by `sudo su`
+  * Then upgrade instance `yum update -y`
+  * install apache web by `yum install httpd -y`
+  * to start apache `systemctrl start httpd` or to autho start `systemctrl enable httpd`
+  * check status of Apache server by `systemctrl status httpd`
+  * let's add a simple web page index.html, change directroy to `cd /var/www/html`
+  * use Nano editor `nano index.html`
+  * Then write a simple html codes in it save with Control+x
+  * Then copy and paste ec2 instance public ip to the browser you will se your index page 
