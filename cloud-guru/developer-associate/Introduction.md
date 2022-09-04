@@ -208,4 +208,4 @@
     * the first thing we need to do is check the application.
 
 * Exam tips - Elastic Load Balancer:
-    * ![Elastic Load Balance Tips](img/ebs-1.png)
+    * ![Elastic Load Balance Tips](img/elb-1.png)
