@@ -1,6 +1,6 @@
 # EC2 (Elastic Compute Cloud )
 
-####                * Exam tips - EC2:
+####                            * Exam tips - EC2:
 
     * EC2 is like a VM hosted in AWS instead of your own Data center
     * You can select the capacity right now
@@ -8,7 +8,7 @@
     * Pay for what you use.
     * Infrastructire can setup minutes not months.
 
-####                * Exam Tips - EC2 Pricing:
+####                            * Exam Tips - EC2 Pricing:
 
 * On Demand:
     * Default section
@@ -43,7 +43,7 @@
       which are preventing you from using a multi-tendency
     * The most expensive one.
 
-####                * Exam Tips - Instance Types:
+####                            * Exam Tips - Instance Types:
 
 * Determines the hardware of the host computer
     * ach instance type offer different compute, memory and storage capabilities.
@@ -58,7 +58,7 @@
         * Storage Optimised
     * Select an instance types based on requirement of the application.
 
-####                * Simple Web Page in EC2 instance
+####                            * Simple Web Page in EC2 instance
 
 * Launch an instance in EC2
 * Add SSH and HTTP Security Groups roles for port 22 and 80
@@ -77,7 +77,7 @@
 * Then write a simple html codes in it save with Control+x
 * Then copy and paste ec2 instance public ip to the browser you will se your index page
 
-####                * EBS: Elastic Block Store
+####                            * EBS: Elastic Block Store
 
 * Storage volume you can attach to EC2 instances
 * When you first launch Ec2 instance it has launched with min 1 EBS volume attached an this is your OS will be instaled
@@ -238,7 +238,7 @@
     * To lost content of selected bucket `aws s3 ls s3://acloudgru-{unique numbers}`
     * [AWS CLI S3 command DOC](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3/index.html)
 
-####      * Exam tips - AWS CLI
+####                  * Exam tips - AWS CLI
 
 * Least Privilege: always give your user the minimum amount of access required to do their job
 * Use identity access management groups
@@ -250,7 +250,7 @@
       your aws cli again by `aws configure`
     * Dont share keys
 
-####     * AWS Pagination
+####                 * AWS Pagination
 
 * You can control the numbur of items insluded the output when you run CLI command
 * by default AWS CLI uses page size of 1000
@@ -298,7 +298,7 @@
 * OLAP and OLTP
   ![Diff OLTP and OLAP](img/elb-1.png)
 
-####  * Exam tips - RDS:
+####              * Exam tips - RDS:
 
 * RDS types:
     * SQLServer, MySql,Orackle, Postgres, Aurora, MariaDB
@@ -306,11 +306,68 @@
     * Great for processing lots of small transactions, like customer orders banking transactions etc.
 * RDS is not suitable OLAP
 
-
 RDS Demo
+
 * Have an EC@ instance that has mysqlCliend instaled in it try to reach MySql instance in AWS RDS
-* While create our EC2 we create a security group called "myec2-sg" , then while creating RDS Mysql free trial instance we also define another SG called 'rd-sq'
-  * Then in 'rd-sg' we add our EC@ instance SG as "inbound Security group" into "rd-sg" security group to make reachabile
+* While create our EC2 we create a security group called "myec2-sg" , then while creating RDS Mysql free trial instance
+  we also define another SG called 'rd-sq'
+    * Then in 'rd-sg' we add our EC@ instance SG as "inbound Security group" into "rd-sg" security group to make
+      reachabile
 * To reach from instande to RDS we need RDS endpoint , in RDS instance details you can find
 * Connect to your database using your endpoint:
-  * `mysql -u acloudguru -p -h acluodguru.hjkhdjkfhdkf {endpoint} acloudguru` when we hit enter it will ask password '-p'
+    * `mysql -u acloudguru -p -h acluodguru.hjkhdjkfhdkf {endpoint} acloudguru` when we hit enter it will ask password '
+      -p'
+
+#### RDS Multi-AZ and Read Replicas:
+
+* **Multi-AZ** is an exact copy of your production database in another availability zone.
+* Multi-AZ is for disaster recovery (DR).
+* RDS will replicate the data from the primary instance to the standby. Now under normal circumstances with everything
+  operating as expected, the standby RDS instance is not visible or accessible to the application servers.
+    * But if something goes wrong with our primary database instance, it could be there's a hardware issue or even a
+      problem with
+      the entire availability zone, we still have another database instance in the standby location.
+* RDS will automatically fail over to the standby database instance.
+    * So we haven't lost our database. So with Multi-AZ AWS have done all the heavy lifting for you.
+* AWS handles all the replication between primary and secondary, so you don't have to configure anything yourself.
+* when you write to your production database, this right will automatically synchronize to the standby database.
+* RDS database can be configured as Multi-AZ, well it's basically all of them. So that includes SQL Server, Oracle, My
+  SQL. PostgreSQL and MariaDB as well.
+* main purpose with Multi-AZ is to provide resilience and keep your application up and running, if you experience an
+  unplanned failure or if you're performing maintenance on your primary RDS instance.
+* you cannot have your database clients
+  or your application servers connecting to both the primary
+  and standby simultaneously
+
+* **Read Replicas:**
+* To improve performance the main things you can do to improve a performance and particularly read performance is to
+  add Read Replicas.
+* a Read Replica is a read-only copy of your primary database
+* it takes the read load off your primary database.
+* Read Replica can be loaded
+    * in the same availability zone as your primary database.
+    * also be cross-AZ, so located in a completely different ability zone.
+    * can even be cross-region and located in a completely different region.
+* each Read Replica has its own DNS and point, which different and independent from the primary database.
+* Read Replicas can even be promoted to become their own independent databases.
+    * However, of course if we do that, that's going to break the replication from the original database but it will
+      give us two completely independent databases both allowing read and write access.
+* they're primarily used for scaling and not fault disaster recovery
+* in order to configure a Read Replica, you will need to have automatic backups enabled. And automatic backups of course
+  they are enabled by default, but if for some reason you've disabled backups then you won't be able to deploy a Read
+  Replica.
+* multiple Read Replicas are supported. So for MySQL, MariaDB, PostgreSQL, Oracle and SQL Server they all allow you to
+  add up to five Read Replicas to each database instance.
+
+* Exam tips - Multi-AZ and Read Replicas:
+    * Multi-AZ you get an exact copy of your production database in another availability zone.
+        * It's used for disaster recovery.
+        * the event of a failure, RDS audience will automatically fail over to the standby instance.
+    * with Read Replicas, you get a read only copy of your primary database either in the same availability zone, in a
+      different availability zone or in a different region entirely.
+        * Read Replicas are used to increase or scale read performance,
+        * they're not used for disaster recovery.
+        * they are great for read heavy workloads because they take the load off your primary database for read-only
+          workloads
+      
+![Multu-AZ and Read Replicas](img/rds-3.png)
