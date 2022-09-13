@@ -1,6 +1,6 @@
 # EC2 (Elastic Compute Cloud )
 
-####                                                                           * Exam tips - EC2:
+####                                                                              * Exam tips - EC2:
 
 * EC2 is like a VM hosted in AWS instead of your own Data center
 * You can select the capacity right now
@@ -8,7 +8,7 @@
 * Pay for what you use.
 * Infrastructire can setup minutes not months.
 
-####                                                                           * Exam Tips - EC2 Pricing:
+####                                                                              * Exam Tips - EC2 Pricing:
 
 * On Demand:
     * Default section
@@ -43,7 +43,7 @@
       which are preventing you from using a multi-tendency
     * The most expensive one.
 
-####                                                                           * Exam Tips - Instance Types:
+####                                                                              * Exam Tips - Instance Types:
 
 * Determines the hardware of the host computer
     * ach instance type offer different compute, memory and storage capabilities.
@@ -58,7 +58,7 @@
         * Storage Optimised
     * Select an instance types based on requirement of the application.
 
-####                                                                           * Simple Web Page in EC2 instance
+####                                                                              * Simple Web Page in EC2 instance
 
 * Launch an instance in EC2
 * Add SSH and HTTP Security Groups roles for port 22 and 80
@@ -77,7 +77,7 @@
 * Then write a simple html codes in it save with Control+x
 * Then copy and paste ec2 instance public ip to the browser you will se your index page
 
-####                                                                           * EBS: Elastic Block Store
+####                                                                              * EBS: Elastic Block Store
 
 * Storage volume you can attach to EC2 instances
 * When you first launch Ec2 instance it has launched with min 1 EBS volume attached an this is your OS will be instaled
@@ -238,7 +238,7 @@
     * To lost content of selected bucket `aws s3 ls s3://acloudgru-{unique numbers}`
     * [AWS CLI S3 command DOC](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3/index.html)
 
-####                                                                 * Exam tips - AWS CLI
+####                                                                    * Exam tips - AWS CLI
 
 * Least Privilege: always give your user the minimum amount of access required to do their job
 * Use identity access management groups
@@ -250,7 +250,7 @@
       your aws cli again by `aws configure`
     * Dont share keys
 
-####                                                                * AWS Pagination
+####                                                                   * AWS Pagination
 
 * You can control the numbur of items insluded the output when you run CLI command
 * by default AWS CLI uses page size of 1000
@@ -294,11 +294,11 @@
     * Failover Capacity
     * Automated backups
 * RDS is not suitable for analysing large amount of data and instead you should think about datawarehouse like Redshif.
-  Optimised for OLAP
+  Optimised for OLAP (online Analytics processing)
 * OLAP and OLTP
   ![Diff OLTP and OLAP](img/elb-1.png)
 
-####                * Exam tips - RDS:
+####                   * Exam tips - RDS:
 
 * RDS types:
     * SQLServer, MySql,Orackle, Postgres, Aurora, MariaDB
@@ -600,3 +600,118 @@
       the time out period and you will need to troubleshoot your application or database server, fix the problem, and
       that should clear the error.
 
+[EC2 - Part 2](https://acloudguru.visme.co/view/8r08r6nq-aws-certified-developer-associate-studyguide-s03-beginner-guide-to-ec2-part2)
+
+* Route 53
+    * Route 53 is Amazon's DNS service
+    * it allows you to map a domain name to an EC2 instance, an elastic load balancer or S3 bucket.
+    * if you remember, we created a web server running httpd,
+        * we added an application load balancer
+        * then we configured our hosted zone with a new alias
+        * an A record to map our domain name to the DNS address of our application load balancer
+        * this is one of the most common use cases for Route 53.
+    * Route 53 terminology.
+        * So we used a hosted zone, which is a container for DNS records for our domain
+        * alias is what allows you to route traffic addressed to the zone apex or the top of the DNS namespace,
+            * for example, ilovecloud.com and send it to a resource within AWS, for example, an elastic load balancer
+        * an A record allows you to route traffic to a resource such as a web server, using an IPv4 address.
+
+* AWS CLI,
+    * the principle of least privilege and always give your users the minimum amount of access required to do their job.
+        * And it's best practice to use groups,
+    * create identity access management groups and assign your users to groups.
+        * Group permissions are assigned using IAM policy documents and your users will automatically inherit the
+          permissions of the group.
+    * When it comes to generating the secret access key, remember that you will only see this once and if you lose it,
+      then you can delete the access key ID and secret access key and regenerate them.
+        * And if you do that, you will need to run AWS configure again and provide the new credentials.
+        * Don't share your key pairs and each developer should have their own access key ID and secret access key and
+          just like passwords, they should never be shared.
+    * AWS CLI supports Linux, Windows and MacOS, so you can install it on your local machine
+        * you can also use it on EC2 instances as well.
+        * And of course, when we launch a Linux to EC2 instance, you get the AWS CLI pre-installed.
+    * using roles with EC2
+        * we can use a role to give an EC2 instance access to AWS resources like S3.
+        * And to do that, we need to create an Identity access management role with S3 access.
+            * Create an EC2 instance and attach the role that we just created and then we should be able to access S3
+              from our EC2 instance.
+        * And using roles in this way is the preferred option from a security perspective. And it allows you to avoid
+          hard coding your credentials,
+        * so roles allow you to provide access without having to manage access keys and secret access keys and manually
+          configure them on every single EC2 instance.
+    * IAM policies to control a roles permissions
+        * you can update a policy attached to a role
+        * it will take immediate effect.
+        * And you can attach and detach roles to running EC2 instances without having to stop or terminate the instances
+
+* RDS or Relational Database Service.
+    * got a few different RDS database types : SQLServer, Oracle, MySQL, PostgreSQL, MariaDB and Amazon Aurora
+    * RDS is for online transaction processing (OLTP) workloads.
+    * So this is great for processing lots of small transactions
+        * like customer orders, banking transactions, payments and booking systems
+    * It is NOT suitable for online analytics processing (OLAP).
+        * So instead, we should use RedShift for OLAP and data warehousing type tasks like analyzing large amounts of
+          data, reporting and sales forecasting.
+    * differences between automated backups and database snapshots (known as manual snapshots).
+        * automated backups:
+            * these are enabled by default and you define the backup window.
+            * They provide point-in-time snapshots plus transaction logs.
+            * You can define a retention period of up to 35 days and they can be used to recover your database to any
+              point in time within the retention period.
+        * snapshots:
+            * are user-initiated and ad-hoc.
+            * They provide point-in-time snapshots only,
+            * there's no retention period
+            * they are stored indefinitely until you delete them
+            * they can be used to backup your database instance to a known state and restore to that specific state at
+              any time,
+
+    * when it comes to encrypting your RDS database, you will need to enable encryption at creation time.
+        * So you cannot enable it later
+        * when you encrypt your RDS database it includes all the underlying storage, automated backups, snapshots, logs
+          and read replicas as well. So it's going to encrypt everything.
+        * RDS integrates with KMS, so it uses the AWS Key Management Service for AES-256 bit encryption.
+        * And if you have any existing RDS instance which you need to encrypt, of course you cannot add encryption later
+            * but what you can do is take a snapshot of your database
+            * then encrypt the snapshot
+            * and create a new RDS instance from your encrypted snapshot.
+
+    * multi-AZ:
+        * you get an exact copy of your production database in another availability zone.
+        * These are used for disaster recovery, so in the event of a failure, RDS will automatically failover to the
+          standby instance.
+    * a read replica
+        * is a read-only copy of your primary database
+        * this can be in the same AZ, cross-AZ or cross-region.
+        * read replicas are used to increase or scale read performance.
+        * a read replica is great for read-heavy workloads
+            * because it takes the load off your primary database for read-only workloads,
+            * for example, if you need to run a business intelligence reporting jobs.
+
+* ElastiCache:
+    * Another way to improve read performance for RDS is to use ElastiCache.
+    * ElastiCache is an in-memory cache designed to improve read performance for read-heavy databases
+    * there are two options available.
+    * memcached:
+        * this is an in-memory, key-value data store.
+        * And this is the one to use if object caching is your primary goal
+        * you want to keep things as simple as possible,
+        * you don't need persistence or multi-AZ
+        * and you don't need support for advanced data types or data sorting.
+    * redis,
+        * that is also an in-memory key-value data store
+        * but this is the one to use if you are performing data sorting and ranking, such as in gaming leaderboards.
+        * And it's also a great choice if you have advanced data types such as lists and hashes
+        * if you need data persistence and multi-AZ.
+            * So memcached is your basic option whereas redis provides enterprise features like persistence and
+              multi-AZ.
+
+* parameter store:
+    * allows you to store confidential information
+        * such as passwords, database connection strings and licensed codes, etc.
+    * You can store your values as plain text or encrypt them and reference them using the parameter name,
+        * for example, in a bootstrap script.
+            * And parameter store is integrated with lots of different AWS services.
+        * So you can use it with EC2, CloudFormation, Lambda and it also supports CodeBuild, CodePipeline and
+          CodeDeploy.
+* ![Common use case of route 53](img/r53-1.png)
