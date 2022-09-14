@@ -1,6 +1,6 @@
 # EC2 (Elastic Compute Cloud )
 
-####                                                                              * Exam tips - EC2:
+##                                                                              * Exam tips - EC2:
 
 * EC2 is like a VM hosted in AWS instead of your own Data center
 * You can select the capacity right now
@@ -8,7 +8,7 @@
 * Pay for what you use.
 * Infrastructire can setup minutes not months.
 
-####                                                                              * Exam Tips - EC2 Pricing:
+##                                                                              * Exam Tips - EC2 Pricing:
 
 * On Demand:
     * Default section
@@ -43,7 +43,7 @@
       which are preventing you from using a multi-tendency
     * The most expensive one.
 
-####                                                                              * Exam Tips - Instance Types:
+##                                                                              * Exam Tips - Instance Types:
 
 * Determines the hardware of the host computer
     * ach instance type offer different compute, memory and storage capabilities.
@@ -58,7 +58,7 @@
         * Storage Optimised
     * Select an instance types based on requirement of the application.
 
-####                                                                              * Simple Web Page in EC2 instance
+##                                                                              * Simple Web Page in EC2 instance
 
 * Launch an instance in EC2
 * Add SSH and HTTP Security Groups roles for port 22 and 80
@@ -77,7 +77,7 @@
 * Then write a simple html codes in it save with Control+x
 * Then copy and paste ec2 instance public ip to the browser you will se your index page
 
-####                                                                              * EBS: Elastic Block Store
+##                                                                              * EBS: Elastic Block Store
 
 * Storage volume you can attach to EC2 instances
 * When you first launch Ec2 instance it has launched with min 1 EBS volume attached an this is your OS will be instaled
@@ -153,7 +153,7 @@
 
 [Amazon EBS volume types](https://aws.amazon.com/tr/ebs/volume-types/)
 
-#### Elastic Load Balancer
+## Elastic Load Balancer
 
 * a load balancer distributes network traffic across a group of servers.
 * Types of Load balancers in AWS:
@@ -210,7 +210,7 @@
 * Exam tips - Elastic Load Balancer:
     * ![Elastic Load Balance Tips](img/elb-1.png)
 
-#### Route 53
+## Route 53
 
 * AWS DNS service
 * Allows you domain maps to
@@ -238,7 +238,7 @@
     * To lost content of selected bucket `aws s3 ls s3://acloudgru-{unique numbers}`
     * [AWS CLI S3 command DOC](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3/index.html)
 
-####                                                                    * Exam tips - AWS CLI
+##                                                                    * Exam tips - AWS CLI
 
 * Least Privilege: always give your user the minimum amount of access required to do their job
 * Use identity access management groups
@@ -250,7 +250,7 @@
       your aws cli again by `aws configure`
     * Dont share keys
 
-####                                                                   * AWS Pagination
+##                                                                   * AWS Pagination
 
 * You can control the numbur of items insluded the output when you run CLI command
 * by default AWS CLI uses page size of 1000
@@ -280,7 +280,7 @@
     * You can update policy of a role and affect immediately
     * Attach and deattach roles to runnig EC@ instances without terminate the service
 
-#### RDS (Relational database System)
+## RDS (Relational database System)
 
 ![RDS in AWS ](img/rds-1.png)
 
@@ -298,7 +298,7 @@
 * OLAP and OLTP
   ![Diff OLTP and OLAP](img/elb-1.png)
 
-####                   * Exam tips - RDS:
+##                   * Exam tips - RDS:
 
 * RDS types:
     * SQLServer, MySql,Orackle, Postgres, Aurora, MariaDB
@@ -319,7 +319,7 @@
           password '
           -p'
 
-#### RDS Multi-AZ and Read Replicas:
+## RDS Multi-AZ and Read Replicas:
 
 * **Multi-AZ** is an exact copy of your production database in another availability zone.
 * Multi-AZ is for disaster recovery (DR).
@@ -373,7 +373,7 @@
 
 ![Multu-AZ and Read Replicas](img/rds-3.png)
 
-#### RDS Backups and Snapshots
+## RDS Backups and Snapshots
 
 * Snapshots:
     * database snapshots, which are manual, ad-hoc, and user initiated.
@@ -432,7 +432,7 @@
 ![Authomatic Backups vs Snapshots](img/rds-4.png)
 ![Encryption](img/rds-7.png)
 
-#### Elastic Cache
+## Elastic Cache
 
 ![Elastic Cashe](img/ec-1.png)
 
@@ -476,7 +476,7 @@
               than a database. And you should think about using Redshift instead.
 * ![Exam tips](img/ec-2.png)
 
-#### System Manager Parameter Store:
+## System Manager Parameter Store:
 
 * it's really important that you maintain the confidentiality of the information, and avoid hard coding parameters in
   your code.
