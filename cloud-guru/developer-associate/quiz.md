@@ -501,12 +501,330 @@ Good work!
     Correct. Elastic Load Balancing offers three types of load balancers: Application Load Balancer, Network Load Balancer,
     and Classic Load Balancer.
 
+# S3
+
+QUESTION 1
+
+Which of the following options allows users to have secure access to private files located in S3?
+
+Choose 3
+
+
+    * CloudFront Signed URLs
+
+
+    * CloudFront Signed Cookies
+
+
+    * CloudFront Origin Access Identity
+
+
+    Public S3 buckets
+
+Good work!
+
+    There are three options in the question which can be used to secure access to files stored in S3 and therefore can be considered correct. Signed URLs and Signed Cookies are different ways to ensure that users attempting access to files in an S3 bucket can be authorized. One method generates URLs and the other generates special cookies but they both require the creation of an application and policy to generate and control these items. An Origin Access Identity on the other hand, is a virtual user identity that is used to give the CloudFront distribution permission to fetch a private object from an S3 bucket. Public S3 buckets should never be used unless you are using the bucket to host a public website and therefore this is an incorrect option.
+
+
+QUESTION 2
+
+You are hosting a website in an Amazon S3 bucket. Which feature defines a way for client web applications that are loaded in one domain to interact with resources in a different domain?
+
+
+    Bucket ACL
+    
+    
+    IAM Role
+    
+    
+    Bucket Policy
+    
+
+    * CORS
+
+Good work!
+    
+    Cross-origin resource sharing (CORS) defines a way for client web applications that are loaded in one domain to interact with resources in a different domain. With CORS support, you can build rich client-side web applications with Amazon S3 and selectively allow cross-origin access to your Amazon S3 resources. Reference: Configuring and using cross-origin resource sharing (CORS).
 
 
 
+QUESTION 3
+
+You are hosting a static website in an S3 bucket that uses Javascript to reference assets in another S3 bucket. For some reason, these assets are not displaying when users browse to the site. What could be the problem?
+
+
+    You cannot use one S3 bucket to reference another S3 bucket.
+    
+    
+    Amazon S3 does not support Javascript.
+    
+    
+    You need to open port 80 on the appropriate security group in which the S3 bucket is located.
+
+
+    * You haven't enabled Cross-origin Resource Sharing (CORS) on the bucket where the assets are stored.
+
+Good work!
 
 
 
+QUESTION 4
 
+The total volume of data and number of objects you can store in Amazon S3 are unlimited.
+
+
+    False
+
+    * True
+
+Good work!
+
+    The total volume of data and number of objects you can store in Amazon S3 are unlimited. Individual Amazon S3 objects can range in size from a minimum of 0 bytes to a maximum of 5 terabytes. The largest object that can be uploaded in a single PUT is 5 gigabytes. For objects larger than 100 megabytes, customers should consider using the Multipart Upload capability. Amazon S3 FAQs.
+
+
+
+QUESTION 5
+
+Which storage class is suitable for long-term archiving of data that occasionally needs to be accessed within a few hours or minutes?
+
+
+    S3 Standard
+
+    S3 Glacier Deep Archive
+
+    *  S3 Glacier
+
+    S3 Intelligent-Tiering
+
+Good work!
+
+    S3 Glacier is designed for long-term data archiving that occasionally needs to be accessed within a few hours or minutes. It supports retrieval options of 1 minute to 12 hours.
+
+QUESTION 6
+
+When you first create an S3 bucket, this bucket is publicly accessible by default.
+
+    True
+
+    * False
+
+Good work!
+
+
+QUESTION 7
+
+You are using S3 in ap-northeast-1 to host a static website in a bucket called "acloudguru". What would the new URL endpoint be?
+
+    
+    http://www.acloudguru.s3-website-ap-northeast-1.amazonaws.com
+
+
+    * http://acloudguru.s3-website-ap-northeast-1.amazonaws.com
+
+
+    https://s3-ap-northeast-1.amazonaws.com/acloudguru/
+    
+    
+    http://acloudguru.s3-website-ap-southeast-1.amazonaws.com
+
+Good work!
+
+    Depending on your Region, your Amazon S3 website endpoint follows one of these two formats:
+    
+    s3-website dash (-) Region ‐ http://bucket-name.s3-website-Region.amazonaws.com
+    s3-website dot (.) Region ‐ http://bucket-name.s3-website.Region.amazonaws.com
+    The Asia Pacific (Tokyo) region ap-northeast-1 uses the website endpoint s3-website-ap-northeast-1.amazonaws.com.
+    
+    Hence, the correct URL is http://acloudguru.s3-website-ap-northeast-1.amazonaws.com.
+    
+    References:
+    
+    Website endpoints
+    Amazon S3 Website Endpoints
+
+
+QUESTION 8
+
+Which of the following encryption methods are supported in S3?
+Choose 3
+
+
+    * SSE-S3
+
+    SSE-AES
+
+    * SSE-C
+
+    * SSE-KMS
+
+Good work!
+
+    Server-side encryption is the encryption of data at its destination by the application or service that receives it. Amazon S3 encrypts your data at the object level as it writes it to disks in its data centers and decrypts it for you when you access it. You have three mutually exclusive options, depending on how you choose to manage the encryption keys: Server-Side Encryption with Amazon S3-Managed Keys (SSE-S3), Server-Side Encryption with Customer Master Keys (CMKs) Stored in AWS Key Management Service (SSE-KMS), or Server-Side Encryption with Customer-Provided Keys (SSE-C). Reference: Protecting data using server-side encryption.
+
+QUESTION 9
+
+True or False? An Amazon S3 object owner can optionally share objects with others by creating a presigned URL.
+
+
+    False
+
+    * True
+
+Good work!
+
+    All Amazon S3 objects by default are private. Only the object owner has permission to access these objects. However, the object owner can optionally share objects with others by creating a presigned URL, using their own security credentials, to grant time-limited permission to download the objects. Sharing an object with a presigned URL.
+
+QUESTION 10
+
+You would like to configure your S3 bucket to only serve content over HTTPS/SSL and explicitly deny all unencrypted HTTP access. In your bucket policy, how should you specify the type of request that should be denied?
+
+```json
+{
+  "Id": "ExamplePolicy",
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowSSLRequestsOnly",
+      "Action": "s3:*",
+      "Effect": "Deny",
+      "Resource": [
+        "arn:aws:s3:::DOC-EXAMPLE-BUCKET",
+        "arn:aws:s3:::DOC-EXAMPLE-BUCKET/*"
+      ],
+      "Condition": {
+        "Bool": {
+          "aws:SecureTransport": "false"
+        }
+      },
+      "Principal": "*"
+    }
+  ]
+}
+```
+
+Good work!
+    
+    Explicitly denying requests that are identified as "aws:SecureTransport": "false" would deny requests that are using HTTP and are unencrypted. AWS Documentation: What S3 bucket policy should I use to comply with the AWS Config rule s3-bucket-ssl-requests-only?
+
+QUESTION 11
+
+You would like to configure your S3 bucket to deny put object requests that do not use server-side encryption. Which bucket policy can you use to deny permissions to upload objects, unless the request includes server-side encryption?
+
+```json
+ {
+                "Version": "2012-10-17",
+                "Id": "PutObjPolicy",
+                "Statement": [
+                    {
+                        "Sid": "DenyUnEncryptedObjectUploads",
+                        "Effect": "Deny",
+                        "Principal": "*",
+                        "Action": "s3:PutObject",
+                        "Resource": "arn:aws:s3:::bucket/*",
+                        "Condition": {
+                            "Null": {
+                                "s3:x-amz-server-side-encryption": "true"
+                            }
+                        }
+                    }
+                ]
+            }
+
+```
+Good Work!
+    
+    The condition above looks for a Null value for the s3:x-amz-server-side-encryption key. If this condition is true, it means the request is Null and does not include server-side encryption. Setting the condition in the condition policy to "s3:x-amz-server-side-encryption": "true" with "Effect": "Deny" and "Action": "s3:PutObject" would deny put object requests that do not use server-side encryption. AWS Documentation: How to Prevent Uploads of Unencrypted Objects to Amazon S3.
+
+QUESTION 12
+
+What is the HTTP code you would see once you successfully place a file in an S3 bucket?
+
+
+    404
+    
+    524
+
+    * 200
+
+    312
+
+Good work!
+
+QUESTION 13
+
+What is the largest size file you can transfer to S3 using a single PUT operation?
+
+    1GB
+    
+    5TB
+    
+    100MB
+
+    * 5GB
+
+Good Work !
+    
+    Individual Amazon S3 objects can range in size from a minimum of 0 bytes to a maximum of 5 terabytes. The largest object that can be uploaded in a single PUT is 5 gigabytes. For objects larger than 100 megabytes, customers should consider using the Multipart Upload capability.
+
+QUESTION 14
+
+Which of the following HTTP methods supported by CloudFront are read-only methods?
+Choose 3
+
+    * OPTIONS
+
+    PATCH
+
+    POST
+
+    * GET
+
+    DELETE
+
+    * HEAD
+
+Good work!
+
+    'OPTIONS is used to find out what other HTTP methods are supported by the given URL.'
+    The GET method is used to read data.
+    HEAD is used to inspect resource headers; similar to GET, except without the response body.
+
+QUESTION 15
+
+Which storage class is suitable for long-term archiving of data and supports millisecond retrieval times?
+
+
+    * Glacier Instant Retrieval
+
+
+    Glacier Flexible Retrieval
+    
+    
+    S3 Standard-Infrequent Access
+
+
+    Glacier Deep Archive
+
+Good work!
+
+    Glacier Instant Retrieval is designed for long-lived data, accessed approximately once per quarter with millisecond retrieval time. 
+
+
+QUESTION 16
+
+You would like to migrate your website to AWS and use CloudFront to provide the best performance. Your users will need to complete a form on the website in order to subscribe to a mailing list and comment on blog posts. Which of the following allowed HTTP methods should you configure in your CloudFront distribution settings?
+
+
+    * GET, HEAD, OPTIONS, PUT, POST, PATCH, DELETE
+
+    GET, HEAD
+
+    GET, HEAD, OPTIONS, POST
+    
+    GET, HEAD, OPTIONS
+
+Good work!
+
+    This combination of HTTP methods will enable your users to interact with the website and send, modify, insert, and delete data.
 
 
