@@ -45,3 +45,43 @@
     * high availability. And that means that you can focus on writing code and building your application instead of
       configuring servers.
     * ![Exam tips](img/sl-2.png)
+
+## Lambda Functions
+
+* Lambda is serverless compute,
+* it allows you to run your application code in AWS without provisioning any servers
+* Lambda takes care of everything required to run your code, including the runtime environment, supported languages,
+  including Java, go PowerShell, no JS C-sharp Python and Ruby.
+* all you need to do is upload your code to Lambda and you are good to go.
+* it includes all the enterprise features that you would expect from an AWS service.
+    * auto scaling
+    * high availability are already baked in to the Lambda service.
+* Lambda pricing, you are charged based on the number of requests that duration and the amount of memory used by your
+  Lambda function.
+* The first 1 million requests per month are always free.
+    * And then after that, you are charged 20 cents per month per million requests.
+* You also charge for the duration that your function runs
+    * you are charging one millisecond increments,
+* and the price depends on the amount of memory that you allocate to your Lambda
+  function, and they charge you a price per gigabyte/second,
+* For example function which uses 512 megabytes of memory, and it runs for a 100 milliseconds.
+    * 0.5 gigabytes and 0.1 seconds = 0.05 gigabyte seconds.
+    * So this is what we'd be charged for running that function every time that
+      function runs. However,
+    * you also get the first 400,000 gigabyte seconds per month, completely free.
+* significantly cheaper than paying for EC2 two instances. Now,
+* Lambda is event driven and serverless applications use an event driven architecture.
+    * So that means that Lambda functions can be automatically triggered by other AWS services, or they can be called
+      directly from any web or mobile application.
+    * So Lambda is triggered by events and these events could be changes made to data in an S3 bucket.
+        * For example, triggering a Lambda function to run your code, or you could run a Lambda function in response to
+          a change in a dynamo DB table.
+        * And you can also have a Lambda function triggered by a user request as well. So you can use API gateway to
+          configure an HTTP endpoint, allowing you to trigger your function at any time using an HTTP request.
+    * Lambda can be triggered by loads of different AWS services.
+        * which AWS services can we use? Well, there's dynamo DB, Kinesis, SQS application load balancer, API gateway,
+          Alexa, CloudFront, S3, SNS, SAS, cloud formation, CloudWatch code commits, and code pipeline.
+    * [Here is the list of services](https://docs.aws.amazon.com/lambda/latest/dg/lambda-services.html)
+    * ![Event Triggers](img/lmd-1.png)
+* Exam Tips
+    * ![](img/lmd-2.png)
