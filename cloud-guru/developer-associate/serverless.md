@@ -84,4 +84,32 @@
     * [Here is the list of services](https://docs.aws.amazon.com/lambda/latest/dg/lambda-services.html)
     * ![Event Triggers](img/lmd-1.png)
 * Exam Tips
-    * ![](img/lmd-2.png)
+    * ![Exam tips](img/lmd-2.png)
+
+## API Gateway
+
+* API stands fro Application Programming Interface and we use APIs to interact with web applications and applications
+  use APIs to communicate with each other as well.
+* API Gateway is a service which allows you to publish, maintain, monitor, and secure APIs at any scale.
+* API Gateway provides a single endpoint for all traffic interacting with the backend of your application.
+    * So here we've got our users and they are connecting using any kind of client device.
+    * They make a request over to our AWS environment and the request hits API Gateway. And then, depending on the type
+      of request, API Gateway can then forward the request to different services such as Lambda, EC2, or it could be a
+      service like DynamoDB, or Kineses for example.
+* It supports multiple endpoints and targets.
+* it supports multiple versions of your API
+* it allows you to maintain multiple versions of your API so that you can have different versions for your development
+  testing and production environment
+* API Gateway is serverless. So it's cost-effective and scalable.
+* It integrates with CloudWatch. So it's logging all API calls, latencies, and error rates to CloudWatch
+* it supports throttling.
+    * So it helps you to manage traffic with throttling so that backend operations can withstand traffic spikes and
+      denial-of-service
+      attacks.
+* Exam tips:
+    * an API is like the front door to your application. And API Gateway provides an endpoint to your applications
+      running in AWS
+    * API Gateway is serverless so it is low cost and scales automatically.
+    * It supports throttling. So you can throttle API Gateway to prevent your application from being overloaded by too
+      many requests.
+    * Everything is logged to CloudWatch. For example, API calls, latencies and errors as well.
