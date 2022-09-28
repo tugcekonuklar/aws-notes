@@ -126,3 +126,25 @@
 * if your application is using an alias, remember that it will not automatically use new code when you upload it.
 * So if you are using an alias and you're uploading new code that you want your application to use then just remember to
   update your application to point at the latest version of the code.
+
+## Lambda Concurrent Executions limit
+
+* Default Concurent Execution Limit is 1000 per seconds, concurrent executions per region account
+* When you hit the number
+    * You wil receive TooManyRequestsException
+    * might also see this HTTP Status Code of 429
+* To increase the Concurrency limit you need to contact with AWS support or you can also request via console to increase
+* if you just have a few very critical functions, then you can set a reserved concurrency, to guarantee that a set
+  number of concurrent executions are always available to your critical functions
+    * alternatively you can also configure something called reserved concurrency, and this guarantees that a set number
+      of
+      executions will always be available, for any critical functions
+        * For example. If you had a whole load of different functions, and some were highly critical, whereas others
+          were
+          not so important to your application or to your business, you can reserve some concurrency, for those critical
+          functions, to make sure that there's always a set number of concurrent executions available for those critical
+          functions.
+        * However do be aware that it also does act as a limit.
+            * for example if you set, a reserved concurrency
+              of 500 for a specific function, that specific function will never be able to go over 500 concurrent
+              executions.
