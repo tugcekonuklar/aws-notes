@@ -148,3 +148,28 @@
             * for example if you set, a reserved concurrency
               of 500 for a specific function, that specific function will never be able to go over 500 concurrent
               executions.
+
+## Lambda and VPCs
+
+* as a developer, you may well see a situation or a use case where you are developing a Lambda function and it needs to
+  be able to communicate with or access resources which are inside a private VPC in a private subnet with no access to
+  the outside world
+* by default, your Lambda function will not be able to access any resources within a private VPC without some additional
+  configuration.
+* basically you need to allow the function to connect to the private subnet and Lambda will need the
+  following VPC configuration information so that it can go in and connect to resources in your VPC.
+    * first of all, you're going to need to provide the private subnet ID where your resources are located.
+        * we choose at least two subnets in order to run in high availability. So let's also select us-east-1b.
+    * You also need to provide a security group ID with specific access for the Lambda function to allow it to do what
+      it needs to do
+    * and Lambda is going to use this information to set up an elastic network interface or ENI using an available IP
+      address from the CIDR range of your private subnet.
+        * The Lambda function needs to have permission to create elastic network interfaces in order to begin
+          communicating with resources in your VPC and it's these permissions which enable the function to do that.
+* you can add this VPC information to your Lambda function using the command line and you just need to use the
+  vpc-config parameter
+* You just need to select your VPC, provide the private subnet ID and a security group ID as well.
+    * And once again, Lambda uses that VPC information to set up an elastic network interface using an IP from the
+      private subnet CIDR range and then the security group that you provided needs to allow your function to access
+      resources within the VPC.
+* ![Exam tips](img/lvpc-1.png)
