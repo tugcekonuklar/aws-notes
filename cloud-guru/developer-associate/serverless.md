@@ -113,3 +113,16 @@
     * It supports throttling. So you can throttle API Gateway to prevent your application from being overloaded by too
       many requests.
     * Everything is logged to CloudWatch. For example, API calls, latencies and errors as well.
+
+## Lambda versioning
+
+* the $LATEST is always the latest version of the code you've uploaded into Lambda
+* use Lambda versioning and aliases to point your applications to a specific version if you don't want to use the
+  $LATEST
+* if you don't use any alias at all and you just use an unqualified ARN, so just ending in the function name, not using
+  prod or latest or whatever then that will default to using the $LATEST version
+    * arn:aws:lambda:eu-west-2:7893748934:function:myLambdaFunc:Prod
+    * arn:aws:lambda:eu-west-2:7893748934:function:myLambdaFunc:$LATEST
+* if your application is using an alias, remember that it will not automatically use new code when you upload it.
+* So if you are using an alias and you're uploading new code that you want your application to use then just remember to
+  update your application to point at the latest version of the code.
