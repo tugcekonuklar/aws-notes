@@ -173,3 +173,76 @@
       private subnet CIDR range and then the security group that you provided needs to allow your function to access
       resources within the VPC.
 * ![Exam tips](img/lvpc-1.png)
+
+## Step Functions
+
+* step functions provide a visual interface for serverless applications, which enables you to build and run serverless
+  applications, as a series of steps.
+* Each step in your application executes in order, as defined by your business logic.
+* And the output of one step can act as the input into the next.
+* So step functions provide orchestration for serverless applications and think of an application consisting of many
+  different lambda functions.
+* And we use step functions to manage the logic of the application, including sequencing, error handling, and retry
+  logic, so that your application executes in order, and as expected.
+* And step functions also log the state of each step.
+    * So when things go wrong this helps you to diagnose and debug problems really quickly
+    * because you can identify which step in the process failed.
+* step functions consists of state machines and tasks.
+* We can build step functions
+    * Sequental
+    * Parallel
+    * Conditions
+* step functions under "application integration"
+* state machines are defined using Amazon States Language.
+* Exam Tips:
+    * ![Step Func Exam Tips](img/step-1.png)
+
+#### Lambda you can create Function URl and reach from outside or authenticated, no need API gateway.
+
+## Compaire Step Function Workflows
+
+* 2 types workflows
+* Standard Workflow:
+    * these are great for long-running, durable, and auditable workflows that may run for up to 1 year.
+    * And with these, full execution history is available for up to 90 days after the workflow has completed.
+    * Standard Workflows use an at-most-once model.
+        * And this means that tasks are never executed more than once unless you explicitly specify retry actions in
+          your code or in your workflow.
+    * Standard Workflows are designed for non-idempotent actions;
+        * for example, when processing payments, and you only want a payment to be processed once, not multiple times.
+        * non-idempotent?
+            * non-idempotent if it always causes a change in state. So let's say we repeat an identical request, will it
+              always cause a change in state?
+                * And with our example of a payment, it is always going to cause a change in state if we repeat an
+                  identical
+                  payment.
+* Express Workflow:
+* these are designed for short-lived workflows that last up to 5 minutes.
+* they are great for high volume event-processing-type workloads.
+* They use an at-least-once model. So the workflow runs at least once, but it could run more than once.
+    * So Express Workflows are ideal if there's a possibility that an execution might be run more than once or that you
+      require multiple concurrent executions.
+* these are great for idempotent actions;
+    * for example, transforming some input data and then storing the result in DynamoDB. And a request is idempotent if
+      an identical request has no side effect. So it's considered idempotent if an identical request can be made once or
+      several times in a row with no additional side effects.
+    * for example, taking some input data and running an identical process to transform that data and then store the
+      result in DynamoDB.
+    * The result will always be the same.
+* Synchronous:
+    * it begins the workflow. It waits until the workflow is completed and then returns the result.
+    * this is great for operations that are going to be performed one at a time.
+    * So the workflow must complete before the next step begins.
+    * For example, you should wait for your customer to complete their payment before you send them their order.
+* Asynchronous:
+    * it begins a workflow, it confirms the workflow has started, but it is not going to return any result to you.
+    * Instead, the result of the workflow can be found in CloudWatch Logs.
+    * it's not waiting for the workflow to complete before moving on to the next task.
+    * this is great if your services or operations don't depend on the completion and the result of your workflow.
+    * For example, think of a messaging system where you just want to send a message and then move on to the next task
+      without waiting for an acknowledgement.
+* Asynchronous Workflows often run in the background while synchronous workflows hold you up until they all complete.
+* ![Step Func](img/step-2.png)
+* ![Step Func](img/step-3.png)
+* ![Step Func](img/step-4.png)
+* ![Step Fun Workflow exam tips](img/step-5.png)
