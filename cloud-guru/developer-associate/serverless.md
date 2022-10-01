@@ -246,3 +246,32 @@
 * ![Step Func](img/step-3.png)
 * ![Step Func](img/step-4.png)
 * ![Step Fun Workflow exam tips](img/step-5.png)
+
+
+## Understanding X-Ray
+
+* it's a tool which helps developers analyze and debug distributed applications, allowing you to troubleshoot the root
+  cause of performance issues and errors, and particularly connection errors.
+* And it provides a visualization of your applications underlying components, so it gives you a really nice visual
+  representation of all the components that make up your application, and they call this the X-Ray service map.
+* this is the X-Ray service map and it provides an end to end view of requests as they travel through your application.
+  And it's collecting information like latency, HTTP status codes and any error messages that are generated, as well.
+  And this information can be used to troubleshoot connectivity and performance issues.
+* ![Xray virtual](img/xray-1.png)
+* integrating X-Ray :
+    * it works with loads of different AWS services. So you can use X-Ray with EC2, Elastic Container Service, Lambda,
+      Elastic Beanstalk, SNS, SQS, DynamoDB, Elastic Load Balancer, and API Gateway.
+        * And you can also integrate X-Ray with your own application.
+    * you can use X-Ray with applications written in Java, Node.js, .NET, Go, Ruby and Python. And it will monitor your
+      API calls, so the X-Ray SDK automatically captures metadata for the API calls that you make to AWS services using
+      the AWS SDK. So, if your application is making API calls to AWS services then X-Ray will automatically capture
+      metadata about those API calls.
+* To use X=Ray
+    * you'll need to install the X-Ray agent on your EC2 instance.
+    * you need to configure your application.
+    * you need to instrument your application using the X-Ray SDK, and the X-Ray SDK provides a set of libraries and
+      methods for generating the trace of data that will be sent to X-Ray.
+    * the X-Ray SDK gathers information from request and response headers, the code in your application and metadata
+      about the AWS resources on which it runs, and sends this trace data to X-Ray.
+    * ![Xray integration](img/xray-2.png)
+* ![X Ray Exam Tips](img/xray-3.png)
