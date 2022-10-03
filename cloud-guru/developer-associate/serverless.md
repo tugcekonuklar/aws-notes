@@ -247,7 +247,6 @@
 * ![Step Func](img/step-4.png)
 * ![Step Fun Workflow exam tips](img/step-5.png)
 
-
 ## Understanding X-Ray
 
 * it's a tool which helps developers analyze and debug distributed applications, allowing you to troubleshoot the root
@@ -275,3 +274,44 @@
       about the AWS resources on which it runs, and sends this trace data to X-Ray.
     * ![Xray integration](img/xray-2.png)
 * ![X Ray Exam Tips](img/xray-3.png)
+
+## X-Ray Configuration
+
+* X-Ray is great that you can actually use it to monitor applications which are running on EC2, in Elastic Container
+  Service, and also applications running in your own data center, as well as serverless technologies like Lambda,
+  DynamoDB, and API gateway.
+* ![Demon](img/xray-4.png)
+* in this diagram, we've got an EC2 instance, an Elastic Container Service cluster running Docker containers, and we've
+  also got an on-premises system in our own data center.
+* And they are all sending data into X-Ray. And the way that it all hangs together, is that you have this AWS X-Ray SDK
+  installed on your system.
+* And the AWS X-Ray SDK sends the data to the X-Ray Daemon, which is also running on your system, and the X-Ray Daemon
+  actually buffers the segments in a
+  queue and then it uploads them into X-Ray in batches.
+* And the main point of this diagram is just really to show you that you need both the X-Ray SDK and the X-Ray Daemon on
+  your systems, in order to start sending data into X-Ray.
+* just remember that you need the X-Ray SDK and the X-Ray Daemon as well, and you use the SDK to instrument your
+  application to send the required data.
+* first of all, for on-premises and EC2 systems, you're going to need to install the X-Ray Daemon directly on your EC2
+  instance, or on your on-premises server.
+* If you're running Elastic Beanstalk, you can just install the X-Ray Daemon, once again, on the EC2 instances inside
+  your Elastic Beanstalk environments.
+* And if you're using Docket containers and Elastic Container Service, then you'll need to install the X-Ray Daemon on
+  its own Docker container on your ECS cluster,alongside your application.
+    * So, don't install the X-Ray Daemon on the same Docker container where your application is running. It's going to
+      need to be in its own Docker container.
+* what are annotations?
+    * when instrumenting your application, you can actually record additional information about requests, or traces,
+      by using annotations. And annotations are simply key-value pairs and they actually get indexed by X-Ray and you
+      can use them with filter expressions, so that you can go ahead and search for traces which contain specific data,
+      and it allows you to group related traces together in the console
+* ![](img/xray-5.png)!
+* [](img/xray-6.png)
+* ![](img/xray-7.png)
+
+## Advanced API Gateway
+
+* You can import APIS using external definition files i.e. OpenAPi or Swagger
+* Dealing with legacy applications which is using SOAP(Single Object Access Protocol), you can configure your api Gateway as SOAP web service passthrought 
+  * or you can use API gateway to convert XML response to Json
+  * [How to configure Amazon API Gateway as a SOAP webservice passthrough in minutes](https://blog.joshuamoesa.com/2017/06/how-to-configure-amazon-api-gateway-as.html)
