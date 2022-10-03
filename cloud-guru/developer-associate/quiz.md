@@ -175,7 +175,7 @@ your needs?
     ArangoDB
 
 Good work!
-    
+
     Correct. The Memcached engine supports partitioning your data across multiple nodes. Because of this, Memcached clusters
     scale horizontally easily. For this scenario we do not require advanced data structure support, only object caching and
     horizontal scaling - so Redis is incorrect. Couchbase and ArangoDB are not supported by ElastiCache, so these are
@@ -224,7 +224,7 @@ Which ElastiCache solution should you use?
     ArangoDB
 
 Good work!
-    
+
     Correct. Amazon ElastiCache for Redis supports both Redis cluster and non-cluster modes and provides high availability
     via support for automatic failover by detecting primary node failures and promoting a replica to be primary with minimal
     impact. It allows for read availability for your application by supporting read replicas (across availability zones), to
@@ -331,7 +331,7 @@ In order to enable encryption at rest using EC2 and Elastic Block Store, you mus
     * Configure encryption when creating the EBS volume
 
 Good work!
-    
+
     Correct. When you create a new, empty EBS volume, you can encrypt it by enabling encryption for the specific volume
     creation operation.
 
@@ -431,7 +431,7 @@ QUESTION 15
 
 You see a "timed out" error when using the AWS CLI to list all the files in an S3 bucket containing thousands of files.
 What could be the reason for this?
-    
+
     Your network connection is too slow.
     
     You have not installed the AWS CLI correctly.
@@ -509,7 +509,6 @@ Which of the following options allows users to have secure access to private fil
 
 Choose 3
 
-
     * CloudFront Signed URLs
 
 
@@ -525,11 +524,10 @@ Good work!
 
     There are three options in the question which can be used to secure access to files stored in S3 and therefore can be considered correct. Signed URLs and Signed Cookies are different ways to ensure that users attempting access to files in an S3 bucket can be authorized. One method generates URLs and the other generates special cookies but they both require the creation of an application and policy to generate and control these items. An Origin Access Identity on the other hand, is a virtual user identity that is used to give the CloudFront distribution permission to fetch a private object from an S3 bucket. Public S3 buckets should never be used unless you are using the bucket to host a public website and therefore this is an incorrect option.
 
-
 QUESTION 2
 
-You are hosting a website in an Amazon S3 bucket. Which feature defines a way for client web applications that are loaded in one domain to interact with resources in a different domain?
-
+You are hosting a website in an Amazon S3 bucket. Which feature defines a way for client web applications that are
+loaded in one domain to interact with resources in a different domain?
 
     Bucket ACL
     
@@ -543,15 +541,13 @@ You are hosting a website in an Amazon S3 bucket. Which feature defines a way fo
     * CORS
 
 Good work!
-    
+
     Cross-origin resource sharing (CORS) defines a way for client web applications that are loaded in one domain to interact with resources in a different domain. With CORS support, you can build rich client-side web applications with Amazon S3 and selectively allow cross-origin access to your Amazon S3 resources. Reference: Configuring and using cross-origin resource sharing (CORS).
-
-
 
 QUESTION 3
 
-You are hosting a static website in an S3 bucket that uses Javascript to reference assets in another S3 bucket. For some reason, these assets are not displaying when users browse to the site. What could be the problem?
-
+You are hosting a static website in an S3 bucket that uses Javascript to reference assets in another S3 bucket. For some
+reason, these assets are not displaying when users browse to the site. What could be the problem?
 
     You cannot use one S3 bucket to reference another S3 bucket.
     
@@ -566,12 +562,9 @@ You are hosting a static website in an S3 bucket that uses Javascript to referen
 
 Good work!
 
-
-
 QUESTION 4
 
 The total volume of data and number of objects you can store in Amazon S3 are unlimited.
-
 
     False
 
@@ -581,12 +574,10 @@ Good work!
 
     The total volume of data and number of objects you can store in Amazon S3 are unlimited. Individual Amazon S3 objects can range in size from a minimum of 0 bytes to a maximum of 5 terabytes. The largest object that can be uploaded in a single PUT is 5 gigabytes. For objects larger than 100 megabytes, customers should consider using the Multipart Upload capability. Amazon S3 FAQs.
 
-
-
 QUESTION 5
 
-Which storage class is suitable for long-term archiving of data that occasionally needs to be accessed within a few hours or minutes?
-
+Which storage class is suitable for long-term archiving of data that occasionally needs to be accessed within a few
+hours or minutes?
 
     S3 Standard
 
@@ -610,12 +601,11 @@ When you first create an S3 bucket, this bucket is publicly accessible by defaul
 
 Good work!
 
-
 QUESTION 7
 
-You are using S3 in ap-northeast-1 to host a static website in a bucket called "acloudguru". What would the new URL endpoint be?
+You are using S3 in ap-northeast-1 to host a static website in a bucket called "acloudguru". What would the new URL
+endpoint be?
 
-    
     http://www.acloudguru.s3-website-ap-northeast-1.amazonaws.com
 
 
@@ -642,12 +632,10 @@ Good work!
     Website endpoints
     Amazon S3 Website Endpoints
 
-
 QUESTION 8
 
 Which of the following encryption methods are supported in S3?
 Choose 3
-
 
     * SSE-S3
 
@@ -665,7 +653,6 @@ QUESTION 9
 
 True or False? An Amazon S3 object owner can optionally share objects with others by creating a presigned URL.
 
-
     False
 
     * True
@@ -676,7 +663,8 @@ Good work!
 
 QUESTION 10
 
-You would like to configure your S3 bucket to only serve content over HTTPS/SSL and explicitly deny all unencrypted HTTP access. In your bucket policy, how should you specify the type of request that should be denied?
+You would like to configure your S3 bucket to only serve content over HTTPS/SSL and explicitly deny all unencrypted HTTP
+access. In your bucket policy, how should you specify the type of request that should be denied?
 
 ```json
 {
@@ -703,42 +691,43 @@ You would like to configure your S3 bucket to only serve content over HTTPS/SSL 
 ```
 
 Good work!
-    
+
     Explicitly denying requests that are identified as "aws:SecureTransport": "false" would deny requests that are using HTTP and are unencrypted. AWS Documentation: What S3 bucket policy should I use to comply with the AWS Config rule s3-bucket-ssl-requests-only?
 
 QUESTION 11
 
-You would like to configure your S3 bucket to deny put object requests that do not use server-side encryption. Which bucket policy can you use to deny permissions to upload objects, unless the request includes server-side encryption?
+You would like to configure your S3 bucket to deny put object requests that do not use server-side encryption. Which
+bucket policy can you use to deny permissions to upload objects, unless the request includes server-side encryption?
 
 ```json
  {
-                "Version": "2012-10-17",
-                "Id": "PutObjPolicy",
-                "Statement": [
-                    {
-                        "Sid": "DenyUnEncryptedObjectUploads",
-                        "Effect": "Deny",
-                        "Principal": "*",
-                        "Action": "s3:PutObject",
-                        "Resource": "arn:aws:s3:::bucket/*",
-                        "Condition": {
-                            "Null": {
-                                "s3:x-amz-server-side-encryption": "true"
-                            }
-                        }
-                    }
-                ]
-            }
+  "Version": "2012-10-17",
+  "Id": "PutObjPolicy",
+  "Statement": [
+    {
+      "Sid": "DenyUnEncryptedObjectUploads",
+      "Effect": "Deny",
+      "Principal": "*",
+      "Action": "s3:PutObject",
+      "Resource": "arn:aws:s3:::bucket/*",
+      "Condition": {
+        "Null": {
+          "s3:x-amz-server-side-encryption": "true"
+        }
+      }
+    }
+  ]
+}
 
 ```
+
 Good Work!
-    
+
     The condition above looks for a Null value for the s3:x-amz-server-side-encryption key. If this condition is true, it means the request is Null and does not include server-side encryption. Setting the condition in the condition policy to "s3:x-amz-server-side-encryption": "true" with "Effect": "Deny" and "Action": "s3:PutObject" would deny put object requests that do not use server-side encryption. AWS Documentation: How to Prevent Uploads of Unencrypted Objects to Amazon S3.
 
 QUESTION 12
 
 What is the HTTP code you would see once you successfully place a file in an S3 bucket?
-
 
     404
     
@@ -763,7 +752,7 @@ What is the largest size file you can transfer to S3 using a single PUT operatio
     * 5GB
 
 Good Work !
-    
+
     Individual Amazon S3 objects can range in size from a minimum of 0 bytes to a maximum of 5 terabytes. The largest object that can be uploaded in a single PUT is 5 gigabytes. For objects larger than 100 megabytes, customers should consider using the Multipart Upload capability.
 
 QUESTION 14
@@ -793,7 +782,6 @@ QUESTION 15
 
 Which storage class is suitable for long-term archiving of data and supports millisecond retrieval times?
 
-
     * Glacier Instant Retrieval
 
 
@@ -809,11 +797,11 @@ Good work!
 
     Glacier Instant Retrieval is designed for long-lived data, accessed approximately once per quarter with millisecond retrieval time. 
 
-
 QUESTION 16
 
-You would like to migrate your website to AWS and use CloudFront to provide the best performance. Your users will need to complete a form on the website in order to subscribe to a mailing list and comment on blog posts. Which of the following allowed HTTP methods should you configure in your CloudFront distribution settings?
-
+You would like to migrate your website to AWS and use CloudFront to provide the best performance. Your users will need
+to complete a form on the website in order to subscribe to a mailing list and comment on blog posts. Which of the
+following allowed HTTP methods should you configure in your CloudFront distribution settings?
 
     * GET, HEAD, OPTIONS, PUT, POST, PATCH, DELETE
 
@@ -826,5 +814,410 @@ You would like to migrate your website to AWS and use CloudFront to provide the 
 Good work!
 
     This combination of HTTP methods will enable your users to interact with the website and send, modify, insert, and delete data.
+
+# Serverless
+
+QUESTION 1
+
+How does API Gateway help to deal with legacy SOAP applications?
+
+Choose 2
+
+    * Converts the response from the application to JSON
+    
+    
+    Converts the response from the application to HTML
+    
+    
+    * Provides web service passthrough for SOAP applications
+    
+    
+    Converts the response from the application to XML
+
+Good work!
+
+    If your existing services return XML-style data, you can use the API Gateway to transform the output to JSON as part of your modernization effort.
+
+    References:
+    
+    [Enhancing Legacy Services](https://aws.amazon.com/tr/blogs/aws/amazon-api-gateway-build-and-run-scalable-application-backends/)
+    [API Gateway guide to SOAP](https://gist.github.com/buger/e94be691cf17e73b2a8003c4887bfd12)
+    
+    When a method request carries a payload and either the Content-Type header does not match any specified mapping template or no mapping template is defined, you can choose to pass the client-supplied request payload through the integration request to the backend without transformation. The process is known as integration passthrough.
+    
+    References:
+    
+    [Integration passthrough behaviors](https://docs.aws.amazon.com/apigateway/latest/developerguide/integration-passthrough-behaviors.html)
+    [How to configure Amazon API Gateway as a SOAP webservice passthrough in minutes](https://www.rubix.nl/blogs/how-configure-amazon-api-gateway-soap-webservice-passthrough-minutes/)
+    [API Gateway guide to SOAP](https://gist.github.com/buger/e94be691cf17e73b2a8003c4887bfd12)
+
+QUESTION 2
+
+Your application relies on a number of Lambda functions. During testing, you would like to make sure you are always
+using the latest version of the function. How can you ensure that your application always launches the very latest
+version of your code?
+
+    * Reference the function using the $LATEST suffix.
+    
+    
+    Publish a new version of your function based on the specific version of code that you would like to use.
+    
+    
+    Create an alias and reference the function using the alias.
+    
+    
+    Create a qualified ARN which points to the specific version of code that you would like to use.
+
+Good work!
+
+    When you create a Lambda function, there is only one version—the $LATEST version. You can use either the qualified or unqualified ARN in your event source mapping to invoke the $LATEST version. If you always want to use the latest version of code, avoid using your own alias or any specific Lambda version as these will not be updated when new code is uploaded to Lambda.
+
+QUESTION 3
+
+You have an internal API that you use for your corporate network. Your company has decided to go all in on AWS to reduce
+their data center footprint. They will need to leverage their existing API within AWS. What is the most efficient way to
+do this.
+
+    Use AWS API Import/Export feature of AWS Storage Gateway.
+    
+    
+    * Use an OpenAPI definition file to import your API in to API Gateway.
+    
+    
+    Replicate your API to API Gateway using the API Replication Master.
+    
+    
+    Recreate the API manually.
+
+Good work!
+
+    Correct. You can use API Gateway to import a REST API from an external definition file into API Gateway. Currently, API Gateway supports OpenAPI v2.0 and OpenAPI v3.0 definition files. You can update an API by overwriting it with a new definition, or you can merge a definition with an existing API. You specify the options by using a mode query parameter in the request URL.
+
+    Reference: Configuring a REST API using OpenAPI(https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-import-api.html)
+
+QUESTION 4
+
+You have launched a new web application on AWS using API Gateway, Lambda, and S3. Someone posts a thread on Reddit about
+your application and it goes viral. You start receiving 10,000 requests every second, and you notice that most types of
+requests are similar. Because of this, your web application begins to struggle. What can you do to optimize your
+application performance?
+
+    Change your Route 53 alias record to point to AWS Neptune. Configure Neptune to filter your API requests to genuine requests only.
+    
+    
+    Enable API Gateway Accelerator.
+    
+    
+    Migrate your API Gateway to a Network Load Balancer and enable session stickiness for all sessions.
+    
+    
+    * Enable API Gateway caching to cache frequent requests.
+
+Good work!
+
+    Since these requests are similar, you can enable API caching in Amazon API Gateway to cache your endpoint's responses. With caching, you can reduce the number of calls made to your endpoint and also improve the latency of requests to your API.
+
+QUESTION 5
+
+You have created a serverless application which converts text into speech using a combination of S3, API Gateway,
+Lambda, Polly, DynamoDB and SNS. Your users complain that only some text is being converted, whereas longer amounts of
+text do not get converted. What could be the cause of this problem?
+
+    AWS X-Ray service is interfering with the application and should be disabled.
+    
+    
+    * Your Lambda function needs a longer execution time. You should check how long is needed in the fringe cases and increase the timeout inside the function to slightly longer than that.
+    
+    
+    Polly has built-in censorship, so if you try and send it text that is deemed offensive, it will not generate an MP3.
+    
+    
+    You’ve placed your DynamoDB table in a single availability zone which is currently down, causing an outage.
+
+Good work!
+
+    Correct. To fix Lambda timeout issues, review the logs of the API call to find the problem. Then, change the timeout settings as needed.
+
+QUESTION 6
+
+Which of the following Step Functions workflows can be used to orchestrate a long-running workflow that could take up to
+a year to complete?
+
+    * Standard Workflow
+    
+    
+    Asynchronous Express Workflow
+    
+    
+    Synchronous Express Workflow
+    
+    
+    Express Workflow
+
+Good work!
+
+    A Standard Workflow can be used for long-running workflows (up to 1 year) that run at-most-once and are non-idempotent.
+
+QUESTION 7
+
+Which of the following Step Functions workflows should be used when you need to orchestrate a short process that
+normally takes 2 minutes to complete, and you require the result of the workflow to be returned after it has completed?
+
+    * Synchronous Express Workflow
+    
+    
+    Express Workflow
+    
+    
+    Asynchronous Express Workflow
+    
+    
+    Standard Workflow
+
+Good work!
+
+    Synchronous Express Workflows return the result of the workflow after it has completed. They are designed to be used for situations where a workflow must complete before the next step begins (e.g., confirm successful payment before sending an order).
+
+QUESTION 8
+
+Your web application is running on Lambda, API Gateway, DynamoDB and S3 and you have recently seen a significant
+increase in traffic to your website. The application support team are now reporting that Lambda invocations are being
+rejected with a 429 HTTP status code. What is the most likely cause of this issue that you would check first?
+
+    [Correct] You have reached the default concurrent executions limit for Lambda.
+    
+    
+    You have reached the default concurrent requests limit for DynamoDB.
+    
+    
+    You have reached the default concurrent requests limit for S3.
+    
+    
+    You have reached the default concurrent requests limit for API Gateway.
+
+Sorry!
+
+    Since your Lambda invocations are being rejected with a 429 HTTP status code and the quota of API Gateway requests per second is much higher than the default quota of Lambda concurrent executions, you first need to check the ConcurrentExecutions metrics for your function in the AWS Region where you see throttling. A service quota increase request can be submitted to AWS once the root cause of the issue is confirmed.
+
+Correct Answer
+
+    AWS Lambda limits the amount of compute and storage resources that you can use to run and store functions, including a Concurrent Executions limit, which is set to 1000 per region, by default. To request an increase, use the Support Center console.
+
+QUESTION 9
+
+You have created a simple serverless website using S3, Lambda, API Gateway and DynamoDB. Your website will process the
+contact details of your customers, predict an expected delivery date of their order and store their order in DynamoDB.
+You test the website before deploying it in to production and you notice that although the page executes, and the lambda
+function is triggered, it is unable to write to DynamoDB. What could be the cause of this issue?
+
+    The availability zone that Lambda is hosted in is down.
+    
+    
+    You have written your function in Python which is not supported as a run time environment for Lambda.
+    
+    
+    The availability zone that DynamoDB is hosted in is down.
+    
+    
+    * Your lambda function does not have the sufficient Identity Access Management (IAM) permissions to write to DynamoDB.
+
+Good work!
+
+    Correct. A Lambda function also has a policy, called an execution role, that grants it permission to access AWS services and resources. It needs permission to write to DynamoDB in this case.
+
+QUESTION 10
+
+You are developing a new application using serverless infrastructure and are using services such as S3, DynamoDB,
+Lambda, API Gateway, CloudFront, CloudFormation and Polly. You deploy your application to production and your end users
+begin complaining about receiving a HTTP 429 error. What could be the cause of the error?
+
+    * You enabled API throttling for a rate limit of 1000 requests per second while in development and now that you have deployed to production your API Gateway is being throttled.
+    
+    
+    You have an S3 bucket policy which is preventing Lambda from being able to write files to your bucket, generating a HTTP 429 error.
+    
+    
+    Your lambda function does not have sufficient permissions to read to DynamoDB and this is generating a HTTP 429 error.
+    
+    
+    Your CloudFormation stack is not valid and is failing to deploy properly which is causing a HTTP 429 error.
+
+Good work!
+
+    Correct. When request submissions exceed the steady-state request rate and burst limits, API Gateway fails the limit-exceeding requests and returns 429 Too Many Requests error responses to the client. Upon catching such exceptions, the client can resubmit the failed requests in a way that is rate limiting, while complying with the API Gateway throttling limits.
+
+QUESTION 11
+
+You would like to use X-Ray to monitor your application which runs on a number of Docker containers. Where should you
+deploy and run the X-Ray daemon?
+
+    * Use a dedicated Docker container build from an image which includes the X-Ray daemon.
+    
+    
+    Install the X-Ray daemon on the underlying EC2 instance.
+    
+    
+    The X-Ray daemon will already be installed on the underlying EC2 instance by default.
+    
+    
+    Install the X-Ray daemon on Lambda.
+
+Good work!
+
+    X-Ray provides a Docker container image that you can deploy alongside your application. For custom configurations, you may need to define your own Docker image.
+
+QUESTION 12
+
+Which of the following services does X-Ray integrate with?
+
+Choose 4
+
+    * Amazon S3
+    
+    
+    Amazon CloudFront
+    
+    
+    * Elastic Load Balancer
+    
+    
+    Amazon Elastic File System (EFS)
+    
+    
+    * AWS Lambda
+    
+    
+    * Amazon Elastic Block Store (EBS)
+
+API Gateway
+
+Good work!
+
+    AWS X-Ray integrates with Amazon S3 to trace upstream requests to update your application's S3 buckets. If a service traces requests by using the X-Ray SDK, Amazon S3 can send the tracing headers to downstream event subscribers such as AWS Lambda, Amazon SQS, and Amazon SNS. X-Ray enables trace messages for Amazon S3 event notifications. Reference: Amazon S3 and AWS X-Ray.
+    
+    The following services provide X-Ray integration: AWS Lambda, Amazon API Gateway, Elastic Load Balancing, AWS Elastic Beanstalk, Amazon Simple Notification Service, and Amazon Simple Queue Service. Reference: AWS X-Ray Supported AWS Services.
+
+QUESTION 13
+
+You are trying to configure X-Ray to monitor Java applications running on your EC2 instances. Which of the following
+will be required in order to get X-Ray working?
+
+Choose 2
+
+    You will need to restart your application.
+    
+    
+    * The X-Ray daemon will need to be installed and running on your EC2 instances.
+    
+    
+    You will need to install the CloudWatch agent.
+    
+    
+    You will need to restart your instance.
+    
+    
+    * Use X-Ray SDK for Java to generate and send trace data to the X-Ray daemon.
+
+Good work!
+
+    Both the X-Ray SDK and X-Ray Daemon, and you need to Instrument your application. Your application will need to be deployed with the additional code, specifying the details you want AWS X-Ray to capture. This is done using the X-Ray SDK, which provides a programmatic interface for your application to send information to the X-Ray Daemon. Once the X-Ray Daemon has received the information, it will send the information to AWS X-Ray to be reviewed. This requires both the X-Ray SDK and X-Ray Daemon to be installed. You will not need to restart your instance, since any additional IAM Roles can be added without shutting down the instance. You may not need to restart your application, depending on its architecture. CloudWatch is a separate service, and it's agent is not required for X-Ray.
+
+QUESTION 14
+
+You work for a gaming company that has built a serverless application on AWS using Lambda, API Gateway and DynamoDB.
+They release a new version of the Lambda function and the application stops working. You need to get the application up
+and back online as fast as possible. What should you do?
+
+    DynamoDB is not serverless and is causing the error. Migrate your database to RDS and redeploy the lambda function.
+    
+    
+    Create a CloudFormation template of the environment. Deploy this template to a separate region and then redirect Route 53 to the new region.
+    
+    
+    * Roll your Lambda function back to the previous version.
+    
+    
+    The new function has some dependencies not available to Lambda. Redeploy the application on EC2 and put the EC2 instances behind a network load balancer.
+
+Good work!
+
+    Correct. You can use versions to manage the deployment of your Lambda functions.
+
+QUESTION 15
+
+You have created an application using serverless architecture using Lambda, Api Gateway, S3 and DynamoDB. Your boss asks
+you to do a major upgrade to API Gateway and you do this and deploy it to production. Unfortunately something has gone
+wrong and now your application is offline. What should you do to bring your application up as quickly as possible?
+
+    Delete the existing API Gateway.
+    
+    
+    Restore your previous API gateway configuration using an EBS snapshot.
+    
+    
+    Restart API Gateway for the new changes to take effect.
+    
+    
+    * Rollback your API Gateway to the previous stage.
+
+Good work!
+
+    Correct. You can easily restore your AWS API Gateway from a previous deployment by selecting a stage that has the last version of your deployment.
+
+QUESTION 8
+
+You are a developer for a busy real estate company, and you want to enable other real estate agents to have the ability
+to show properties on your books, but skinned so that it looks like their own website. You decide the most efficient way
+to do this is to expose your API to the public using API Gateway. The project works well, but one of your competitors
+starts abusing this, sending your API tens of thousands of requests per second. This generates an HTTP 429 error. Each
+agent connects to your API using individual API keys. What actions can you take to stop this behavior?
+
+    Deploy multiple API Gateways and give the agent access to another API Gateway.
+    
+    
+    * Throttle the agent's API access using the individual API Keys
+    
+    
+    Use AWS Shield Advanced API protection to block the requests.
+    
+    
+    Place an AWS Web Application Firewall in front of API Gateway and filter the requests.
+
+Good work!
+
+    To prevent your API from being overwhelmed by too many requests, Amazon API Gateway throttles requests to your API using the token bucket algorithm, where a token counts for a request. You can enable usage plans to restrict client request submissions to within specified request rates and quotas. This restricts the overall request submissions so that they don't go significantly past the account-level throttling limits in a Region. Amazon API Gateway provides Per-client throttling limits that are applied to clients that use API keys associated with your usage policy as client identifier.
+
+QUESTION 15
+
+You have designed a serverless learning management system and you are ready to deploy your code into a test/dev
+environment. The system uses a combination of Lambda, API Gateway, S3 and CloudFront and is designed to be highly
+available, fault-tolerant and scalable. What are the three different ways you can deploy your code to Lambda?
+
+Choose 3
+
+    * Zip your code into a zip file and upload it via the Lambda console.
+    
+    
+    * Copy and paste your code in to the integrated development environment (IDE) inside Lambda.
+    
+    
+    Import your code to Amazon’s Glacier and change your Lambda execution handler to point to Glacier.
+    
+    
+    Upload your code to S3 and use a MySQL connection string to connect Lambda to your S3 bucket.
+    
+    
+    * Write a CloudFormation template that will deploy your environment including your code.
+
+Good work!
+
+    Correct. A deployment package is a ZIP archive that contains your function code and dependencies. You can upload the package directly to Lambda, or you can use an Amazon S3 bucket, and then upload it to Lambda. If the deployment package is larger than 50 MB, you must use Amazon S3.
+    
+    Correct. The code editor in the AWS Lambda console enables you to write, test, and view the execution results of your Lambda function code.
+    
+    Correct. The CloudFormation AWS::Lambda::Function resource creates a Lambda function. To create a function, you need a deployment package and an execution role.
+
+
+
 
 
