@@ -312,6 +312,130 @@
 ## Advanced API Gateway
 
 * You can import APIS using external definition files i.e. OpenAPi or Swagger
-* Dealing with legacy applications which is using SOAP(Single Object Access Protocol), you can configure your api Gateway as SOAP web service passthrought 
-  * or you can use API gateway to convert XML response to Json
-  * [How to configure Amazon API Gateway as a SOAP webservice passthrough in minutes](https://blog.joshuamoesa.com/2017/06/how-to-configure-amazon-api-gateway-as.html)
+* Dealing with legacy applications which is using SOAP(Single Object Access Protocol), you can configure your api
+  Gateway as SOAP web service passthrought
+    * or you can use API gateway to convert XML response to Json
+    * [How to configure Amazon API Gateway as a SOAP webservice passthrough in minutes](https://blog.joshuamoesa.com/2017/06/how-to-configure-amazon-api-gateway-as.html)
+
+## API Gateway Cachcing and Trottling
+
+* APi Caching:
+    * Is to improve performance by caching the outputs of API calls to avoid calling your backend everytime.
+    * Reduces the amount of number of calls made your endpoint and also can improve the latency for request to your API
+    * TTL (Time to live ) Api caches your endpoint responses for default 300 seconds = 5mins
+    * Api Gateway returns the Cached Response, it looks up the cache instead to make a new call.
+* API Throttling:
+    * Prevent your API from being overwhelmed by to many requests.
+    * Default API limits steady-state request rate limits is 10,000 request in 1 second per region
+    * There is also limit for concurrent limits, max concurrent limit is 5000 across all APIs per region.
+    * You can increase both of those limits.
+    * If you exceed 10.000 request per second or 5000 concurrent requerst you will receive 429 To many request error.
+        * That point you wil need to increas your limits.
+* Example:
+    * Your api receive 10K request in first second, what will happen ?
+        * The first 5K will serves immediately because of the concurrency
+        * Then the rest 5k will trottle the remaining over the one second period.
+        * It will deal with all request in one second but 5k, but no more than one second.
+
+## Summary - Serverless
+
+* Serverless 101
+    * Enables to build scable applications quickly without managing any service
+    * Low Cots: Serverles-applications are event-driven and you are only charged when your code is executed
+    * AWS handles all heavy lifting: you can focus on your code and building your app instead of server configuration
+* Lambda:
+    * Extremely cost effective: Paay only when your code execute
+    * Continuous scaling: scales automaticaly
+    * Event Driven: Lambda functions triggered only via event or action
+    * Independent: Each event will trig one lambda function
+    * Serverless Technology: Lambda ,APi gateway, S3, SQS, SNS Dynamo DB are serverless
+    * Lambda Triggers: Be aware of services taht can trigger a Lambda function
+        * DynamoDB
+        * Kinesis
+        * API Gateway
+        * CloudFront
+        * SQS
+        * Application Load Balancer
+        * S3
+        * SNS
+        * SES
+        * CloudFormation
+        * CloudWatch
+        * Code Commit
+        * Coe pipeline
+        * Alexa , etc
+* Api Gateway:
+    * Front door of your application
+    * API gateway provides an endpoint to your app running in AWS
+    * Serverless: low cost and scales automatically
+    * Throttling: you can throttle your API to prevent your application from being overloaded by to many request
+    * Everything is logged in CloudWatch
+* Lambda Versioning:
+    * $LATEST is always the latest verdsion of code that uploaded to Lambda
+    * We can use versioning or aliases to points your application to specific versions of your code if you dont want to
+      use the latest version
+    * Aliased codes wont use automateclly the latest version when you upload. You need to update your alias if you want
+      to use the latest.
+* Lambda Concurrent Execution Limits:
+    * Default concurrency limit is 1k execution per second
+    * When you hit the limit you will start to reach 429 HTTP Status Code error and your request will start to reject.
+    * The remedy is to get the limit raised by AWS support
+    * If you use critical application , the use Reserved concurrency, guaranties a set number of concurrent executions
+      are always available to a critical function.
+* Lambda & VPCs
+    * You can enable lambda to access resources in a private Vpcs
+    * You need to provide VPC Config information to your Lambda Function : Private Subnet ID and security Group ID
+    * Lambda will use VPC information to configure an Elastic Network Interface (ENI) using an IP address from the
+      private subnet CIDR range (i.e 10.0.0.0/24). Then Lambda will arrange ENI could be something 10.0.0.5
+    * Security Group then allows your function to access resources in private VPC
+* Step Functions:
+    * Virtualize and Orchestra: great way to visualise and orchestrate your serverless applications.
+    * Automatically track each step of the step machine or workflow and the output one of the step is often input to the
+      next.
+    * Step funtions will log the state of each step, so of something is goes wrong you can track what went wrong and
+      where.
+* Compairring Step Functions Workflows
+    * Understand the differences:
+        * Standatd workflow:
+            * Designed Long running up to 1 year
+            * Works at most once
+            * Non-idempotent : if you run identical tasks it will cause always change in state
+        * Express workflow:
+            * Designed short lives processes, up tp 5 min
+            * Then run at least once, can run multiple times
+            * Idempotent: run same task multipole times without any state changes.
+        * Synchronous Express Workflow:
+            * The workflow must complete before to move the next step. (i.e customer has to provide address before order
+              state)
+        * Asynchronous Express Workflow:
+            * Other task ios not depend on the completion of the workflow (i.e messaging system)
+* X-Ray:
+    * X-Ray helps to developer analyse and debug distributed systems.
+    * Service Mao: Provides a service map is a visual presentation of your application.
+    * If you like to run X-Ray, you need X-Ray agent/demon must be installed on your EC2 instance. ANd use the X-Ray SDK
+      to instrument your app to send traces to X-Ray.
+    * X-Ray provodes also some information like latency, Http status codes and error messages. This info can be use
+      trouble shots
+    * Integrated with a lot of AWS services, like DynamoDb. Lambda, API Gateway etc.
+    * You can also instrument your own applications to send data to X-Ray. For example data about incoming HTTP requests
+      to your app.
+    * Supported Platforms: Applications can run on EC2, ECS, Elastic Beanstalk environment and on=premise systems
+    * Running ECS:
+        * For ECS, run X-Ray demons in its own Docker-container running along your side of application.
+    * X-Ray annotations to add user-defined key-value pairs to X-Ray data to allowing you to filter, index and search (
+      i.e game_name=TickTackToe, game_id=1 )
+* API Gateway Caching
+    * Improves the performance of your APIs by caching the output of API calls to avoid calling your app backend
+      everytime
+    * Responses cached in TTL period. TTL is default 300 sec = 5 min
+    * Reduces the Number of API calls, API calls returns the cache response instead of making new reuest to your app.
+      This improves performance and reduces latency
+* API Gateway Throttling
+    * Default 10k request per second and concurrency is 5k request per second per region
+    * If you exceed the limit then you will receive 426 HTTP errors Too many Request.
+    * Uses throttling to prevent your api by overwhelmed by too many requests
+    * You can make a request AWS support to increase the limits.
+* Advanced API Gateways:
+    * You can import APIS using external definition files like Swagger and OpenAPi
+    * When dealing with legacy applications with SOAP, you can configure API gateway as SOAP web service pass through,
+      or you can use API gateway to convert responses from XML to Json.
