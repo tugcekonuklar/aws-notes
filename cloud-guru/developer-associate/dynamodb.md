@@ -253,3 +253,27 @@
     * and the same goes for applications that don't require microsecond response times. There's no point in configuring
       it if you don't need that low latency.
     * ![Exam tips](img/dynamo-9.png)
+
+## DynamoDb Time To Live (TTL)
+
+* It is an attribute which defines an expiration time for your data
+* You define an expiration time and your data is marking for deletion. After 48 hours letter DynamoDb deletes data from
+  datasource automatically.
+* And this is really good for removing any irrelevant or old data, so data that's no longer useful to your application.
+* So think session data, event logs, any temporary data.
+* So any data that's no longer useful to your application after a certain period of time.
+* And this is going to really help to reduce costs for storing data in DynamoDB because it automatically removes data,
+  which you no longer need.
+* TTL is expressed on epoc time called Unix time or POSIX time as well. it represents the number of seconds which have
+  elapsed since 12:00 AM on January the 1st, 1970
+* We can manage TTL by clicking "manage TTL" button on table. popep up menu will ask which attribute to choose for
+  expiration time and we can set the attribute to check TTL of the items.
+* It will mark your data for expiration as soon as the current time is greater than the TTL. The item will then be
+  expired, marked for deletion, and then deleted within 48 hours.
+* ![Setting TTL](img/dynamo-10.png)
+* ![Overview of Table](img/dynamo-11.png)
+* Exam Tips:
+    * It's great for removing irrelevant or old data, for example, session data, event logs, and temporary data that
+      your application no longer requires.
+    * And this is great because it saves you money and reduces the cost of your DynamoDB table by automatically removing
+      data, which is no longer relevant or useful to your application.
