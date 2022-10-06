@@ -183,5 +183,25 @@
     * ![Commonly used apis 1](img/dynamo-3.png)
     * ![Commonly used apis 2](img/dynamo-4.png)
 * To be able run the command user needs to have the right IAM permission required for each operation that we would like
-  to allow.For example to run put=item command user needs to have permission to call PutItem 
+  to allow.For example to run put=item command user needs to have permission to call PutItem
 * [Commands in DynamoDB](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/dynamodb/index.html)
+
+## DynamoDb Provisioned Capacity
+
+* DynamoDb provisioned throughput is measured in capacity units.
+* While you create dynamoDb you define write and read capacity units.
+* This read/write capacity units are defines how much data you will write in your database
+* 1 write capacity unit is 1KB
+* 1 strongly consistent read capacity is 1X4KB
+* 1 eventually consistent read capacity is 2x4KB
+* For example; your application needs to read 80 items per second from your DynamoDB table. Each item is 3KB in
+  size, and you need strongly consistent reads. How many read capacity units do you think you'll need?
+    * Solution: 1 strongly read unit capacity is 4KB, lets calculate 1 item required capacity by dividing 4KB => 3KB/4KB
+      =0.75 by rounding = 1
+    * Thats mean we need 1 string read capacity unit for one item let's multiple 80x1= 80 read capacity unit requires
+    * Ho about eventually consistency read ? 2x4KB for 1 read unit with thi info it makes 80/2 = 40 unit required.
+* For example:  imagine you need to write 100 items per second to your DynamoDB table. And each item is 512 bytes in
+  size.How many write capacity units do you think you'll need?
+    * Solution : 512 byte = 0,5 KB lets round = 1 KB. 1 writing unit is 1KB per second, then for 100 items it will make
+      100x1 = 100 writing unit capacity required.
+* ![DynamoDb Provision Throughput ](img/dynamo-5.png)
