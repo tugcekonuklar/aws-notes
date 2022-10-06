@@ -205,3 +205,51 @@
     * Solution : 512 byte = 0,5 KB lets round = 1 KB. 1 writing unit is 1KB per second, then for 100 items it will make
       100x1 = 100 writing unit capacity required.
 * ![DynamoDb Provision Throughput ](img/dynamo-5.png)
+
+## DynamoDb on-demand Capacity
+
+* On-demand capacity is a pricing model for DynamoDb
+* Charges will apply for reading, writing and storing your data on DynamoDb
+* DynamoDb will scale up/down on depending reads and writes or activities of your application on your DynamoDb
+* Great for:
+    * Unpredictable workloads
+    * New applications where you don't know to use pattern yet.
+    * When you want to pay for only what you use (pay per request). This can make harder to predict the pricing because
+      of the DynamoDb scaling depending on your application activities.
+* Which Pricing model should we use?
+* ![Price model prediction](img/dynamo-6.png)
+* Exam tips:
+    * Understand the differences of pricing model is important.
+    * On-demand capacity is for unpredictable application trafic and pay-per-usage model.
+    * Use Provision capacity model :
+        * Read and write capacity can be predictable/forecasted
+        * Application traffic is consistent or increases gradually
+
+## DynamoDb Accelerator (DAX)
+
+* DynamoDb Accelerator (DAX) is a full managed, clustered, in-memory cache for DynamoDb
+* They claim that 10X better performance on readings
+* it is ideal for read-heavly also bursty read workloads ie gaming, retail sites for black friday session etc.
+* How DAX is work?
+    * DAX is a write-throught caching service, it meand data is writing on cache as well as the backend store at the
+      same time.
+    * That means anytime DynamoDb table update, add new item or modify item, it is also writing the cache DAX itself.
+* When a call comes it will go to DAX cluster first then DynamoDb itself if DAX does not have the item.
+* Cache hit
+    * ![Cache hit](img/dynamo-7.png)
+* Cache Missed
+    * When the item is not in DAX means cache missed, DAX is making call GetItem Api and it writes into its cache,
+      and it also hands it back to the application.
+    * ![Cache missed](img/dynamo-8.png)
+* So retrieval of data from DAX reduces the read load on your DynamoDB tables. And in some cases, you may even be able
+  to reduce the provisioned read capacity on your tables. So that means you can save some money on your DynamoDB bill
+* When DAX is not suitable:
+    * DAX is suitable for eventually consistent reads only, not suitable for applications on strongly consistent reads
+      needs.
+    * DAX is not really suitable for write-intensive applications. So you're not going to get a benefit from using DAX
+      because it only helps with read operations.
+    * Applications that don't perform that many read operations are not really going to see a benefit from configuring
+      DAX,
+    * and the same goes for applications that don't require microsecond response times. There's no point in configuring
+      it if you don't need that low latency.
+    * ![Exam tips](img/dynamo-9.png)
