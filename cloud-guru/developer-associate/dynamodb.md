@@ -112,11 +112,9 @@
   query on the entire data set.
 * Local Secondary Index:
     * Primary Key: A local secondary index is an index that can only be created when you are creating your table and it
-      has same
-      partition key as your original table.
+      has same partition key as your original table.
     * Different View:  but ot has a different sort key at gives you a different view of data, because data will be
-      orginize according to
-      an alternative sorted key
+      orginize according to an alternative sorted key
     * Fast Query: Any queries based on this sortkey are much faster using the index than the main table.
     * Add at creation time: Can be created only when you create on creation time. You can not add, remove or modify
       after it later.
@@ -266,7 +264,7 @@
   which you no longer need.
 * TTL is expressed on epoc time called Unix time or POSIX time as well. it represents the number of seconds which have
   elapsed since 12:00 AM on January the 1st, 1970
-* We can manage TTL by clicking "manage TTL" button on table. popep up menu will ask which attribute to choose for
+* We can manage TTL by clicking "manage TTL" button on table. popped up menu will ask which attribute to choose for
   expiration time and we can set the attribute to check TTL of the items.
 * It will mark your data for expiration as soon as the current time is greater than the TTL. The item will then be
   expired, marked for deletion, and then deleted within 48 hours.
@@ -303,7 +301,7 @@
         * every time an item gets changed in your DynamoDB table, it's going to record that in the DynamoDB stream.
     * **Encrypted and stored:** The data is only stored for 24 hours and after that, it's going to start getting
       deleted.
-    * **Lamda event Source:** it's a really good event source for Lambda, allowing you to create applications that can
+    * **Lambda event Source:** it's a really good event source for Lambda, allowing you to create applications that can
       take
       actions based on events that are happening in your DynamoDB table.
 

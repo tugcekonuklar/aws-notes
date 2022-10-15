@@ -1217,6 +1217,495 @@ Good work!
     
     Correct. The CloudFormation AWS::Lambda::Function resource creates a Lambda function. To create a function, you need a deployment package and an execution role.
 
+# DynamoDb
+
+QUESTION 1
+
+Which DynamoDB feature can be used to define an expiry date and time for a data record in your table?
+
+    DynamoDB Streams
+
+    * TTL
+
+    Exponential Backoff
+
+    DynamoDB Expiry
+
+Good work!
+
+    TTL or Time To Live is used to set an expiry time on your record
+
+QUESTION 2
+
+You have an application that needs to read 25 items per second and each item is 13KB in size. Your application uses
+strongly consistent reads. What should you set the read throughput to?
+
+    25
+
+    50
+
+    10
+
+    * 100
+
+Good work!
+
+    Each Read Capacity unit represents 1 x 4KB Strongly Consistent Read. 13 / 4 = 3.25 rounded up to 4KB multiply by 25 = 100.
+
+QUESTION 3
+
+In order to address performance considerations and achieve faster response times, which of the following best practices
+can be used for Querying and Scanning Data in Amazon DynamoDB large tables?
+
+Choose 2
+
+    * Run parallel scans if the table size is 20 GB or larger, the table's provisioned read throughput is not being fully used, and sequential Scan operations are too slow.
+    
+    
+    Set your queries to be eventually consistent.
+    
+    
+    Scan using the 'FilterExpression' parameter to discard items that you do not want to appear in the results.
+    
+    
+    * Reduce the page size to return fewer items per results page.
+
+Sorry!
+
+    A Query operation performs eventually consistent reads, by default.
+
+Correct Answer
+
+      For large tables, a parallel scan can complete much faster than a sequential one, if the table size is 20 GB or larger, the table's provisioned read throughput is not being fully used, and sequential Scan operations are too slow. Reference: Best Practices for Querying and Scanning Data.
+    A smaller page size means uses fewer read operations and creates a "pause" between each request which reduces the impact of a query or scan operation. A larger number of smaller operations can allow other critical requests to succeed without throttling. Reference: Best Practices for Querying and Scanning Data.
+
+QUESTION 4
+
+What does the error "ProvisionedThroughputExceededException" mean in DynamoDB?
+
+    Your EC2 instance has run out of CPU or memory
+    
+    
+    The DynamoDB table is unavailable.
+    
+    
+    The DynamoDB table has exceeded the allocated space.
+    
+    
+    * You exceeded your maximum allowed provisioned throughput for a table or for one or more global secondary indexes.
+
+Good work!
+
+    This error means that you have exceeded your maximum allowed provisioned throughput for a table or for one or more global secondary indexes.
+
+QUESTION 5
+
+DynamoDB is a No-SQL database provided by AWS.
+
+    False
+    
+    
+    * True
+
+Good work!
+
+QUESTION 6
+
+Your application is storing customer order data in a DynamoDB table. You need to run a query to find all the orders
+placed by a specific customer in the last month, which attributes would you use in your query?
+
+    The Partition Key of OrderDate and a Sort Key of CustomerID
+    
+    
+    The Partition Key of OrderDate and Sort Key of CustomerName
+    
+    
+    A composite Primary Key made up of the CustomerName and OrderDate
+
+    * The Partition Key of CustomerID and a Sort Key of OrderDate
+
+Good work!
+
+    CustomerName is unlikely to be a unique value in the database, CustomerID is a better choice as will be a unique value. To identify all the orders placed in the last month by a customer, use OrderDate as the Sort Key. The Partition Key of CustomerID would also be more unique than CustomerName.
+
+QUESTION 7
+
+You have an application which reads 80 items of data every second. Each item consists of 3KB. Your application uses
+eventually consistent reads. What should you set the RCU read throughput to?
+
+    80 RCU
+    
+    
+    60 RCU
+    
+    
+    20 RCU
+    
+    
+    * 40 RCU
+
+Good work!
+
+    Each Read Capacity Unit represents 2 x Eventually consistent 4KB reads per second. 3KB / 4KB = 0.75 and round up to 1. Multiply that by 80 to give you the figure for Strongly consistent reads. Divide that by 2 to get Eventually consistent reads. Therefore the answer is 40 RCU.
+
+QUESTION 8
+
+A user would like to use the AWS CLI to get the attributes for an item with a specific primary key stored in a DynamoDB
+table. In order to do this, they will need IAM permissions for which of the following?
+
+    UpdateItem
+    
+    
+    ListTables
+    
+    
+    * GetItem
+    
+    
+    DescribeTable
+
+Good work!
+
+    GetItem returns a set of attributes for an item with the given primary key.
+
+QUESTION 9
+
+What is the difference between a Global Secondary Index and a Local Secondary Index
+
+Choose 2
+
+    You can create a Local Secondary Index at any time but you can only create a Global Secondary Index at table creation time
+    
+    
+    You can delete a Local Secondary Index at any time
+    
+    
+    * You can delete a Global Secondary Index at any time
+    
+    
+    * You can create a Global Secondary Index at any time but you can only create a Local Secondary Index at table creation time
+
+Good work!
+
+    Only Global secondary Indexes can be created or deleted at anytime. Local Secondary Indexes must be created when you first create the table and they cannot be modified or deleted.
+
+QUESTION 10
+
+By default, a DynamoDB query operation is used for which of the following?
+
+    Find items in a table based on the sort key attribute
+    
+    
+    Return the entire contents of a table
+    
+    
+    * Find items in a table based on the partition key attribute
+    
+    
+    Return the entire contents of a table filtered on the partition key attribute
+
+Good work!
+
+    A query finds items based on the partition key, whereas a scan returns the entire contents of a table. Query.
+
+QUESTION 11
+
+Your low latency web application needs to store its session state in a scalable way so that it can be accessed quickly.
+Which service do you recommend?
+
+    In memory on your EC2 instance
+    
+    
+    * DynamoDB
+    
+    
+    RDS
+    
+    
+    Elastic File Store
+
+Good work!
+
+    Using DynamoDB for session storage alleviates issues that occur with session handling in a distributed web application by moving sessions off of the local file system and into a shared location. Amazon DynamoDB provides an effective solution for sharing session state across web servers without incurring drawbacks. Reference: Managing ASP.NET Session State with Amazon DynamoDB.
+
+QUESTION 12
+
+You have an application that needs to read 25 items per second and each item is 13KB in size. Your application uses
+eventually consistent reads. What should you set the read throughput to?
+
+    100 RCU
+    
+    
+    25 RCU
+    
+    
+    10 RCU
+    
+    
+    * 50 RCU
+
+Good work!
+
+    Each Read Capacity unit represents 1 x 4KB Strongly Consistent Read. 13KB / 4KB = 3.25 rounded up to 4 multiply by 25 = 100 which gives you the figure for Strongly consistent reads. Divide that by 2 for Eventually consistent. So the answer is 50 RCU.
+
+QUESTION 13
+
+Which of the following approaches is used in AWS to improve flow control by retrying failed requests using progressively
+longer waits between retries?
+
+    * xExponential Backoff
+    
+    
+    Exponential Retry
+    
+    
+    Linear Backoff
+    
+    
+    Backoff With Jitter
+
+Good work!
+
+    Each AWS SDK implements an exponential backoff algorithm for better flow control. The idea behind exponential backoff is to use progressively longer waits between retries for consecutive error responses.
+
+QUESTION 14
+
+You are running a query on your Customers table in DynamoDB, however you only want the query to return CustomerID and
+EmailAddress for each item in the table, how can you refine the query so that it only includes the required attributes?
+
+    Create a Global Secondary Index which only includes the attributes you need and run the query on the Global Secondary Index
+    
+    
+    Run a query based on the Primary Key and filter the results using a Sort Key of EmailAddress
+    
+    
+    * Use the ProjectionExpression parameter
+    
+    
+    Use a scan operation instead
+
+Good work!
+
+    When using Query, or Scan, DynamoDB returns all of the item attributes by default. To get just some, rather than all of the attributes, use a Projection Expression.
+
+QUESTION 15
+
+Using the AWS Console, you are trying to scale DynamoDB past its pre-configured maximums. Which service limits can you
+increase by raising a ticket to AWS support?
+
+Choose 2
+
+    Item Sizes
+    
+    
+    * Global Secondary Indexes per table
+    
+    
+    Local Secondary Indexes
+    
+    
+    * Provisioned throughput limits
+
+Sorry!
+
+    The maximum item size in DynamoDB is 400 KB, which includes both attribute name binary length (UTF-8 length) and attribute value lengths (again binary length). The attribute name counts towards the size limit. Reference: Service, Account, and Table Quotas in Amazon DynamoDB (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ServiceQuotas.html)
+
+Correct Answer
+
+    There is an initial quota of 20 global secondary indexes per table. To request a service quota increase, see https://aws.amazon.com/support. Reference: Service, Account, and Table Quotas in Amazon DynamoDB
+    
+    AWS places some default quotas on the throughput you can provision. These are the quotas unless you request a higher amount. To request a service quota increase, see https://aws.amazon.com/support. Reference: Service, Account, and Table Quotas in Amazon DynamoDB
+
+QUESTION 16
+
+Your application is storing customer order data in DynamoDB. Which of the following pairs of attributes would make the
+best composite key to allow you to query DynamoDB efficiently to find a customer order that was placed on a specific
+day?
+
+    CustomerID + ProductCategory
+    
+    
+    * CustomerID + OrderDate
+    
+    
+    CustomerID + ProductID
+    
+    
+    CustomerID + Size
+
+Good work!
+
+    To find an order placed on a specific date, use CustomerID and OrderDate as the composite key.
+
+QUESTION 17
+
+Which of the following attributes wouldn't make a good partition key?
+
+    OrderID
+    
+    
+    * InvoiceDate
+    
+    
+    EmailID
+    
+    
+    CustomerID
+
+Good work!
+
+    High-cardinality attributes are recommended for DynamoDB partition keys. These are attributes that have distinct values for each item, like e-mailid, employee_no, customerid, sessionid, orderid, and so on. InvoiceDate provides low-cardinality since many values are repeated for such attribute. Reference: Choosing the Right DynamoDB Partition Key.
+
+QUESTION 18
+
+Your DynamoDB table is throwing a ProvisionedThroughputExceeded error, what could be the problem?
+
+    You are experiencing network contention
+    
+    
+    You are running out of disk space
+    
+    
+    * Your application's request rate is too high
+    
+    
+    Your instance is too small
+
+Good work!
+
+    ProvisionedThroughputExceededException means that your application is sending more requests to the DynamoDB table than the provisioned read / write capacity can handle.
+
+QUESTION 19
+
+Which of the following DynamoDB API calls is used to add a new item into a DynamoDB table?
+
+    UpdateTable
+    
+    
+    UpdateItem
+    
+    
+    GetItem
+    
+    
+    * PutItem
+
+Good work!
+
+    PutItem adds a new item into a table or replaces an old item with a new one.
+
+QUESTION 20
+
+Which of the following services provides in-memory write-through cache optimized for DynamoDB?
+
+    CloudFront
+    
+    
+    Elasticache
+    
+    
+    * DAX
+    
+    
+    Read-replica
+
+Good work!
+
+    DAX or DynamoDB Accelerator is highly available, in-memory cache which is optimized for DynamoDB. DAX currently only offers write-through cache. ElastiCache is supported for use with DynamoDB, however it is not specifically optimized for use with DynamoDB. CloudFront is a Content Delivery Network which caches content like files, web pages, videos etc, but cannot be used to cache Database data. Read-Replicas are used to scale read operations for RDS instances.
+
+QUESTION 21
+
+You have a motion sensor which writes 600 items of data every minute. Each item consists of 5KB. What should you set the
+write throughput to?
+
+    * 50
+
+    10
+
+    20
+
+    40
+
+Good work!
+
+    One write request unit represents one write for an item up to 1 KB in size. If you write 600 items every minute, it means 10 items are written per second ( 600 / 60 ). The total number of write capacity units required depends on the item size. If your item size is 5 KB, just multiply 10 items by 5 KB, so you require 50 write capacity units to sustain one write request. Read/Write Capacity Mode.
+
+QUESTION 22
+
+Which feature can you use to capture a time-ordered sequence of all the activity which occurs on your DynamoDB table -
+e.g. insert, update, delete?
+
+    Kinesis Data Streams
+    
+    
+    * DynamoDB Streams
+    
+    
+    Amazon CloudWatch
+    
+    
+    AWS CloudTrail
+
+Good work!
+
+    DynamoDB Streams captures a time-ordered sequence of item-level modifications in any DynamoDB table and stores this information in a log for up to 24 hours. Applications can access this log and view the data items as they appeared before and after they were modified, in near-real time. Change Data Capture for DynamoDB Streams.
+
+QUESTION 23
+
+In DynamoDB, a scan operation is used to:
+
+    Find items in a table based on the Sort Key attribute
+    
+    
+    Find items in a table based on the Primary Key values
+    
+    
+    Return the entire contents of a table filtered on the Primary Key attribute
+    
+    
+    * Return all data attributes for every item in the table or index
+
+Sorry!
+
+    By default, a Scan operation returns all of the data attributes for every item in the table or index, but not filtered on the primary key attributes. If you need to further refine the Scan results, you can optionally provide a filter expression.
+
+Correct Answer
+
+    A Scan operation in Amazon DynamoDB reads every item in a table or a secondary index. By default, a Scan operation returns all of the data attributes for every item in the table or index. You can use the ProjectionExpression parameter so that Scan only returns some of the attributes, rather than all of them. Working with Scans in DynamoDB.
+
+QUESTION 24
+
+Which of the following attributes would make a good Partition Key?
+
+    WarehouseLocation
+    
+    
+    * ProductID
+    
+    
+    ProductType
+    
+    
+    Size
+
+Good work!
+
+    It is good practice to use high-cardinality attributes for Partition Keys. in other words, attributes with values that are very uncommon or unique. e.g. ID number, email address, phone number, Social Security Number etc.
+
+QUESTION 25
+
+In terms of performance, a scan is more efficient than a query.
+
+    True
+    
+    
+    * False
+
+Good work!
+
+    In most cases a query is preferable to a scan operation. A scan is generally less efficient & more expensive.
+
+
 
 
 
