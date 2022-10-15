@@ -135,7 +135,7 @@
         * For example: selecting an item where userId=200 will select all attributes of the item ie firstname lastname
     * And you can use optional sort key name and value to refine the query results.
         * For example: your sortkey is timestamp, you can select items with timestamp of the last 7 days.
-    * By default query returns all attributes of the item, but if you wany to return specific attributes you want you
+    * By default query returns all attributes of the item, but if you want to return specific attributes you want you
       can use 'ProjectionExpression'
     * SortKey: Results always sorted by sorted ley value
     * Numeric Order: default is ascending numeric ordering
@@ -277,3 +277,81 @@
       your application no longer requires.
     * And this is great because it saves you money and reduces the cost of your DynamoDB table by automatically removing
       data, which is no longer relevant or useful to your application.
+
+## DynamoDb Streams
+
+* DynamoDb Streams are time ordered sequence streams and it records any modification that are made to items in your
+  dynamoDb like insert,update or delete.
+* it records all of these actions in a log and the logs are encrypted at rest and stored for 24 hours only.
+* after 24 hours, it's going to start deleting those entries.
+* typically, DynamoDB streams can be used for auditing or archiving of transactions
+* Also replaying transactions to a different table
+* They are really good for serverless architectures.
+* You can trigger a lambda function by DynamoDb streams.
+* the streams are accessed using their own dedicated endpoint. So there's one endpoint to access the DynamoDB table
+  itself and then there's a second separate endpoint for the DynamoDB stream.
+* by default, the minimum amount of data that you can record is the primary key of the item that was being modified,
+  updated or deleted, but you can also store before and after images as well.
+    * So you can capture the state of the item before the change and the state of the item after the change as well.
+* the Stream events are logged in near real-time
+* In serverless architecture it allows you to build applications which respond to changes in the DynamoDB table.
+  Applications can take actions based on the contents of your stream.
+* here is a sample scenario :
+* ![Example Scenario](img/dynamo-12.png)
+* Exam tips:
+    * **Sequence of modification:** it's a time-ordered sequence of item-level modifications in your DynamoDB tables.
+        * every time an item gets changed in your DynamoDB table, it's going to record that in the DynamoDB stream.
+    * **Encrypted and stored:** The data is only stored for 24 hours and after that, it's going to start getting
+      deleted.
+    * **Lamda event Source:** it's a really good event source for Lambda, allowing you to create applications that can
+      take
+      actions based on events that are happening in your DynamoDB table.
+
+## Provisioned Throughput Exceeded and Exponential Backoff
+
+* **ProvisionedThroughputExceededException** : the provision to throughput exceeded exception is one that you might see
+  on
+  your DynamoDB table if your request rate is too high for the read and write capacity provisioned on the DynamoDB
+  table.
+* if your app is making too many read/ write request on DynamoDb than can not handle based on read/write capacity then
+  you start to get this error.
+* if you're using the AWS SDK, it's going to automatically retry the requests until they are successful.
+    * all of the AWS SDKs, they all implement automatic retries, which simply send the request again until it is
+      successful.
+    * But in addition to these simple retries, all AWS SDKs also use exponential backoff.
+    * And with exponential backoff, this means that the requester uses progressively longer waits between consecutive
+      retries for improved flow control
+* if you dont use AWS SDK, there are some things to do:
+    * firstly, you can reduce the request frequency, so reduce the number of concurrent requests that are being sent to
+      the DynamoDB table, reduce the frequency of the requests that are being sent to the table,
+    * second thing you can do is to implement exponential backoff.
+* What is exponential backofs ?
+    * consecutive retries for improved flow control.
+    * For example, after the first failed request, it might wait, for example, 50 milliseconds before trying again. And
+      then if that retry fails, it then might wait 100 milliseconds until trying again. And then if that retry fails,
+      it might wait 200 milliseconds before trying again.
+    * So it will continue like that until the request is successful.
+    * And this gives significantly improved flow control in the hope that at some point, the traffic is going to start
+      flowing freely again, and requests will start to be fulfilled again.
+    * ![Exponential backoff](img/dynamo-13.png)
+* But if after about 1 minute this doesn't work, it might be instead that your request size is actually exceeding the
+  throughput for your read and write capacity on the DynamoDB table.
+    * So in this case, it may be worth investigating your provisioned throughput.
+    * And if your workload is mainly Get requests, you might be able to improve performance using either DynamoDB
+      Accelerator, or DAX, or using ElastiCache. However,
+    * if it's mainly write requests that are causing the issue, then maybe take a look at increasing your write capacity
+      for the DynamoDB table.
+* Exam tips:
+    * if you see the ProvisionedThroughputExceeded error, this means that the number of requests into your DynamoDB
+      table is too high.
+    * Exponential backoff can be used to improve the flow control by retrying the requests using progressively longer
+      waits.
+    * However, if your wait is getting up to around 1 minute, it's definitely worth checking your read and write
+      capacity units' settings and seeing if they need to be adjusted. And just remember that exponential backoff, it
+      doesn't only apply to DynamoDB.
+    * It's actually a feature of every single AWS SDK, and it applies to many services within AWS, for example,
+      S3 buckets, if you're using CloudFormation heavily, and SES, etc.
+    * And if you're not using the AWS SDK, then you're going to need to handle this yourself in your application
+      settings or in your application code.
+    * So the way to do that is just to reduce the frequency of your requests and
+      implement exponential backoff yourself. 
