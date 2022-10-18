@@ -1705,7 +1705,180 @@ Good work!
 
     In most cases a query is preferable to a scan operation. A scan is generally less efficient & more expensive.
 
+# KMS
 
+QUESTION 1
+
+What is the name of the practice of encrypting plaintext data with a data key, and then encrypting the data key under
+another key?
+
+    Key encryption
+    
+    
+    * Envelope encryption
+    
+    
+    Customer managed key encryption
+    
+    
+    Customer master key encryption
+
+Good work!
+
+    When you encrypt your data, your data is protected, but you have to protect your encryption key. One strategy is to encrypt it. Envelope encryption is the practice of encrypting plaintext data with a data key, and then encrypting the data key under another key.
+
+QUESTION 2
+
+Which of the following statements are correct about AWS managed keys?
+
+Choose 2
+
+    The data key is used to encrypt and decrypt the customer master key.
+    
+    
+    *You cannot use AWS managed keys in cryptographic operations directly.
+    
+    
+    *Envelope encryption is used to protect your encryption key.
+    
+    
+    The AWS managed key is used to encrypt and decrypt text files.
+
+Sorry!
+
+    AWS managed keys cannot be used to directly encrypt and decrypt files. You cannot manage AWS managed keys, rotate them, or change their key policies. Customer managed keys can be used with the KMS command to encrypt files when key usage rights are given.
+
+Correct Answer
+
+     You can view AWS managed keys and their key policies in your account, and audit their use in AWS CloudTrail logs. However, you cannot manage, rotate, or change their key policies. And, you cannot use AWS managed keys in cryptographic operations directly; the service that creates them uses them on your behalf.
+    
+    Reference: Customer Master Keys (CMKs).
+    
+    When you encrypt your data, your data is protected, but you have to protect your encryption key. One strategy is to encrypt it. Envelope encryption is the practice of encrypting plaintext data with a data key, and then encrypting the data key under another key.
+    
+    Reference: Envelope encryption.
+
+QUESTION 3
+
+You would like KMS to rotate your encryption keys on a yearly basis. Which API command can you use to configure this?
+
+    setup-key-rotation -y
+    
+    
+    configure-key-rotation
+    
+    
+    *enable-key-rotation
+    
+    
+    chkconfig key-rotation on
+
+Good work!
+
+    Use the aws kms enable-key-rotation command to configure key rotation. This can also be enabled in the console.
+
+QUESTION 4
+
+You need to re-encrypt a file with a new customer master key (CMK). Which API call can you use to do this?
+
+    *re-encrypt
+    
+    
+    decrypt and encrypt
+    
+    
+    enable-key-rotation
+    
+    
+    encrypt
+
+Good work!
+
+    The re-encrypt API call encrypts data on the server side with a new CMK without exposing the plaintext of the data on the client side.
+
+QUESTION 5
+
+Which command can you use to encrypt a plaintext file using a CMK?
+
+    aws iam encrypt
+    
+    
+    aws encrypt
+    
+    
+    aws kms-encrypt
+    
+    
+    *aws kms encrypt
+
+Good work!
+
+    Use the aws kms encrypt command to encrypt files.
+
+QUESTION 6
+
+You are working on a project which requires a key management solution. Your security architect has confirmed that a
+multi-tenant solution is fine. Which solution do you recommend?
+
+    CloudHSM
+    
+    
+    Client-side encryption
+    
+    
+    *KMS
+    
+    
+    S3 encryption
+
+Good work!
+
+    KMS is multi-tenant, whereas CloudHSM is dedicated hardware. S3 encryption and client-side encryption are not key management solutions.
+
+QUESTION 7
+
+Which of the following is a managed service that allows you to create and control the encryption keys used to encrypt
+your data?
+
+    RDS encryption
+    
+    
+    *KMS
+    
+    
+    S3 encryption
+    
+    
+    CMK
+
+Good work!
+
+    AWS KMS is a managed service that enables you to easily create and control the keys used for cryptographic operations.
+
+QUESTION 8
+
+Which of the following statements is correct in relation to KMS?
+
+Choose 2
+
+    KMS encryption keys are global by default.
+    
+    
+    You can export (copy out of the AWS KMS service in plaintext) your customer master key.
+    
+    
+    *KMS encryption keys are single-Region by default.
+    
+    
+    *You cannot export (copy out of the AWS KMS service in plaintext) your customer master key.
+
+Good work!
+
+    Single-Region is the default option when creating KMS keys, which are only stored and used in the Region they are configured. KMS multi-Region encryption keys can be created using advanced options and can be replicated into other Regions.
+    
+    AWS Key Management Service FAQs > Security.
+    
+    CMKs are created and used only within the service to help ensure their security, enable your policies to be consistently enforced, and provide a centralized log of their use.
 
 
 
