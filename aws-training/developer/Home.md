@@ -23,11 +23,11 @@
 
 ## AWS service Stack
 
-<img src="./img/1.png" alt="alt text" width="500" height="300">
+<img src="img.png" alt="alt text" width="500" height="300">
 
 ## AWS Foundation Services
 
-<img src="./img/2.png" alt="alt text" width="500" height="300">
+<img src="img.png" alt="alt text" width="500" height="300">
 
 * AWS provides several foundation services
     * Compute:
@@ -64,7 +64,7 @@
                   throughput without increasing your budget, or both
             * Spot Instances are also available to run for a predefined duration
 
-<img src="./img/5.png" alt="alt text" width="500" height="300">
+<img src="img.png" alt="alt text" width="500" height="300">
 
 * General purpose instances provide a balanced set of resources and a low-cost platform that is well suited for a wide
   variety of applications.
@@ -118,11 +118,11 @@
     * Amazon Cognito for authentication and saving mobile user data
     * Amazon Pinpoint to measure and analyse mobile application usage
 
-<img src="./img/3.png" alt="alt text" width="500" height="300">
+<img src="img.png" alt="alt text" width="500" height="300">
 
 ## Architecture Evaluation
 
-<img src="./img/4.png" alt="alt text" width="500" height="300">
+<img src="img.png" alt="alt text" width="500" height="300">
 
 # AWS Identity and Access Management
 
@@ -202,7 +202,7 @@
 
 * IAM Authentiation in CLI and SDK
 
-<img src="./img/23.png" alt="alt text" width="500" height="300">
+<img src="img3.png" alt="alt text" width="500" height="300">
 
 * Best Practices:
     * not using your AWS account root user credentials. Instead, create separate IAM users with their own access keys
@@ -212,7 +212,7 @@
 
 * Security Credential Priority Order
 
-<img src="./img/24.png" alt="alt text" width="500" height="300">
+<img src="img4.png" alt="alt text" width="500" height="300">
 
 # Developer Tools
 
@@ -235,7 +235,7 @@
     * Options – The AWS CLI also provides choices that you can specify when executing operation. For example, you can
       use the --query option to limit the response text so that it returns only the instance ID of your new instan
 
-<img src="./img/8.png" alt="alt text" width="500" height="300">
+<img src="img.png" alt="alt text" width="500" height="300">
 
 * to list EC2 instances
 
@@ -287,7 +287,7 @@ aws configure
     * Instromentantion for code
     * [Integration with other services](https://github.com/aws?q=xray-sdk.)
 
-<img src="./img/9.png" alt="alt text" width="500" height="300">
+<img src="img.png" alt="alt text" width="500" height="300">
 
 # Management Tools:
 
@@ -300,7 +300,7 @@ aws configure
 
 <img src="./img/10.png" alt="alt text" width="500" height="300"></br>
 
-<img src="./img/11.png" alt="alt text" width="500" height="300">
+<img src="img1.png" alt="alt text" width="500" height="300">
 
 * Auto Scaling works as a trio of services working together. Elastic Load Balancing and EC2 instances feed metrics to
   Amazon CloudWatch. Auto Scaling defines a group with launch configurations and Auto Scaling policies. Amazon
@@ -316,7 +316,7 @@ aws configure
       creation, modification, and deletion of AWS resources, such as Amazon EC2 instances, Amazon VPC security groups,
       and Amazon EBS volumes.
 
-<img src="./img/12.png" alt="alt text" width="500" height="300">
+<img src="img2.png" alt="alt text" width="500" height="300">
 
 # Storage Services
 
