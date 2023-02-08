@@ -692,6 +692,56 @@
 
 # Storage
 
+* There are three types of cloud storage: object, file, and block
+    * Amazon EBS for block storage
+    * Amazon EFS and Amazon FSx for file storage
+    * Amazon S3 and Amazon S3 Glacier for object storage
+
+## Amazon Simple Storage Service S3 Bucket
+
+* S3 is an object-level storage
+* Amazon S3 storage tiers are all designed to provide 99.999999999% (11 9's) of data durability of objects over a given
+  year
+* With Amazon S3, you can:
+    * Accelerate innovation – Integrate S3 buckets as storage solutions for static files and rely less on traditional
+      file systems.
+    * Increase agility – With hosted object storage, you won’t need to expand your storage as the quantity and size of
+      data grows. Individual objects cannot be larger than 5 TB; however, you can store as much total data as you need.
+    * Reduce cost – Use the variety of storage tiers in Amazon S3 to spend less on infrequently accessed data. Archive
+      data in S3 for your long-term storage needs.
+    * Strengthen security – Store your data in Amazon S3 and secure it from unauthorized access with encryption features
+      and access management tools. S3 maintains compliance programs, such as PCI-DSS, HIPAA/HITECH, FedRAMP, EU Data
+      Protection Directive, and FISMA, to help you meet regulatory requirements
+* Some use cases for Amazon S3 include:
+    * **Backup and restore**: Amazon S3 is designed for 99.999999999 percent durability, or 11 9’s of durability
+    * **Data lakes for analytics**: Run big data analytics, artificial intelligence (AI), machine learning (ML), and
+      high-performance computing (HPC) applications to unlock data insights
+    * **Media storage and streaming**: You can use Amazon S3 with Amazon CloudFront’s edge locations to host videos for
+      on-demand viewing in a secure and scalable way. Video on demand (VOD) streaming means that your video content is
+      stored on a server and viewers can watch it at any time
+    * **Static website** : You can use Amazon S3 to host a static website. On a static website, individual webpages
+      include
+      static content. They might also contain client-side scripts. Amazon S3’s object storage makes it easier to manage
+      data access, replications, and data protection for static files
+    * **Archiving and compliance**:  Replace your tape with low-cost cloud backup workflows, while maintaining
+      corporate,
+      contractual, and regulatory compliance requirements.
+* [How AWS Partners Are Utilizing Amazon S3 to Help Customers Solve for Scale](https://aws.amazon.com/blogs/apn/how-aws-partners-are-utilizing-amazon-s3-to-help-customers-solve-for-scale/)
+* When you upload a file to the bucket, you can set permissions on the object and add metadata.
+* You can control permissions
+* The diagram contains a virtual-hosted–style access URL made from a bucket and an object key. An object key is the
+  unique identifier for an object in a bucket. The combination of a bucket, key, and version ID uniquely identifies each
+  object. Every object can be uniquely addressed through the combination of the web service endpoint, bucket name, key,
+  and optionally, a version.
+* <img src="./img/51.png" alt="alt text" width="500" height="300">
+* By default, all Amazon S3 resources—buckets, objects, and related resources (for example, lifecycle configuration and
+  website configuration)—are private
+* The resource owner can provide controlled access to a resource. You can grant access permissions to others by writing
+  access policies.
+* Bucket policies are resource-based policies for your S3 buckets. Access control for your data is based on policies,
+  such as IAM policies, S3 bucket policies, and AWS Organizations service control policies (SCPs).
+* <img src="./img/52.png" alt="alt text" width="500" height="300">
+
 # Database Services
 
 # Monitoring and Storing
@@ -704,4 +754,4 @@
 
 # Edge Services
 
-# Backup and Recovery_
+# Backup and Recovery
