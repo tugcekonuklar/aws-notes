@@ -472,7 +472,7 @@
     * <img src="./img/36.png" alt="alt text" width="500" height="300">
 
 * Comparing Security Group and ACLs
-    * <img src="./img/36.png" alt="alt text" width="500" height="300">
+    * <img src="./img/37.png" alt="alt text" width="500" height="300">
     * Security groups:
         * Security groups in default VPCs allow all traffic.
         * New security groups have no inbound rules and allow outbound traffic.
@@ -481,6 +481,214 @@
         * Custom network ACLs deny all inbound and outbound traffic, until you add rules.
 
 # Compute
+
+* <img src="./img/38.png" alt="alt text" width="500" height="300">
+* Virtual machines (VMs) provide the following:
+    * Hardware independence
+    * Faster provisioning speed, in minutes or hours
+    * Pay-as-you-go pricing models instead of hardware purchases
+    * More scale
+    * Elastic resources
+    * Greater agility
+    * Reduced maintenance
+* Containerization provides:
+    * Platform independence
+    * A consistent runtime environment
+    * Higher resource use
+    * Easier and faster deployments
+    * Isolation and sandboxing
+    * Quicker start speed, so you can deploy in seconds
+* Serverless computing provides:
+    * Continuous scaling
+    * Built-in fault tolerance
+    * Pay for value
+    * Zero maintenance
+
+## Elastic Compute Cloud EC2()
+
+* EC2 is to create and run virtual machines
+* Amazon EC2 is just like your traditional on-premises server, but it is available in the cloud. It can support
+  workloads such as web hosting, applications, databases, authentication services, and anything else a server can
+  support.
+* Consideration while creating Ec2 instance:
+    * Name and tags – How should your instance be identified?
+    * Application and OS image – What will you start running?
+    * Instance type and size – What technical requirements do you have?
+    * Authentication and key pair – How do you plan to connect to the instance?
+    * Network settings and security – What virtual private cloud (VPC), subnet, and security groups will you use?
+    * Configure storage – What type of block storage is best for your use case?
+    * Placement and tenancy – Where should you run your EC2 instances?
+    * Scripts and metadata – What can you do to automate your launch
+* Tags:
+    * On AWS, you can assign metadata to your resources in the form of tags.
+    * Each tag is a simple label consisting of a customer-defined key and an optional value.
+    * Use tags to filter resources.
+    * Tags can manage resource access control, track costs, help automate tasks, and keep you organize
+    * [Tagging AWS resources](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+* Amazon Machine Image(AMI):
+    * An AMI provides the information requires to launch an instance, which is a virtual server in cloud.
+    * You can launch multiple servers by using AMI
+    * An AMI includes:
+        * A template for root volume for instance i.e an OS
+        * Launch permission that controls which AWS account can use the AMI
+        * Block device mapping that specifies the volume to attach to the instance when it is launched.
+    * You can buy or sell AMIs through the following sources:
+        * AWS user community
+        * AWS Marketplace
+    * To create a custom AMI, launch an instance and customize it to meet your requirements. Then, save that
+      configuration as a custom AMI. Instances launched from this custom AMI will use all of your customization
+    * [Amazon Machine Images (AMI)](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html)
+
+* Understanding instance type names:
+    * <img src="./img/40.png" alt="alt text" width="500" height="300">
+    * c – The first letter is the instance family. So, the c family, for example, is compute optimized. There are
+      general purpose EC2 instances, burstable instances, and compute-intensive and memory-intensive instances, to name
+      a few.
+    * 6 –The next number is the generation, which gradually increases as AWS upgrades hardware in its data centers.
+    * g – Sometimes there are one or more letters after the generation. The letters represent additional properties.
+      In this example, the g stands for Graviton2, an ARM-based processor developed by AWS. Choose properties based on
+      your needs, like optimized networking throughput or storage.
+    * xlarge – The last part represents the size of the instance. This includes the CPU, memory, storage, and network
+      performance.
+* EC2 Types:
+    * [Amazon EC2 Instance Types](https://aws.amazon.com/ec2/instance-types/)
+    * <img src="./img/41.png" alt="alt text" width="500" height="300">
+    * General purpose:
+        * Balance of compute, memory, and networking
+        * Diverse workloads
+        * Web application
+    * Compute optimized:
+        * Compute-bound applications
+        * High-performance processors
+        * Media transcoding
+        * Scientific modeling
+        * Machine learning
+    * Memory optimized
+        * Fast delivery of large data sets in memory
+        * Database servers
+        * Web caches
+        * Data analytics
+    * Accelerated computing
+        * High-graphics processing
+        * GPU bound
+        * Machine learning
+        * High performance comp
+    * Storage optimized
+        * High sequential read/write
+        * Large data sets
+        * NoSQL databases
+        * Amazon OpenSearch Service
+* Dedicated Host :
+    * By default, EC2 instances have **shared tenancy**, meaning multiple AWS accounts might share the same physical
+      hardware.
+    * **Dedicated Instances** are EC2 instances that are physically isolated at the host hardware level from instances
+      that
+      aren't dedicated and from instances that belong to other AWS accounts.
+    * When you launch instances on a **Dedicated Host**, the instances run on a physical server with EC2 instance
+      capacity
+      fully dedicated to your use. You are provided an isolated server with configurations that you can control. With
+      Dedicated Hosts, you have the option to allow AWS to automatically select a server to place your instance. Or you
+      can manually select a dedicated server to place your instance.
+    * An Amazon EC2 Dedicated Host is a physical server fully dedicated for your use, so you can help address corporate
+      compliance requirements.
+    * [Amazon EC2 Dedicated Hosts](https://aws.amazon.com/ec2/dedicated-hosts/)
+* Placement Groups:
+    * [Placement groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html)
+    * **Cluster placement groups** are recommended for your applications that benefit from low network latency, high
+      network
+      throughput, or both. They are also recommended when the majority of the network traffic is between the instances
+      in your group. HPC workloads can require this level of connectivity in your VPC.
+    * **Spread placement groups** are recommended for applications that have a small number of critical instances that
+      should be kept separate from each other. Services that require maximum uptime, such as a medical health record
+      system, are more fault-tolerant in a spread.
+    * **Partition placement groups** can be used to deploy your large distributed and replicated workloads. Avoid
+      same-time
+      hardware failures for multiple components by using partitions.
+* User Data:
+    * Runs script as root after the instance launches
+    * Can be used to perform common authomated configuration tasks.
+* Instance metadata
+    * is data about your instance that you can use to configure or manage the running instance.
+    * Instance metadata is divided into categories, for example, host name, events, and security group
+
+## Amazon Elastic Block Store (EBS)
+
+* Amazon EBS volumes provide durable, detachable, block-level storage for your Amazon EC2 instances. Because they are
+  mounted to the instances, they can provide extremely low latency between where the data is stored and where it might
+  be used on the instance. For this reason, they can be used to run a database with an Amazon EC2 instance.
+* [Amazon Elastic Block Store (Amazon EBS)](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEBS.html)
+* EBS Volume types:
+    * [Amazon EBS volume types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html)
+    * **General Purpose solid state drive (SSD)** volumes (gp2 and gp3) offer cost-effective storage that is ideal for a
+      broad range of use cases. These volume types are ideal for boot volumes, small and medium-sized databases, and
+      development and test environments. Use cases:
+        * Transactional workloads
+        * Virtual desktops
+        * Medium-sized, single-instance databases
+        * Low-latency interactive applications
+        * Boot volumes
+        * Development and test enviro
+    * **Provisioned IOPS SSD volumes** (io1 and io2) are designed to meet the needs of I/O intensive workloads, for
+      example, database workloads that are sensitive to storage performance and consistency. Provisioned IOPS SSD
+      volumes use a consistent IOPS rate. You specify the rate when you create the volume. Amazon EBS delivers the
+      provisioned performance 99.9 percent of the time.
+    * **Throughput-optimized hard disk drive** (HDD) volumes (st1) provide low-cost magnetic storage that defines
+      performance in terms of throughput rather than IOPS. This volume type is a good fit for large, sequential
+      workloads such as Amazon EMR; extract, transform, and load (ETL); data warehouses; and log processing.
+    * **Cold HDD (sc1) volumes** provide low-cost magnetic storage that defines performance in terms of throughput
+      rather than IOPS. sc1 is a good fit for large, sequential
+    * <img src="./img/44.png" alt="alt text" width="500" height="300">
+    * Provisioned IOP SSD use cases:
+        * Workloads that require sustained IOPS performance or more than 16,000 IOPS
+        * I/O intensive database workloads
+    * Specific use cases for io2 Block Express include the following:
+        * Sub-millisecond latency
+        * Sustained IOPS performance
+        * More than 64,000 IOPS or 1,000 MiB/s of throughput
+    * <img src="./img/44.png" alt="alt text" width="500" height="300">
+    * HDD-backed volumes are optimized for large streaming workloads where throughput, measured in MiB/s, is a better
+      performance measure than IOPS.
+        * Use cases for Throughput Optimized HDD volumes include:
+            * Big data
+            * Data warehouses
+            * Log processing
+        * Use cases for Cold HDD volumes include:
+            * Throughput-oriented storage for data that is infrequently accessed
+            * Scenarios where the lowest storage cost is important
+* Instance Storage:
+    * An instance store provides temporary block-level storage for your instance. This storage is located on disks that
+      are physically attached to the host computer.
+    * An instance store is ideal for temporary storage of information that changes frequently, such as buffers, caches,
+      scratch data, and other temporary content
+
+* Purchase Options :
+    * <img src="./img/46.png" alt="alt text" width="500" height="300">
+* Spot instance:
+    * The hourly price for a Spot Instance is called a Spot price. The Spot price of each instance type in each
+      Availability Zone is set by Amazon EC2. The price is adjusted gradually, based on the long-term supply and demand
+      for Spot Instances. Your Spot Instance runs whenever capacity is available, and as long as your requested maximum
+      price is higher than the Spot price. If your Spot request cannot be fulfilled, it fails
+    * [Spot Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html)
+    * Spot Instances are ideal for your fault-tolerant, flexible, loosely coupled, or stateless workloads.
+    * <img src="./img/47.png" alt="alt text" width="500" height="300">
+    * <img src="./img/48.png" alt="alt text" width="500" height="300">
+
+## AWS Lambda
+
+* [Serverless](https://aws.amazon.com/serverless/)
+* [Managing Lambda reserved concurrency](https://docs.aws.amazon.com/lambda/latest/dg/configuration-concurrency.html)
+* With Lambda, you can run code without provisioning or managing servers.
+* The service runs your code on a high-availability compute infrastructure and performs all administration of the
+  compute resources.
+* This includes:
+    * Server and OS maintenance
+    * Capacity provisioning and automatic scaling
+    * Code monitoring and logging
+* <img src="./img/49.png" alt="alt text" width="500" height="300">
+* Event Source Example:
+    * <img src="./img/50.png" alt="alt text" width="500" height="300">
+* [Common Lambda application types and use cases](https://docs.aws.amazon.com/lambda/latest/dg/applications-usecases.html)
+* Lambda functions can be allocated up to 10 GB of memory. Lambda functions run for up to 15 minutes.
 
 # Storage
 
