@@ -126,7 +126,7 @@
 * [Federated users](https://aws.amazon.com/identity/federation/) are external users and AWS is not manage those users
     * <img src="./img/10.png" alt="alt text" width="500" height="300">
 
-* **IAM **:
+* **IAM**:
     * By default, a new IAM user has no permissions to do anything. The user is not authorized to perform any AWS
       operations or access any AWS resources.
     * An advantage of having individual IAM users is that you can assign permissions individually to each user
@@ -294,6 +294,9 @@
         * Configure route tables and network gateway
     * [What is VPC?](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html)
     * <img src="./img/23.png" alt="alt text" width="500" height="300">
+    * Each AWS account comes with a default Amazon VPC that is preconfigured for you to use immediately. The default
+      Amazon VPC is suitable for getting started quickly and for launching public instances, such as a blog or simple
+      website
 * **Subnet**:
     * <img src="./img/24.png" alt="alt text" width="500" height="300">
     * A subnet is a range of IP addresses in your VPC.
@@ -310,7 +313,7 @@
             * 10.0.0.255: Network broadcast address. We do not support broadcast in a VPC; therefore, we reserve this
               address.
 
-* Public Subnet:
+* **Public Subnet:**
     * Your public subnet configuration acts as a two-way door—allowing traffic to flow in either direction, invited or
       not invited.
     * Since there is no automatic outbound routing, you must configure a subnet to be public.
@@ -321,7 +324,7 @@
         * Public IP addresses: These are addresses that are accessible from the internet. Public IP addresses obscure
           the private IP addresses, which are only reachable within the network.
 
-* Internet gateway:
+* **Internet gateway:**
     * internet gateway is a horizontally scaled, redundant, and highly available VPC component that permits
       communication between instances in your VPC and the internet. It imposes no availability risks or bandwidth
       constraints on your network traffic
@@ -339,6 +342,143 @@
         * Public IP: Use public IP addresses for communication between resources in your VPC and the internet. A public
           IP address is reachable over the internet.
     * [Connect to the internet using an internet gateway](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html)
+
+* **Route Tables:**
+    * <img src="./img/27.png" alt="alt text" width="500" height="300"> 
+      * In this example, both route tables direct network traffic locally, but the public route table includes routes to the internet gateway.
+    * A route table contains a set of rules (routes) that the VPC uses to determine where to direct network traffic.
+    * When you create a VPC, it automatically has a main route table, that is a local route that permits communication
+      for all the resources within the VPC and you can not modify the local route table.
+    * Each subnet in your VPC must be associated with a route table. If you don't explicitly associate a subnet with a
+      particular route table, the subnet is implicitly associated with and uses the main route table. A subnet can be
+      associated with only one route table at a time, but you can associate multiple subnets with the same route table.
+      Use custom route tables for each subnet to permit granular routing for destinations
+    * [Configure Route tables](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html)
+    * Private subnets allow indirect access to the internet.
+    * While you can put web-tier instances into a public subnet, we recommend that you put web-tier instances inside
+      private subnets behind a load balancer placed in a public subnet
+
+* **Elastic IP Address:**
+    * An Elastic IP address is a static, public IPv4 address designed for dynamic cloud computing.
+    * You can associate an Elastic IP address with any instance or network interface for any VPC in your account
+    * With an Elastic IP address, you can mask the failure of an instance by rapidly remapping the address to another
+      instance in your VPC.
+    * You can move one Elastic IP to another instance. Instance can be the same or another VPC.
+    * Elastic IP can access through to internet gateway of a VPC. If you use VPn can not possible to use Elastic IP.
+    * You are limited to five Elastic IP addresses.
+    * To help conserve them, you can use a NAT device. We strongly encourage you to use an Elastic IP address primarily
+      for the ability to remap the address to another instance in the case of instance failure, and to use DNS hostnames
+      for all other inter-node communication
+    * <img src="./img/28.png" alt="alt text" width="500" height="300">
+    * In this example EC2 instance uses Elastic IP 203.0.133.15 fails and this elastic IP assign another EC2 instance.
+    * VPC in a single AZ with a public and private subnet. Customers connect to the VPC through an internet gateway. The
+      private subnet has one EC2 instance with a private IP of 172.31.128.75. The public subnet has two EC2 instances.
+      The one with a private IP of 172.31.0.50 fails. The second, with a private IP of 172.31.32.51, is still running.
+      The Elastic IP address is reassigned from the failed instance to the running instance
+
+* **Elastic Network Interface:**
+    * An elastic network interface is a logical networking component in a VPC that represents a virtual network card.
+    * When you move a network interface from one instance to another, network traffic is redirected to the new instance.
+      Each instance in a VPC has a default network interface (the primary network interface).
+    * You can attach additional network intefaces
+    * Attaching multiple network interfaces to an instance is useful when you want to do the following
+        * Create a management network.
+        * Use network and security appliances in your VPC.
+        * Create dual-homed instances with workloads or roles on distinct subnets.
+        * Create a low-budget, high-availability solution
+    * You can attach a network interface in one subnet to an instance in another subnet in the same VPC.
+    * However, both the network interface and the instance must reside in the same Availability Zone. This limits its
+      use for disaster recovery (DR) scenarios, where you would want to redirect traffic to another Availability Zone.
+
+* **Network Address Translation with NAT Gateways:**
+    * NAT maps one IP address to another message.
+    * NAT maps private IP addresses to a public IP address, you can use it to allow private IP networks to connect to
+      the internet.
+    * A single device, such as a router, can act as an agent between the internet (public network) and a local network (
+      private network)
+    * NAT communicates between instances in your VPC and the internet.
+    * They are horizontally scaled, redundant, and highly available by default.
+    * NAT gateways provide a target in your subnet route tables for internet-routable traffic.
+        * Instances in the private subnet can initiate outbound traffic to the internet or other AWS services.
+        * NAT gateways managed by AWS prevent private instances from receiving inbound traffic from the internet
+    * You set up NAT gateways in the public subnets to handle outbound traffic to the internet from private subnets.
+      This provides internet connectivity while preventing external traffic from connecting with your private instances.
+    * You can put NAT gateways in both public and private subnets.
+    * <img src="./img/30.png" alt="alt text" width="500" height="300">
+    * **Connecting Private subnets to internet**
+    * You can use a NAT gateway for a one-way connection between private subnet instances and the internet or other AWS
+      services. This type of connection prevents external traffic from connecting with your private instances
+        * The route table for the private subnet sends all IPv4 internet traffic to the NAT gateway.
+        * The NAT gateway uses its Elastic IP address as the source IP address for traffic from the private subnet.
+        * The route table for the public subnet sends all internet traffic to the internet gateway. This is not
+          supported for IPv6.
+    * **Deploy a VPC accros multiple available zones**
+        * <img src="./img/31.png" alt="alt text" width="500" height="300">
+        * In this diagram of a VPC spanning two Availability Zones, the backend servers are in two private subnets in
+          the two separate Availability Zones. They send outbound traffic to NAT gateways in public subnets located in
+          their Availability Zone. Backend traffic from both NAT gateways route to an internet gateway.
+        * Elastic Load Balancing receives inbound traffic and routes it to the application servers in the private
+          subnets of both Availability Zones.
+
+## VPC traffic Security
+
+* **Network Access Control Lists (ACLs)**
+    * <img src="./img/32.png" alt="alt text" width="500" height="300">
+    * A network ACL is an optional layer of security for your VPC that acts as a firewall for controlling traffic in and
+      out of one or more subnets.
+    * Every VPC automatically comes with a default network ACL. It allows all inbound and outbound IPv4 traffic.
+    * You can create a custom network ACL and associate it with a subnet.
+    * By default, custom network ACLs deny all inbound and outbound traffic until you add rules.
+    * A network ACL contains a numbered list of rules, which are evaluated in order, starting with the lowest numbered
+      rule
+    * Components of a network ACL rule include the following:
+        * Rule number – Rules are evaluated starting with the lowest numbered rule.
+        * Type – The type of traffic, for example, Secure Shell (SSH). You can also specify all traffic or a custom
+          range.
+        * Protocol – You can specify any protocol that has a standard protocol number.
+        * Port range – The listening port or port range for the traffic, for example, 80 for HTTP traffic.
+        * Source – For inbound rules only, the source of the traffic (CIDR range).
+        * Destination – For outbound rules only, the destination for the traffic (CIDR range).
+        * Allow or Deny – Whether to allow or deny the specified traffic.
+    * [Control traffic to subnets using Network ACLs](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html)
+
+* **Security Groups**:
+    * A security group acts as a virtual firewall for your instance to control inbound and outbound traffic.
+    * Security groups act at the network interface level, not the subnet level, and they support Allow rules only.
+    * <img src="./img/33.png" alt="alt text" width="500" height="300">
+    * Security Groups in default VPC allows all outbound traffic
+    * Custom security group does not have inbound rules and allow only outbound traffic.
+    * [Control traffic to resources using security groups](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html)
+    * With security group rules, you can filter traffic based on protocols and port numbers. Security groups are
+      stateful—if you send a request from your instance, the response traffic for that request is allowed to flow in
+      regardless of inbound security group rules.
+    * <img src="./img/34.png" alt="alt text" width="500" height="300">
+    * This table displays both inbound and outbound security group rules for a web server. The inbound rules allow for
+      traffic on port 80 and port 443. Any user requesting the web server would be allowed in and the web server would
+      return the response back to their request. From the outbound perspective, if trying to send traffic, not in
+      response to something that was requested on 480 or 443, you are limited to the port 1433 and 3306.
+    * Security Group chain
+        * <img src="./img/35.png" alt="alt text" width="500" height="300">
+
+
+* **Multiple Layers of Defence Design:**
+    * As a best practice, you should secure your infrastructure with multiple layers of defense.
+    * You can control which instances are exposed to the internet by running your infrastructure in a VPC with a
+      properly configured internet gateway and route tables.
+    * You can also define security groups and network ACLs to further protect your infrastructure at the interface and
+      subnet levels.
+    * Additionally, you should secure your instances with a firewall at the operating system level and follow other
+      security best practices.
+    * <img src="./img/36.png" alt="alt text" width="500" height="300">
+
+* Comparing Security Group and ACLs
+    * <img src="./img/36.png" alt="alt text" width="500" height="300">
+    * Security groups:
+        * Security groups in default VPCs allow all traffic.
+        * New security groups have no inbound rules and allow outbound traffic.
+    * Network ACLs :
+        * Network ACLs in default VPCs allow all inbound and outbound IPv4 traffic.
+        * Custom network ACLs deny all inbound and outbound traffic, until you add rules.
 
 # Compute
 
