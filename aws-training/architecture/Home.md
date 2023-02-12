@@ -742,6 +742,234 @@
   such as IAM policies, S3 bucket policies, and AWS Organizations service control policies (SCPs).
 * <img src="./img/52.png" alt="alt text" width="500" height="300">
 
+* **Server Side Encryption Keys:**
+    * Cryptographic keys are used to encrypt your data at rest.
+    * **Server-side encryption (SSE) with Amazon S3-managed keys (SSE-S3)**
+        * Usage of SSE-S3, each object is encrypted with a unique key.
+        * As an additional safeguard, it encrypts the key itself with a primary key that it regularly rotates.
+        * Amazon S3 server-side encryption uses 256-bit Advanced Encryption Standard (AES-256) to encrypt your data.
+    * **Server-side encryption with AWS KMS keys stored in AWS Key Management Service (AWS KMS) (SSE-KMS)**
+        * KMS keys stored in SSE-KMS are similar to SSE-S3, but with some additional benefits and charges.
+        * There are separate permissions for the use of a KMS key that provides added protection against unauthorized
+          access of your objects in Amazon S3.
+        * SSE-KMS also provides you an audit trail that shows when your KMS key was used, and by whom.
+    * Server-side Encryption with Customer-Provided Keys (SSE-C):
+        * With SSE-C, you manage the encryption keys and Amazon S3 manages the encryption as it writes to disks.
+        * Also, Amazon S3 manages decryption when you access your objects.
+        * But you have to manage your keys
+    * [Protecting data using server-side encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/serv-side-encryption.html)
+* **Amazon S3 Storage Classes:**
+    * **S3 Standard** for general-purpose storage of frequently accessed data.
+    * **S3 Standard-Infrequent Access (S3 Standard-IA)** for long-lived, but less frequently accessed data.
+    * **S3 One Zone-Infrequent Access (S3 One Zone-IA)** for long-lived, less frequently accessed data that can be
+      stored in a single Availability Zone.
+    * **S3 Glacier Instant Retrieval** for archive data that is rarely accessed but requires a restore in milliseconds.
+    * **S3 Glacier Flexible Retrieval** for the most flexible retrieval options that balance cost with access times
+      ranging from minutes to hours. Your retrieval options permit you to access all the archives you need, when you
+      need them, for one low storage price. This storage class comes with multiple retrieval options: expedited
+      retrievals (restore in 1–5 minutes), standard retrievals (restore in 3–5 hours), or bulk retrievals (restore in
+      5–12 hours). Bulk retrievals are available at no additional charge.
+    * **S3 Glacier Deep Archive** for long-term cold storage archive and digital preservation. Your objects can be
+      restored in 12 hours or less.
+    * **S3 on Outposts**  delivers object storage to your on-premises AWS Outposts environment. Outposts will
+      be discussed later in this course
+    * <img src="./img/53.png" alt="alt text" width="500" height="300">
+    * <img src="./img/54.png" alt="alt text" width="500" height="300">
+    * **S3 Intelligent-Tiering** is an additional storage class that provides flexibility for data with unknown or
+      changing
+      access patterns. It automates the movement of your objects between storage classes to optimize cost.
+        * Amazon S3 Intelligent-Tiering is the only storage class that delivers you automatic storage cost savings when
+          data
+          access patterns change, without performance impact or operational overhead. Your data moves between access
+          tiers
+          as usage patterns change
+        * When you assign an object to S3 Intelligent-Tiering, it is placed in the Frequent Access tier which has the
+          same
+          storage cost as S3 Standard. Objects not accessed for 30 days are then moved to the Infrequent Access tier
+          where
+          the storage cost is the same as S3 Standard-IA. After 90 days of no access, an object is moved to the Archive
+          Instant Access tier, which has the same cost as S3 Glacier Instant Retrieval
+    * **Amazon S3 Glacier** is a service that gives you extremely-low cost, powerful, and flexible data storage
+      solutions. The storage is purpose-built for your archived data
+        * <img src="./img/55.png" alt="alt text" width="500" height="300">
+
+* Amazon s3 Versioning:
+    * Versioning-enabled buckets help you recover objects from accidental deletion or overwrite:
+        * If you delete an object, instead of removing it permanently, Amazon S3 inserts a delete marker, which becomes
+          the current object version.
+        * If you overwrite an object, it results in a new object version in the bucket.
+    * When S3 Versioning is turned on, you can restore the previous version of the object to correct the mistake.
+    * <img src="./img/56.png" alt="alt text" width="500" height="300">
+    * [Object Lock](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html) is using mostly write one
+      read many (WORM) strategy
+    * [Versioning](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html)
+
+* Amazon S3 life cycle Policy:
+    * With S3 Lifecycle policies, you can delete or move objects based on age.
+    * You should automate the lifecycle of your data stored in Amazon S3. Using S3 Lifecycle policies, you can have data
+      cycled at regular intervals between different Amazon S3 storage types
+* Replication
+    * Replicate objects while retaining metadata – Ensure that your replica is identical to the source object if it is
+      necessary.
+    * Replicate objects into different storage classes – Use replication to directly put objects into S3 Glacier
+      Flexible Retrieval, S3 Glacier Deep Archive, or another storage class in the destination buckets.
+    * Maintain object copies under different ownership – Tell Amazon S3 to change replica ownership to the AWS account
+      that owns the destination bucket.
+    * Keep objects stored over multiple AWS Regions – Meet compliance requirements by replicating data to another AWS
+      Region.
+
+* **What if you need to upload large objects? How do you upload them and how does it work?**
+    * Amazon s3 multipart upload:
+        * With a multipart upload, you can consistently upload large objects in manageable parts.
+        * This process involves three steps:
+            * Initiating the upload
+            * Uploading the object parts
+            * Completing the multipart upload
+        * When the multipart upload request is completed, Amazon S3 will re-create the full object from the individual
+          pieces.
+        * You cannot perform multipart uploads manually using the console.
+
+* **How can you increase the speed at which objects are uploaded to AWS Regions that are not close to you?**
+    * Amazon S3 Transfer Acceleration uses AWS globally-distributed edge locations to facilitate fast data transfer into
+      an S3 bucket. The data is routed to Amazon S3 over an optimized network path
+    * S3 Transfer Acceleration shortens the distance between client applications and AWS servers that acknowledge PUTS
+      and GETS to Amazon S3 using a global network of hundreds of edge locations.
+    * AWS automatically routes your uploads and downloads through the closest edge locations to your application.
+    * Use Transfer Acceleration when you:
+        * Have customers all over the world who upload to a centralized bucket
+        * Transfer gigabytes or terabytes of data across continents on a regular basis
+        * Underutilize the available bandwidth when uploading to Amazon S3 over the internet
+
+* **Can actions be automated based on events like when you upload an object?**
+    * With Amazon S3 event notifications, you can receive notifications when certain object events happen in your
+      bucket. Event-driven models like this mean that you no longer have to build or maintain server-based polling
+      infrastructure to check for object changes.
+    * Nor do you have to pay for idle time of that infrastructure when there are no changes to process.
+    * Amazon S3 can send event notification messages to the following destinations:
+        * Amazon Simple Notification Service (Amazon SNS) topics
+        * Amazon Simple Queue Service (Amazon SQS) queues
+        * AWS Lambda function
+    * [“Reliable event processing with Amazon S3 event notifications on the AWS Storage Blog](https://aws.amazon.com/blogs/storage/reliable-event-processing-with-amazon-s3-event-notifications/)
+
+* Cost Factors:
+    * **Storage** – Per-gigabyte cost to hold your objects. You pay for storing objects in your S3 buckets. The rate
+      you’re
+      charged depends on your objects' size, how long you stored the objects during the month, and the storage class.
+      There are per-request ingest charges when using PUT, COPY, or lifecycle rules to move data into any S3 storage
+      class.
+    * **Requests and retrievals** – The number of API calls: PUT and GET requests. You pay for requests made against
+      your S3
+      buckets and objects. S3 request costs are based on the request type, and are charged on the quantity of requests.
+      When you use the Amazon S3 console to browse your storage, you incur charges for GET, LIST, and other requests
+      that are made to facilitate browsing.
+    * **Data transfer** – Usually no transfer fee for data-in from the internet and, depending on the requestor location
+      and
+      medium of data transfer, different charges for data-out.
+    * **Management and analytics** – You pay for the storage management features and analytics that are activated on
+      your
+      account’s buckets. These features are not discussed in detail in this course.
+    * **S3 Replication and S3 Versioning** can have a big impact on your AWS bill. These services both create multiple
+      copies of your objects and you pay for each PUT request in addition to the storage tier charge. S3 Cross-Region
+      Replication also requires data transfer between AWS Regions
+
+## Shared File Systems
+
+* **How do we handle an application running on multiple instances that must use the same file system?**
+* **Amazon EBS** provides block storage, so it could be used as the underlying storage component of a self-managed file
+  storage solution. Amazon EBS supports multi-attach for up to 16 Linux EC2 instance attachments, but it is a very
+  specialized use case. In most cases, an EBS volume is attached to one EC2 instance. This limit makes it difficult to
+  have the scalability, availability, and affordability of a fully managed file storage solution.
+* **Amazon S3** is an option, but what if you need the performance and read/write capacity of a network file system? S3
+  is
+  an object store system, not a block store, so changes overwrite entire files, not blocks of characters within files.
+* For high throughput changes to files of varying sizes, a file system will be superior to an object store system.
+  **Amazon Elastic File System (Amazon EFS)** and **Amazon FSx** are ideal for this use case.
+  Using a fully managed cloud file storage solution removes complexities, reduces costs, and simplifies management. You
+  will continue to learn about shared file systems in this section of the module.
+* [“Attach a volume to multiple instances with Amazon EBS Multi-Attach](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volumes-multi.html)
+* <img src="./img/57.png" alt="alt text" width="500" height="300">
+
+## Amazon EFS
+
+* Amazon EFS provides a scalable, elastic file system for Linux-based workloads for use with AWS Cloud services and
+  on-premises resources.
+* You can create a file system, mount the file system on an Amazon EC2 instance, and then read and write data to and
+  from your file system. You can mount an Amazon EFS file system in your VPC through the Network File System (NFS)
+  versions 4.0 and 4.1 (NFSv4) protocol. You do not need to take action to expand the file system as your storage needs
+  grow.
+* Amazon EC2 instances in your VPC can access Amazon EFS file systems concurrently, so applications that scale beyond a
+  single connection can access a file system.
+* Benefits:
+    * Amazon EFS provides a shared, persistent layer that allows stateful applications to elastically scale up and down.
+      Examples include DevOps, web serving, web content systems, media processing, machine learning, analytics, search
+      index, and stateful microservices applications. Amazon EFS can support a petabyte-scale file system, and the
+      throughput of the file system also scales with the capacity of the file system
+    * Amazon EFS is serverless, you don’t need to provision or manage the infrastructure or capacity. Amazon EFS file
+      systems can be shared with up to tens of thousands of concurrent clients, no matter the type. These could be
+      traditional EC2 instances, containers running in one of your self-managed clusters or in one of the AWS container
+      services, Amazon ECS, Amazon EKS, and Fargate, or in a serverless function running in Lambda.
+* <img src="./img/58.png" alt="alt text" width="500" height="300">
+
+## Amazon FSx
+
+* With Amazon FSx, you can quickly launch and run feature-rich and high-performing file systems. The service provides
+  you with four file systems to choose from. This choice is based on your familiarity with a given file system or by
+  matching the feature sets, performance profiles, and data management capabilities to your needs.
+* <img src="./img/60.png" alt="alt text" width="500" height="300">
+
+## Data Migration
+
+* **How can we move lots of data to the cloud in a relatively short time period?”**
+* AWS offers a wide variety of services and Partner tools to help you migrate your data sets (files, databases, machine
+  images, block volumes, or tape backups). In this module, you will learn about the following tools:
+    * **AWS Storage Gateway** simplifies on-premises adoption of AWS storage. Storage Gateway lets you seamlessly
+      connect and extend
+      your on-premises applications to AWS storage. It supports multiple file transfer protocols: server message block (
+      SMB),
+      network file sharing (NFS), and internet small computer systems interface (iSCSI).
+    * <img src="./img/61.png" alt="alt text" width="500" height="300">
+    * <img src="./img/62.png" alt="alt text" width="500" height="300">
+    * **AWS DataSync** is a data transfer service that facilitates moving data between on-premises storage and Amazon
+      S3, Amazon EFS, or FSx for Windows File Server.
+    * **The AWS Transfer Family** permits the transfer of files into and out of Amazon S3 using the secure file transfer
+      protocol (SFTP). The Transfer Family will not be covered in this course.
+    * **AWS Snow Family** is a group of edge computing, data migration, or edge storage devices designed for secure,
+      physical transport.
+* **Amazon DataSync**
+    * Manual tasks related to data transfers can slow down migrations and burden IT operations. DataSync facilitates
+      moving large amounts of data between on-premises storage and Amazon S3 and Amazon EFS, or FSx for Windows File
+      Server
+    * DataSync deploys as a single software agent that can connect to multiple shared file systems and run multiple
+      tasks.
+    * The software agent is typically deployed on premises through a virtual machine to handle the transfer of
+      data over the wide area network (WAN) to AWS.
+    * On the AWS side, the agent connects to the DataSync service infrastructure. Because DataSync is a service, there
+      is no infrastructure for customers to set up or maintain in the cloud. DataSync configuration is managed directly
+      from the console.
+* AWS Snow Family Service Model
+    * <img src="./img/63.png" alt="alt text" width="500" height="300">
+
+
+* Review:
+    * What are some services to consider when looking at block, file and object storage?
+        * Use Amazon EBS for block-level storage. Amazon S3 and S3 Glacier have object-level storage options to review.
+          For file-level storage, choose Amazon EFS or Amazon FSx.
+    * How can we move lots of data to the cloud in a relatibve short time?
+        * o move data from one source to another destination, use AWS Datasync. For hybrid storage solutions, use AWS
+          Storage Gateway. For an offline way to move data from on-premises to AWS Cloud destinations, use the AWS Snow
+          Family
+* Amazon s3 Cross-Region Pelication:
+    * S3 Cross-Region Replication (CRR) is used to copy objects across Amazon S3 buckets in different AWS Regions. CRR
+      can help you do the following:
+    * Meet compliance requirements – Although Amazon S3 stores your data across
+      multiple geographically distant Availability Zones by default, compliance requirements might dictate that you
+      store data at even greater distances. To satisfy these requirements, use Cross-Region Replication to replicate
+      data between distant AWS Regions.
+    * Minimize latency – If your customers are in two geographic locations, you can minimize latency in accessing
+      objects by maintaining object copies in AWS Regions that are geographically closer to your users.
+    * Increase operational efficiency – If you have compute clusters in two different AWS Regions that analyze the
+      same set of objects, you might choose to maintain object copies in those Regions
+
 # Database Services
 
 # Monitoring and Storing
