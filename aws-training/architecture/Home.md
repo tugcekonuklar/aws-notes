@@ -972,6 +972,121 @@
 
 # Database Services
 
+* [Amazon Database Services](https://aws.amazon.com/products/databases/)
+* <img src="./img/64.png" alt="alt text" width="500" height="300">
+
+## Amazon RDS
+
+* Amazon RDS is a web service that helps you to set up, operate, and scale a relational database in the cloud.
+* It provides cost-efficient and resizable capacity, while managing time-consuming database administration tasks.
+* By using Amazon RDS, you can focus on your applications and business.
+* Amazon RDS provides you with six familiar database engines to choose from, including Amazon Aurora, PostgreSQL, MySQL,
+  MariaDB, Oracle Database, and Microsoft SQL Server
+* <img src="./img/65.png" alt="alt text" width="500" height="300">
+* Amazon RDS Multi-AZ deployments provide enhanced availability and durability for database (DB) instances, making them
+  a natural fit for production database workloads. When you provision a Multi-AZ DB instance, Amazon RDS synchronously
+  replicates the data to a standby instance in a different Availability Zone
+* Amazon RDS Multi-AZ not used for read-only scenarios.
+* In case of the primary instance failure, Amazon RDS performs an automatic failover to the standby instance.
+* With Amazon RDS, you can create read replicas of your database.
+    * Amazon automatically keeps them in sync with the primary DB instance.
+    * Read replicas are available in Amazon RDS for Aurora, MySQL, MariaDB, PostgreSQL, Oracle, and
+      Microsoft SQL Server.
+    * Read replicas can help you do the following:
+        * Relieve pressure on your primary node with additional read capacity.
+        * Bring data close to your applications in different AWS Regions.
+        * Promote a read replica to a standalone instance as a disaster recovery (DR) solution if the primary DB
+          instance fails.
+
+* Data Encryption at rest:
+    * Amazon RDS provides encryption of data at rest using the AWS Key Management Service (AWS KMS).
+    * AWS KMS is a managed service that provides the ability to create and manage encryption keys and then encrypt and
+      decrypt your data using those keys.
+    * All of these keys are tied to your AWS account and are fully managed by you.
+    * AWS KMS provides an additional layer of protection against unauthorized access to the underlying storage of your
+      Amazon RDS instance.
+
+### Amazon Aurora
+
+* Amazon Aurora is an enterprise-class relational database.
+* It is compatible with MySQL and PostgreSQL relational databases.
+* It is up to five times faster than standard MySQL databases and up to three times faster than standard PostgreSQL
+  databases.
+* Aurora helps to reduce your database costs by reducing unnecessary I/O operations, while ensuring that your database
+  resources remain reliable and available.
+* Consider Aurora if your workloads require high availability.
+* It replicates six copies of your data across three Availability Zones and continuously backs up your data to Amazon
+  Simple Storage Service (Amazon S3).
+  Aurora supports network isolation, encryption at rest and in transit, and compliance and assurance programs.
+* Aurora is managed by Amazon RDS, so it requires no server provisioning, software patching, setup, configuration, or
+  backups.
+* An Amazon Aurora DB cluster consists of one or more DB instances and a cluster volume that manages the data for those
+  DB instances.
+    * The instances perform the compute functions of the database while the cluster volume stores the actual data.
+      Aurora offers two instance types:
+        * Primary instance – Supports read and write operations and performs all the data modifications to the cluster
+          volume. Each Aurora DB cluster has one primary instance.
+        * Aurora replica – Supports read operations only. Each Aurora DB cluster can have up to 15 Aurora replicas in
+          addition to the primary instance.
+* An Aurora cluster volume is a virtual database storage volume that spans multiple Availability Zones, with each
+  Availability Zone having a copy of the DB cluster data.
+* Aurora Serverless V2 for PostgreSQL and MySQL:
+    * Aurora Serverless v2 is an on-demand, auto scaling configuration for Amazon Aurora.
+    * Aurora Serverless v2 helps to automate the processes of monitoring the workload and adjusting the capacity for
+      your databases.
+    * Capacity is adjusted automatically based on application demand.
+    * You're charged only for the resources that your DB clusters consume, so Aurora Serverless v2 can help you to stay
+      within budget and avoid paying for computer resources that
+      you don't use.
+
+## Amazon DynamoDB
+
+* DynamoDB is a fully managed NoSQL database service.
+* DynamoDB is cost effective. You pay for the storage you are consuming and the I/O throughput you have provisioned.
+* DynamoDB supports end-to-end encryption and fine-grained access control
+* <img src="./img/66.png" alt="alt text" width="500" height="300">
+* DynamoDB stores data in tables. When creating a table, you must specify a table name and a partition key.
+* These are the only two required entities.
+* DynamoDB uses primary keys to uniquely identify each item in a table and secondary indexes to provide more
+  query flexibility.
+* There are two types of primary keys supported:
+    * **Simple primary key** – A simple primary key is composed of just one attribute designated as the partition key.
+      If
+      you use only the partition key, no two items can have the same value.
+    * **Composite primary key** – A composite primary key is composed of both a partition key and a sort key. In this
+      case,
+      the partition key value for multiple items can be the same, but their sort key values must be different.
+* You work with the core components: tables, items, and attributes. A table is a collection of items, and each
+  item is a collection of attributes. In this example, the table includes two items, with simple primary keys Tom Hanks
+  and Tim Allen. The item with the primary key Tom Hanks includes three attributes: Role, Year, and Genre. The
+  primary key for Tim Allen includes a Height attribute, and it does not include the Genre attribute.
+* [Core components of Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.CoreComponents.html)
+* <img src="./img/67.png" alt="alt text" width="500" height="300">
+* DynamoDB capacity and scaling:
+    * On-demand capacity mode is a pay-per-request model. On-demand capacity mode is best when you:
+        * Have unknown workloads
+        * Have unpredictable traffic
+        * Prefer to pay for only what you use
+    * With provisioned capacity mode, you set a maximum number of RCUs and WCUs.
+    * When traffic exceeds those limits, DynamoDB throttles those requests to control your costs.
+    * You can adjust your provisioned capacity using auto scaling.
+    * Provisioned capacity mode is best when you:
+        * Have predictable application traffic
+        * Have traffic that is consistent or changes gradually
+        * Can forecast capacity requirements to control cost
+    * [Amazon DynamoDB auto scaling: Performance and cost optimization at any scale](https://aws.amazon.com/blogs/database/amazon-dynamodb-auto-scaling-performance-and-cost-optimization-at-any-scale/)
+    * <img src="./img/68.png" alt="alt text" width="500" height="300">
+* DynamoDb Consistency Options:
+    * **Eventually consistent** reads When you read data from a DynamoDB table, the response might not reflect the
+      results of a recently completed write operation. The response might include some stale data. If you repeat your
+      read request after a short time, the response should return the latest data.
+    * **Strongly consistent reads** When you request a strongly consistent read, DynamoDB returns a response with the
+      most up-to-date data, reflecting the updates from all prior write operations that were successful. A strongly
+      consistent read might not be available if there is a network delay or outage.
+    * DynamoDB uses eventually consistent reads, unless you specify otherwise. Read operations (such as GetItem, Query,
+      and Scan) provide a ConsistentRead parameter. If you set this parameter to true, DynamoDB uses strongly consistent
+      reads during the operation.
+
 # Monitoring and Storing
 
 # Automation
