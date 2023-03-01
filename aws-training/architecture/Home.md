@@ -1051,11 +1051,9 @@
   query flexibility.
 * There are two types of primary keys supported:
     * **Simple primary key** – A simple primary key is composed of just one attribute designated as the partition key.
-      If
-      you use only the partition key, no two items can have the same value.
+      If you use only the partition key, no two items can have the same value.
     * **Composite primary key** – A composite primary key is composed of both a partition key and a sort key. In this
-      case,
-      the partition key value for multiple items can be the same, but their sort key values must be different.
+      case, the partition key value for multiple items can be the same, but their sort key values must be different.
 * You work with the core components: tables, items, and attributes. A table is a collection of items, and each
   item is a collection of attributes. In this example, the table includes two items, with simple primary keys Tom Hanks
   and Tim Allen. The item with the primary key Tom Hanks includes three attributes: Role, Year, and Genre. The
@@ -1063,11 +1061,11 @@
 * [Core components of Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.CoreComponents.html)
 * <img src="./img/67.png" alt="alt text" width="500" height="300">
 * DynamoDB capacity and scaling:
-    * On-demand capacity mode is a pay-per-request model. On-demand capacity mode is best when you:
+    * **On-demand capacity** mode is a pay-per-request model. On-demand capacity mode is best when you:
         * Have unknown workloads
         * Have unpredictable traffic
         * Prefer to pay for only what you use
-    * With provisioned capacity mode, you set a maximum number of RCUs and WCUs.
+    * With **provisioned capacity** mode, you set a maximum number of RCUs and WCUs.
     * When traffic exceeds those limits, DynamoDB throttles those requests to control your costs.
     * You can adjust your provisioned capacity using auto scaling.
     * Provisioned capacity mode is best when you:
@@ -1086,6 +1084,24 @@
     * DynamoDB uses eventually consistent reads, unless you specify otherwise. Read operations (such as GetItem, Query,
       and Scan) provide a ConsistentRead parameter. If you set this parameter to true, DynamoDB uses strongly consistent
       reads during the operation.
+* Dynamo Global tables:
+    * A global table is a collection of one or more DynamoDB tables, all owned by a single AWS account, identified as
+      replica tables.
+    * A replica table (or replica, for short) is a single DynamoDB table that functions as part of a global table.
+    * Each replica stores the same set of data items.
+    * Any given global table can only have one replica table per Region, and every replica has the same table name and
+      the same primary key schema
+    * DynamoDB global tables provide a fully managed solution for deploying a multi-Region, multi-active database,
+      without having to build and maintain your own replication solution. When you create a global table, you specify
+      the Regions where you want the table to be available.
+    * DynamoDB performs all the necessary tasks to create identical tables in these Regions and propagate ongoing data
+      changes to all of them. DynamoDB communicates these changes over the AWS network backbone.
+
+## Database Caching 
+* Why we need cache in DB?
+  * Data requires a slow and expensive query
+  * frequently accessed data
+  * information that relatively static
 
 # Monitoring and Storing
 
