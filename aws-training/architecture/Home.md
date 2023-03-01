@@ -1097,11 +1097,58 @@
     * DynamoDB performs all the necessary tasks to create identical tables in these Regions and propagate ongoing data
       changes to all of them. DynamoDB communicates these changes over the AWS network backbone.
 
-## Database Caching 
+## Database Caching
+
 * Why we need cache in DB?
-  * Data requires a slow and expensive query
-  * frequently accessed data
-  * information that relatively static
+    * Data requires a slow and expensive query
+    * frequently accessed data
+    * information that relatively static
+* Database caches on AWS such as Amazon ElastiCache and DynamoDB Accelerator (DAX) are in-memory databases.
+    * They use a cache cluster that contains a set of cache nodes distributed between subnets. Resources within those
+      subnets have high-speed access to those nodes
+* Two common caching strategies include lazy loading and write-through.
+    * In lazy loading, updates are made to the database without updating the cache. In the case of a cache miss, the
+      information retrieved from the database can be subsequently written to the cache. Lazy loading loads data needed
+      by the application in the cache, but it can result in high cache-miss-to-cache-hit ratios in some use cases.
+    * An alternative strategy is to write through to the cache every time the database is accessed. This approach
+      results in fewer cache misses. This improves performance, but requires additional storage for data that may not be
+      needed by the applications.
+    * [Caching Strategy](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Strategies.html)
+    * . By adding a time to live (TTL) value to each write to the cache, you can maintain fresh data without cluttering
+      up the cache with extra data.
+* [ElastiCache](https://aws.amazon.com/elasticache/))
+* supports two open-source in-memory engines: [in-memory compared to disk]
+    * Redis
+    * Memcached
+    * [Redis vs MemCahe](https://aws.amazon.com/elasticache/redis-vs-memcached/)
+* Dynamo Accelerator (DAX):
+    * DynamoDB Accelerator (DAX) delivers fast response times for accessing eventually consistent data.
+    * DAX is a caching service compatible with DynamoDB that provides fast in-memory performance for demanding
+      applications.
+    * [DAX](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.html)
+
+## Database Migration
+
+* **AWS Database Migration Service (AWS DMS)** replicates data from a source to a target database in the AWS Cloud. You
+  create a source and a target connection to tell AWS DMS where to extract from and load to.
+* Then you schedule a task that runs on this server to move your data.
+* AWS DMS creates the tables and associated primary keys if they don't exist on the target.
+* AWS DMS supports migration between the most widely used databases, which includes Oracle, PostgreSQL, SQL Server,
+  Amazon Redshift, Aurora, MariaDB, and MySQL.
+* It also supports homogenous (same engine) and heterogeneous (different engines) migrations.
+* You can use the service to migrate between on-premises databases, Amazon EC2 databases, and Amazon RDS databases.
+* However, you cannot migrate between two on-premises databases. Either the source or the target database (or both) need
+  to reside in Amazon RDS or on Amazon EC2.
+* With AWS DMS, you can also use a Snowball edge device as a migration target. You would use this method if your
+  environment has poor internet connectivity, the source database is too large to move over the internet, or if your
+  organization has privacy or security requirements.
+* For homogenous migrations, you can use native tools to perform these conversions. For heterogeneous migrations, you
+  can use the AWS Schema Conversion Tool (AWS SCT).
+* <img src="./img/69.png" alt="alt text" width="500" height="300">
+* [**The AWS Schema Conversion Tool (AWS SCT)**](https://aws.amazon.com/dms/schema-conversion-tool/) makes heterogeneous database migrations predictable. It automatically
+  converts the source database schema and a majority of the database code objects. The conversion includes views, stored
+  procedures, and functions. They are converted to a format that is compatible with the target database. Any objects
+  that cannot be automatically converted are marked so that they can be manually converted to complete the migration
 
 # Monitoring and Storing
 
