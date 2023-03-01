@@ -1145,12 +1145,93 @@
 * For homogenous migrations, you can use native tools to perform these conversions. For heterogeneous migrations, you
   can use the AWS Schema Conversion Tool (AWS SCT).
 * <img src="./img/69.png" alt="alt text" width="500" height="300">
-* [**The AWS Schema Conversion Tool (AWS SCT)**](https://aws.amazon.com/dms/schema-conversion-tool/) makes heterogeneous database migrations predictable. It automatically
+* [**The AWS Schema Conversion Tool (AWS SCT)**](https://aws.amazon.com/dms/schema-conversion-tool/) makes heterogeneous
+  database migrations predictable. It automatically
   converts the source database schema and a majority of the database code objects. The conversion includes views, stored
   procedures, and functions. They are converted to a format that is compatible with the target database. Any objects
   that cannot be automatically converted are marked so that they can be manually converted to complete the migration
 
 # Monitoring and Storing
+
+* Reasons for monitoring
+    * <img src="./img/70.png" alt="alt text" width="500" height="300">
+
+## CloudWatch
+
+* Amazon CloudWatch is an AWS service that provides a near real-time stream of system events. The events describe
+  changes to your AWS resources.
+* CloudWatch alarms send notifications or automatically make changes to the resources you are monitoring based on rules
+  that you define.
+* [CloudWatch](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html)
+* Metrics are data about the performance of your systems. By default, many services provide you with metrics for
+  resources, such as Amazon EC2 instances, Amazon Elastic Block Store (Amazon EBS) volumes, and Amazon Relational
+  Database Service (Amazon RDS) DB instances.
+* CloudWatch stores data about a metric as a series of data points. Each data point has an associated timestamp.
+* Types of logs:
+* <img src="./img/71.png" alt="alt text" width="500" height="300">
+* AWs Cloud Trail:
+    * AWS CloudTrail provides insight into who did what and when by tracking user activity and API usage.
+    * With CloudTrail, you can get a history of AWS API calls in your account, including those made through the console,
+      AWS SDKs, CLI, and higher-level AWS services.
+    * CloudTrail records the AWS API calls and delivers the log files to you.
+    * The information includes the source IP address and identity of the API caller, the time of the call, the request
+      parameters, and the response elements returned by the AWS service.
+    * [CloudTrail supported services and integrations](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-aws-service-specific-topics.html)
+
+## Alarms
+
+* A metric alarm watches a single CloudWatch metric.
+    * The alarm performs one or more actions based on the value of the metric relative to a threshold over a number of
+      time
+      periods.
+    * The action can be an Amazon EC2 action, an auto scaling action, or a notification sent to an Amazon Simple
+      Notification Service (Amazon SNS) topic
+* EventBridge:
+    * With EventBridge can use to capture events in CloudWatch
+    * With EventBridge, you get a simple programming model where event publishers are decoupled from event subscribers.
+      You can build loosely coupled, independently scaled, and highly reusable event-driven application
+    * <img src="./img/72.png" alt="alt text" width="500" height="300">
+* <img src="./img/74.png" alt="alt text" width="500" height="300">
+* In this example, EventBridge rules are built to notify your support team when the CPUAbove90Percent alarm is in ALARM
+  state, so that they can investigate and take action.
+* EventBridge takes two actions: it sends an email to subscribed recipients using the Amazon Simple Notification
+  Service (Amazon SNS) topic, and sends a rich notification to the operation team’s third-party monitoring tool.
+
+## Load Balancing
+
+* Elastic Load Balancing (ELB) is:
+* High availability – ELB automatically distributes your traffic across multiple targets in a single Availability Zone
+  or multiple Availability Zones. Examples of targets include EC2 instances, containers, and IP addresses.
+* Layer 4 or Layer 7 HTTP and HTTPS load balancing – You can load balance your HTTP or HTTPS applications for Layer
+  7-specific features. Alternatively, you can use strict Layer 4 load balancing for applications that rely purely on the
+  TCP.
+* Security features – Use Amazon VPC to create and manage security groups associated with load balancers to provide
+  additional networking and security options. You can also create an internal (non-internet-facing) load balancer.
+* Health checks – ELB load balancers can detect unhealthy targets, stop sending traffic to them, and spread the load
+  across the remaining healthy targets.
+* Monitoring operations – To monitor real-time application performance, ELB integrates with CloudWatch metrics and
+  provides request tracing
+* Load Balance Types:
+* Types of load balancers available for you to use include the following:
+* **Application Load Balancer** – This load balancer functions at the application layer, the seventh layer of the
+  Open Systems Interconnection (OSI) model.
+    * Application Load Balancer supports content-based routing, applications that run in containers, and open standard
+      protocols (WebSocket and HTTP/2).
+    * This type of balancer is ideal for advanced load balancing of HTTP and HTTPS traffic.
+* **Network Load Balancer** – This load balancer is designed to handle tens of millions of requests per second while
+  maintaining high throughput at ultra low-latency.
+    * Network Load Balancer operates at the transport layer (Layer 4), routing connections to targets based on IP
+      protocol data.
+    * Targets include EC2 instances, containers, and IP addresses.
+    * It is ideal for balancing TCP and User Diagram Protocol (UDP) traffic.
+* **Gateway Load Balancer** – You can use this load balancer to deploy, scale, and manage your third-party virtual
+  appliances.
+    * It provides one gateway for distributing traffic across multiple virtual appliances, and scales them up or
+      down, based on demand.
+    * This distribution reduces potential points of failure in your network and increases availability.
+    * Gateway Load Balancer passes all Layer 3 traffic transparently through third-party virtual appliances.
+    * It is invisible to the source and destination.
+* **Classic Load Balancer** – This is a previous-generation load balancer that is not discussed deeply in this course.
 
 # Automation
 
